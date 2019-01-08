@@ -11,7 +11,7 @@ namespace TuxMandados
         {
             InitializeComponent();
 
-            NavigationPage objeto = new NavigationPage(new Views.StartPage());
+            NavigationPage objeto = new NavigationPage(new Views.LoginPage());
             MainPage = objeto;
         }
 

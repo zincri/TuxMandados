@@ -7,7 +7,11 @@ namespace TuxMandados.ViewModels
         #endregion
         private static MainViewModel instance;//Objeto principal
         #region ViewModels
-
+        public LoginViewModel Login
+        {
+            get;
+            set;
+        }
         public StartViewModel Start
         {
             get;

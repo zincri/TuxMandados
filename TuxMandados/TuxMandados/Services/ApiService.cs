@@ -2,8 +2,7 @@
 {
     using System.Threading.Tasks;
     using Plugin.Connectivity;
-    using TuxMandados.Models;
-    //using Domain;//Para el response
+    using Domain;//Para el response
     public class ApiService
     {
         public async Task<Response> CheckConnection()

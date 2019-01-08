@@ -22,4 +22,7 @@
     <Folder Include="ViewModels\" />
     <Folder Include="Services\" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\TuxMandados.Domain\TuxMandados.Domain.csproj" />
+  </ItemGroup>
 </Project>

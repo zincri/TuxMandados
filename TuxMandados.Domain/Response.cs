@@ -1,5 +1,4 @@
-﻿using System;
-namespace TuxMandados.Models
+﻿namespace TuxMandados.Domain
 {
     public class Response
     {
@@ -19,5 +18,4 @@ namespace TuxMandados.Models
             set;
         }
     }
-
 }

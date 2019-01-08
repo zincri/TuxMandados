@@ -5,7 +5,9 @@
              x:Class="TuxMandados.Views.StartPage">
     <ContentPage.Content>
         <ScrollView
-            BindingContext="{Binding Start}">
+            BindingContext="{Binding Start}"
+            
+            >
             <StackLayout>
                 <Label Text="Start page!"
                 VerticalOptions="CenterAndExpand" 

@@ -89,8 +89,8 @@
 
             var mainViewModel = MainViewModel.GetInstance();
 
-            mainViewModel.Next = new NextViewModel();
-            await App.Current.MainPage.Navigation.PushAsync(new Views.NextPage());
+            //mainViewModel.Next = new NextViewModel();
+            //await App.Current.MainPage.Navigation.PushAsync(new Views.NextPage());
 
             IsRunning = false;
             IsEnable = true;

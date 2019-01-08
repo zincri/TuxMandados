@@ -28,4 +28,8 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="Views\MasterTuxPage.xaml.cs" />
+    <Compile Remove="Views\MasterTuxMandPage.xaml.cs" />
+  </ItemGroup>
 </Project>

@@ -1,4 +1,5 @@
 ﻿using System;
+using TuxMandados.Views;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -7,12 +8,18 @@ namespace TuxMandados
 {
     public partial class App : Application
     {
+
+
+        #region Properties
+        public static NavigationPage Navigator { get; internal set; }
+        #endregion
         public App()
         {
             InitializeComponent();
 
-            NavigationPage objeto = new NavigationPage(new Views.LoginPage());
-            MainPage = objeto;
+            //NavigationPage objeto = new NavigationPage(new LoginPage());
+            //MainPage = objeto;
+            MainPage = new MasterPage();
         }
 
         protected override void OnStart()

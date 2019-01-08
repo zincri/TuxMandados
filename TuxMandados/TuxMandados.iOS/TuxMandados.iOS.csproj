@@ -153,8 +153,27 @@
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>
     <ProjectReference Include="..\TuxMandados\TuxMandados.csproj">
-      <Project>{A8A215EC-B982-4B81-BE23-72528BAD86C7}</Project>
+      <Project>{22D75688-9281-4947-9841-067E65093454}</Project>
       <Name>TuxMandados</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\adduser.png" />
+    <BundleResource Include="Resources\forward.png" />
+    <BundleResource Include="Resources\iconostux08.png" />
+    <BundleResource Include="Resources\iconostux09.png" />
+    <BundleResource Include="Resources\iconostux10.png" />
+    <BundleResource Include="Resources\iconostux11.png" />
+    <BundleResource Include="Resources\iconostux12.png" />
+    <BundleResource Include="Resources\iconostux13.png" />
+    <BundleResource Include="Resources\iconostux14.png" />
+    <BundleResource Include="Resources\iconostux15.png" />
+    <BundleResource Include="Resources\iconostux16.png" />
+    <BundleResource Include="Resources\iconostux17.png" />
+    <BundleResource Include="Resources\iconostux18.png" />
+    <BundleResource Include="Resources\iconostux19.png" />
+    <BundleResource Include="Resources\iconostux20.png" />
+    <BundleResource Include="Resources\informacion.png" />
+    <BundleResource Include="Resources\tuxlogo.png" />
   </ItemGroup>
 </Project>

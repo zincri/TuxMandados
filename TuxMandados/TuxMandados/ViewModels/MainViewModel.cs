@@ -27,7 +27,7 @@ namespace TuxMandados.ViewModels
         public MainViewModel()
         {
             instance = this;
-            this.Start = new StartViewModel();
+            this.Login = new LoginViewModel();
         }
         #endregion
 

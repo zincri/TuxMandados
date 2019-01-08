@@ -10,6 +10,8 @@ namespace TuxMandados.ViewModels
     using System.ComponentModel;
     using System.Runtime.CompilerServices;
     using System.Windows.Input;
+    using TuxMandados.Views;
+
     public class LoginViewModel : INotifyPropertyChanged
     {                
         #region Vars        
@@ -95,8 +97,8 @@ namespace TuxMandados.ViewModels
         {
             IsEnable = false;
             var mainViewModel = MainViewModel.GetInstance();
-            mainViewModel.Home = new HomeViewModel();
-            await App.Current.MainPage.Navigation.PushAsync(new Views.HomePage());
+            //mainViewModel.Home = new HomeViewModel();
+            await App.Current.MainPage.Navigation.PushAsync(new MasterTuxMandPage());
             IsEnable = true;
         }
 

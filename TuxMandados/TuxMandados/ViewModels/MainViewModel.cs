@@ -17,7 +17,12 @@ namespace TuxMandados.ViewModels
             get;
             set;
         }
-        public NextViewModel Next
+        public HomeViewModel Home
+        {
+            get;
+            set;
+        }
+        public MenuViewModel Menu
         {
             get;
             set;

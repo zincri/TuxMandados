@@ -11,7 +11,8 @@ namespace TuxMandados
         {
             InitializeComponent();
 
-            MainPage = new MainPage();
+            NavigationPage objeto = new NavigationPage(new Views.StartPage());
+            MainPage = objeto;
         }
 
         protected override void OnStart()

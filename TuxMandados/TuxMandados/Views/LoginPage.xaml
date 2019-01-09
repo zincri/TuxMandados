@@ -113,7 +113,8 @@
                         FontAttributes="Bold"
                         TextColor="#EFCB4B"
                         VerticalOptions="Center"
-                        HorizontalOptions="Center"/>
+                        HorizontalOptions="Center"
+                        Command="{Binding RegisterCommand}"/>
                 </Frame>
                     <Label HorizontalOptions="Center"
                    TextColor="#EFCB4B"

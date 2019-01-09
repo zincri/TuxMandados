@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TuxMandados.Views.MapPage"
+             xmlns:maps="clr-namespace:Xamarin.Forms.GoogleMaps;assembly=Xamarin.Forms.GoogleMaps"
+             BackgroundColor="#002E6D"
+             Title="Seleccione un punto en el mapa">
+    <ContentPage.Content>
+        <StackLayout>
+            <maps:Map x:Name="map"
+                       HorizontalOptions="FillAndExpand"
+                      VerticalOptions="FillAndExpand" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

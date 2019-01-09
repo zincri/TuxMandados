@@ -97,8 +97,10 @@ namespace TuxMandados.ViewModels
         {
             IsEnable = false;
             var mainViewModel = MainViewModel.GetInstance();
-            //mainViewModel.Home = new HomeViewModel();
-            await App.Current.MainPage.Navigation.PushAsync(new MasterTuxMandPage());
+
+            mainViewModel.Home = new HomeViewModel();
+            await App.Current.MainPage.Navigation.PushAsync(new Views.HomePage());
+
             IsEnable = true;
         }
 

@@ -76,6 +76,13 @@
                 return new RelayCommand(AccessMethod);
             }
         }
+        public ICommand RegisterCommand
+        {
+            get
+            {
+                return new RelayCommand(RegisterMethod);
+            }
+        }
         public ICommand ForgotPassword
         {
             get
@@ -110,6 +117,17 @@
             IsRunning = false;
         }
 
+
+        private async void RegisterMethod()
+        {
+            IsEnable = false;
+            IsRunning = true;
+            var mainViewModel = MainViewModel.GetInstance();
+            mainViewModel.NewClient = new NewClientViewModel();
+            await App.Current.MainPage.Navigation.PushAsync(new NewClientPage());
+            IsEnable = true;
+            IsRunning = false;
+        }
         private void ForgotMethod()
         {
             

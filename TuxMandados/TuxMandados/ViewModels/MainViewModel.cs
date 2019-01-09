@@ -21,6 +21,11 @@
             get;
             set;
         }
+        public NewClientViewModel NewClient
+        {
+            get;
+            set;
+        }
         #endregion
         #region Constructors
         public MainViewModel()

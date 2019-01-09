@@ -1,14 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="1" android:versionName="1.0" package="com.cid.TuxMandados" android:installLocation="auto">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="1" android:versionName="1.0" package="com.companyname.TuxMandados">
 	<uses-sdk android:minSdkVersion="21" android:targetSdkVersion="27" />
-	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-	<uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
-	<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-	<uses-permission android:name="android.permission.ACCESS_MOCK_LOCATION" />
-	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-	<uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-	<application android:label="TuxMandados">
-    <meta-data android:name="com.google.android.maps.v2.API_KEY" android:value="AIzaSyAJZLzKxCiRWv_l5DhVNucrK4tjDjYA3N4" />
-  </application>
-	
+	<application android:label="TuxMandados.Android"></application>
 </manifest>

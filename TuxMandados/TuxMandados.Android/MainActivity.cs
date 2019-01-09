@@ -19,6 +19,8 @@ namespace TuxMandados.Droid
 
             base.OnCreate(savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
+            Xamarin.FormsMaps.Init(this, savedInstanceState);
+            Xamarin.FormsGoogleMaps.Init(this,savedInstanceState);
             LoadApplication(new App());
         }
     }

@@ -7,7 +7,7 @@ namespace TuxMandados.ViewModels
     using System.Runtime.CompilerServices;
     using System.Windows.Input;
     using GalaSoft.MvvmLight.Command;
-
+    using TuxMandados.Views;
     public class HomeViewModel : INotifyPropertyChanged
     {
         #region Vars  
@@ -53,10 +53,7 @@ namespace TuxMandados.ViewModels
 
         private async void TuxMandarMethod()
         {
-            await App.Current.MainPage.DisplayAlert(
-                "Message",
-                "Presionaste el botón",
-                "Ok");
+            await App.Current.MainPage.DisplayAlert("Correcto","Tuxmandado","ok");
             return;
         }
 

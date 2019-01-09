@@ -6,6 +6,8 @@
     x:Class="TuxMandados.Views.HomeTabbedPage">
     <TabbedPage.Children>
         <tabs:HomePage/>
+        <tabs:OrdersPage/>
         <tabs:AboutPage/>
+        <tabs:ProfilePage/>
     </TabbedPage.Children>
 </TabbedPage>

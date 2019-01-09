@@ -115,16 +115,15 @@
                         VerticalOptions="Center"
                         HorizontalOptions="Center"/>
                 </Frame>
-                <Label HorizontalOptions="Center"
+                    <Label HorizontalOptions="Center"
                    TextColor="#EFCB4B"
                    FontSize="16"
                    Text="¿Olvidé mi contraseña?">
-                   <Label.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding ForgotPassword}" />
-                   </Label.GestureRecognizers>
-                </Label>
-                    
-            </StackLayout>
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding ForgotPassword}" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                </StackLayout>
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>

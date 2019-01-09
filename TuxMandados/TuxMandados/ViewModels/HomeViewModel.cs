@@ -53,7 +53,9 @@ namespace TuxMandados.ViewModels
 
         private async void TuxMandarMethod()
         {
-            await App.Current.MainPage.DisplayAlert("Correcto","Tuxmandado","ok");
+            //await App.Current.MainPage.DisplayAlert("Correcto","Tuxmandado","ok");
+            //mainViewModel.Home = new HomeViewModel();
+            await App.Current.MainPage.Navigation.PushAsync(new SMapPage());
             return;
         }
 

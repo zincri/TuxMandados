@@ -24,7 +24,7 @@ namespace TuxMandados.iOS
         {
             global::Xamarin.Forms.Forms.Init();
             LoadApplication(new App());
-
+            Xamarin.FormsGoogleMaps.Init("AIzaSyAJZLzKxCiRWv_l5DhVNucrK4tjDjYA3N4");
             return base.FinishedLaunching(app, options);
         }
     }

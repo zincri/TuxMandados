@@ -2,11 +2,13 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TuxMandados.Views.HomePage"
-             BindingContext="{Binding Main,Source={StaticResource Locator}}">
+             BindingContext="{Binding Main,Source={StaticResource Locator}}"
+             Icon="homeworld"
+             Title="Inicio">
     <ContentPage.Content>
         <StackLayout
             BindingContext="{Binding Home}">
-                <Label Text="Home page!"
+                <Label Text="Home!"
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" />
         </StackLayout>

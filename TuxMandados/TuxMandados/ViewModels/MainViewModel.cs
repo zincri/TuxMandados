@@ -1,5 +1,4 @@
-﻿using System;
-namespace TuxMandados.ViewModels
+﻿namespace TuxMandados.ViewModels
 {
     public class MainViewModel
     {
@@ -8,11 +7,6 @@ namespace TuxMandados.ViewModels
         private static MainViewModel instance;//Objeto principal
         #region ViewModels
         public LoginViewModel Login
-        {
-            get;
-            set;
-        }
-        public StartViewModel Start
         {
             get;
             set;

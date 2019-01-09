@@ -1,9 +1,9 @@
 ﻿namespace TuxMandados.Views
 {
     using Xamarin.Forms;
-    public partial class HomePage : ContentPage
+    public partial class AboutPage : ContentPage
     {
-        public HomePage()
+        public AboutPage()
         {
             InitializeComponent();
         }

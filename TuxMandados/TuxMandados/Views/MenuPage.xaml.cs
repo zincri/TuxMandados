@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-
-using Xamarin.Forms;
-
-namespace TuxMandados.Views
+﻿namespace TuxMandados.Views
 {
+    using Xamarin.Forms;
     public partial class MenuPage : ContentPage
     {
         public MenuPage()

@@ -83,6 +83,26 @@
     <AndroidResource Include="Resources\mipmap-xxhdpi\launcher_foreground.png" />
     <AndroidResource Include="Resources\mipmap-xxxhdpi\icon.png" />
     <AndroidResource Include="Resources\mipmap-xxxhdpi\launcher_foreground.png" />
+    <AndroidResource Include="Resources\drawable\adduser.png" />
+    <AndroidResource Include="Resources\drawable\forward.png" />
+    <AndroidResource Include="Resources\drawable\iconostux08.png" />
+    <AndroidResource Include="Resources\drawable\iconostux09.png" />
+    <AndroidResource Include="Resources\drawable\iconostux10.png" />
+    <AndroidResource Include="Resources\drawable\iconostux11.png" />
+    <AndroidResource Include="Resources\drawable\iconostux12.png" />
+    <AndroidResource Include="Resources\drawable\iconostux13.png" />
+    <AndroidResource Include="Resources\drawable\iconostux14.png" />
+    <AndroidResource Include="Resources\drawable\iconostux15.png" />
+    <AndroidResource Include="Resources\drawable\iconostux16.png" />
+    <AndroidResource Include="Resources\drawable\iconostux17.png" />
+    <AndroidResource Include="Resources\drawable\iconostux18.png" />
+    <AndroidResource Include="Resources\drawable\iconostux19.png" />
+    <AndroidResource Include="Resources\drawable\iconostux20.png" />
+    <AndroidResource Include="Resources\drawable\informacion.png" />
+    <AndroidResource Include="Resources\drawable\LaunchScreen.storyboard" />
+    <AndroidResource Include="Resources\drawable\tuxlogo.png" />
+    <AndroidResource Include="Resources\drawable\homeworld.png" />
+    <AndroidResource Include="Resources\drawable\info.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\drawable-hdpi\" />
@@ -93,7 +113,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TuxMandados\TuxMandados.csproj">
-      <Project>{A8A215EC-B982-4B81-BE23-72528BAD86C7}</Project>
+      <Project>{22D75688-9281-4947-9841-067E65093454}</Project>
       <Name>TuxMandados</Name>
     </ProjectReference>
   </ItemGroup>

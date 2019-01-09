@@ -1,42 +1,130 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="TuxMandados.Views.LoginPage"
-             BindingContext="{Binding Main,Source={StaticResource Locator}}"
-             BackgroundColor="#002E6D"
-             Title="Login">
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage 
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="TuxMandados.Views.LoginPage"
+    BindingContext="{Binding Main,Source={StaticResource Locator}}"
+    BackgroundColor="#002E6D"
+    Title="Login">
     <ContentPage.Content>
         <ScrollView BindingContext="{Binding Login}">
-            <StackLayout>
-                <Image Source="tuxlogo.png" HorizontalOptions="Center" HeightRequest="100" WidthRequest="300"></Image>
-                <Frame BackgroundColor="#0047BA" HorizontalOptions="Center" WidthRequest="300" CornerRadius="35" Padding="3" Margin="5">
-                    <Frame BackgroundColor="#002E6D" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" CornerRadius="35" Padding="0">
-                        <Entry  VerticalOptions="Center" TextColor="#EFCB4B" FontSize="16" Margin="15,10,15,10" HorizontalTextAlignment="Center" Placeholder="USUARIO" PlaceholderColor="#FFD700" BackgroundColor="Transparent" Text="{Binding Usuario, Mode=TwoWay}">
-
-                        </Entry>
+            <StackLayout
+                Padding="20">
+                <Image 
+                    Source="tuxlogo.png"
+                    HorizontalOptions="Center"
+                    VerticalOptions="CenterAndExpand"
+                    HeightRequest="100"
+                    WidthRequest="300">
+                </Image>
+                <StackLayout
+                    Orientation="Vertical"
+                    HorizontalOptions="CenterAndExpand"
+                    VerticalOptions="CenterAndExpand">
+                    
+                    <Frame
+                        BackgroundColor="#0047BA"
+                        HorizontalOptions="Center"
+                        WidthRequest="300"
+                        CornerRadius="35"
+                        Padding="3"
+                        Margin="5">
+                        <Frame 
+                            BackgroundColor="#002E6D"
+                            VerticalOptions="FillAndExpand"
+                            HorizontalOptions="FillAndExpand"
+                            CornerRadius="35"
+                            Padding="0">
+                            <Entry
+                                VerticalOptions="Center"
+                                TextColor="#EFCB4B"
+                                FontSize="16"
+                                Margin="15,10,15,10"
+                                HorizontalTextAlignment="Center"
+                                Placeholder="USUARIO"
+                                PlaceholderColor="#FFD700"
+                                BackgroundColor="Transparent"
+                                Text="{Binding Usuario, Mode=TwoWay}">
+                            </Entry>
+                        </Frame>
                     </Frame>
-                </Frame>
-                <Frame BackgroundColor="#0047BA" HorizontalOptions="Center" WidthRequest="300" CornerRadius="35" Padding="3" Margin="5">
-                    <Frame BackgroundColor="#002E6D" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" CornerRadius="35" Padding="0">
-                        <Entry  TextColor="#EFCB4B" FontSize="16" Margin="15,10,15,10" HorizontalTextAlignment="Center" Placeholder="CONTRASEÑA" PlaceholderColor="#FFD700" BackgroundColor="Transparent"  IsPassword="True" Text="{Binding Password, Mode=TwoWay}">
-
-                        </Entry>
+                    
+                    <Frame 
+                        BackgroundColor="#0047BA"
+                        HorizontalOptions="Center"
+                        WidthRequest="300"
+                        CornerRadius="35"
+                        Padding="3"
+                        Margin="5">
+                        <Frame 
+                            BackgroundColor="#002E6D"
+                            VerticalOptions="FillAndExpand"
+                            HorizontalOptions="FillAndExpand"
+                            CornerRadius="35"
+                            Padding="0">
+                            <Entry  
+                                TextColor="#EFCB4B"
+                                FontSize="16"
+                                Margin="15,10,15,10"
+                                HorizontalTextAlignment="Center"
+                                Placeholder="CONTRASEÑA"
+                                PlaceholderColor="#FFD700"
+                                BackgroundColor="Transparent"
+                                IsPassword="True"
+                                Text="{Binding Password, Mode=TwoWay}">
+                            </Entry>
+                        </Frame>
                     </Frame>
+                    
+                </StackLayout>
+                    
+                <StackLayout
+                Orientation="Vertical"
+                HorizontalOptions="CenterAndExpand"
+                VerticalOptions="CenterAndExpand">
+                <Frame 
+                    CornerRadius="25"
+                    Padding="80,0"
+                    BackgroundColor="#EFCB4B"
+                    HorizontalOptions="Center"
+                    Margin="0,5,0,10">
+                    <Button
+                        HeightRequest="50"
+                        BackgroundColor="Transparent"
+                        Text="Iniciar sesión"
+                        FontSize="16"
+                        FontAttributes="Bold"
+                        TextColor="#174188"
+                        VerticalOptions="Center"
+                        HorizontalOptions="Center"
+                        Command="{Binding LoginCommand}"/>
                 </Frame>
-                <Frame CornerRadius="25" Padding="80,0"  BackgroundColor="#EFCB4B" HorizontalOptions="Center" Margin="0,5,0,10">
-                    <Button  HeightRequest="50"   BackgroundColor="Transparent" Text="Iniciar sesión" FontSize="16" FontAttributes="Bold" TextColor="#174188" VerticalOptions="Center" HorizontalOptions="Center" Command="{Binding LoginCommand}"/>
-                </Frame>
-                <Frame CornerRadius="25" Padding="80,0"  BackgroundColor="#174188" HorizontalOptions="Center" Margin="0,5,0,10">
-                    <Button   HeightRequest="50"   BackgroundColor="Transparent" Text=" Registrarse " FontSize="16" FontAttributes="Bold" TextColor="#EFCB4B" VerticalOptions="Center" HorizontalOptions="Center"  />
+                <Frame
+                    CornerRadius="25"
+                    Padding="80,0"
+                    BackgroundColor="#174188"
+                    HorizontalOptions="Center"
+                    Margin="0,5,0,10">
+                    <Button
+                        HeightRequest="50"
+                        BackgroundColor="Transparent"
+                        Text=" Registrarse "
+                        FontSize="16"
+                        FontAttributes="Bold"
+                        TextColor="#EFCB4B"
+                        VerticalOptions="Center"
+                        HorizontalOptions="Center"/>
                 </Frame>
                 <Label HorizontalOptions="Center"
-       TextColor="#EFCB4B"
-       FontSize="16"
-       Text="¿Olvidé mi contraseña?">
-                    <Label.GestureRecognizers>
+                   TextColor="#EFCB4B"
+                   FontSize="16"
+                   Text="¿Olvidé mi contraseña?">
+                   <Label.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding ForgotPassword}" />
-                    </Label.GestureRecognizers>
+                   </Label.GestureRecognizers>
                 </Label>
+                    
+            </StackLayout>
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>

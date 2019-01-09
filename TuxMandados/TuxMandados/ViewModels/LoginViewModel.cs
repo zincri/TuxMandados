@@ -1,20 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace TuxMandados.ViewModels
+﻿namespace TuxMandados.ViewModels
 {
     using System;
     using GalaSoft.MvvmLight.Command;
-    using TuxMandados.Services;
     using System.ComponentModel;
     using System.Runtime.CompilerServices;
     using System.Windows.Input;
     using TuxMandados.Views;
 
     public class LoginViewModel : INotifyPropertyChanged
-    {                
-        #region Vars        
+    {
+        #region Vars  
+        private bool _isRunning;
         private bool _isEnable;
         private string _usuario;
         private string _password;
@@ -57,10 +53,22 @@ namespace TuxMandados.ViewModels
                 OnPropertyChanged();
             }
         }
+        public bool IsRunning
+        {
+            get
+            {
+                return _isRunning;
+            }
+            set
+            {
+                _isRunning = value;
+                OnPropertyChanged();
+            }
+        }
         #endregion
 
         #region Commands
-        
+
         public ICommand LoginCommand
         {
             get
@@ -75,17 +83,15 @@ namespace TuxMandados.ViewModels
                 return new RelayCommand(ForgotMethod);
             }
         }
-        
-
-
         #endregion
 
         #region Constructors
         public LoginViewModel()
         {
-            Usuario = "XXXU";
-            Password = "XXXP";
-            IsEnable = true;
+            this.Usuario = "UserEjemplo";
+            this.Password = "Passejemplo";
+            this.IsEnable = true;
+            this.IsRunning =  false;
         
         }
         #endregion
@@ -96,10 +102,12 @@ namespace TuxMandados.ViewModels
         private async void AccessMethod()
         {
             IsEnable = false;
+            IsRunning = true;
             var mainViewModel = MainViewModel.GetInstance();
-            //mainViewModel.Home = new HomeViewModel();
-            await App.Current.MainPage.Navigation.PushAsync(new MasterTuxMandPage());
+            mainViewModel.Home = new HomeViewModel();
+            await App.Current.MainPage.Navigation.PushAsync(new HomeTabbedPage());
             IsEnable = true;
+            IsRunning = false;
         }
 
         private void ForgotMethod()

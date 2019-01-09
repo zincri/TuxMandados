@@ -5,9 +5,9 @@ using Xamarin.Forms;
 
 namespace TuxMandados.Views
 {
-    public partial class NextPage : ContentPage
+    public partial class MasterPage : ContentPage
     {
-        public NextPage()
+        public MasterPage()
         {
             InitializeComponent();
         }

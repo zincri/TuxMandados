@@ -176,5 +176,7 @@
     <BundleResource Include="Resources\iconostux20.png" />
     <BundleResource Include="Resources\informacion.png" />
     <BundleResource Include="Resources\tuxlogo.png" />
+    <BundleResource Include="Resources\homeworld.png" />
+    <BundleResource Include="Resources\info.png" />
   </ItemGroup>
 </Project>

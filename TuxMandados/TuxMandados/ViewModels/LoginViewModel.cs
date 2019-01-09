@@ -118,6 +118,7 @@
         }
 
 
+
         private async void RegisterMethod()
         {
             IsEnable = false;
@@ -128,9 +129,17 @@
             IsEnable = true;
             IsRunning = false;
         }
-        private void ForgotMethod()
+        
+        private async void ForgotMethod()
         {
-            
+            IsEnable = false;
+            IsRunning = true;
+            var mainViewModel = MainViewModel.GetInstance();
+            mainViewModel.Forgot = new ForgotViewModel();
+            await App.Current.MainPage.Navigation.PushAsync(new ForgotPage());
+            IsEnable = true;
+            IsRunning = false;
+
         }
         private void OnPropertyChanged([CallerMemberName] String propertyName = "")
         {

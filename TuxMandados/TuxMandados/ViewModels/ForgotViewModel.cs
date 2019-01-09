@@ -8,14 +8,27 @@ namespace TuxMandados.ViewModels
     using System.Windows.Input;
     using GalaSoft.MvvmLight.Command;
     using TuxMandados.Views;
-    public class HomeViewModel : INotifyPropertyChanged
+    public class ForgotViewModel : INotifyPropertyChanged
     {
         #region Vars  
         private bool _isEnable;
+        private string _correo;
         public event PropertyChangedEventHandler PropertyChanged;
         #endregion
 
         #region Properties
+        public string Correo
+        {
+            get
+            {
+                return _correo;
+            }
+            set
+            {
+                _correo = value;
+                OnPropertyChanged();
+            }
+        }
         public bool IsEnable
         {
             get
@@ -30,33 +43,34 @@ namespace TuxMandados.ViewModels
         }
         #endregion
         #region Constructors
-        public HomeViewModel()
+        public ForgotViewModel()
         {
+            this.Correo = "correo@hotmail.com";
         }
         #endregion
 
         #region Commands
 
-        public ICommand TuxMandarCommand
+        public ICommand SendCommand
         {
             get
             {
-                return new RelayCommand(TuxMandarMethod);
+                return new RelayCommand(SendMethod);
             }
         }
+
+        
 
         #endregion
 
 
 
-        #region Methods
-
-        private async void TuxMandarMethod()
+        #region Methods       
+        private async void SendMethod()
         {
-            await App.Current.MainPage.DisplayAlert("Correcto","Tuxmandado","ok");
+            await App.Current.MainPage.DisplayAlert("Éxito", "Correo enviado", "ok");
             return;
         }
-
         private void OnPropertyChanged([CallerMemberName] String propertyName = "")
         {
             if (PropertyChanged != null)

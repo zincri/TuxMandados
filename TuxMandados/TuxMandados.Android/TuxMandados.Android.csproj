@@ -103,7 +103,7 @@
       <Name>TuxMandados</Name>
     </ProjectReference>
   </ItemGroup>
-<<<<<<< HEAD
+
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\tuxlogo.png" />
   </ItemGroup>
@@ -155,7 +155,6 @@
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\informacion.png" />
   </ItemGroup>
-=======
->>>>>>> 79e2dc4378b37ac2aeeaacbae5e5492c5d9e1bd9
+
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>

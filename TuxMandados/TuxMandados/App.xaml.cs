@@ -10,16 +10,20 @@ namespace TuxMandados
     {
 
         #region Properties
+
         public static NavigationPage Navigator { get; internal set; }
         public static MasterPage Master { get; internal set; }
+
         #endregion
         public App()
         {
             InitializeComponent();
 
-            //NavigationPage objeto = new NavigationPage(new LoginPage());
-            //MainPage = objeto;
-            MainPage = new MasterPage();
+
+            NavigationPage objeto = new NavigationPage(new LoginPage());
+            MainPage = objeto;
+            //MainPage = new MasterTuxMandPage();
+
         }
 
         protected override void OnStart()

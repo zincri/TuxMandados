@@ -4,13 +4,56 @@
              x:Class="TuxMandados.Views.HomePage"
              BindingContext="{Binding Main,Source={StaticResource Locator}}"
              Icon="homeworld"
+             BackgroundColor="#002E6D"
              Title="Inicio">
     <ContentPage.Content>
-        <StackLayout
+        <ScrollView
             BindingContext="{Binding Home}">
-                <Label Text="Home!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+            <StackLayout Padding="10">
+                <Label
+                    Text="¡BUEN DIA!" 
+                    VerticalOptions="Center" 
+                    HorizontalOptions="Center"
+                    TextColor="White"
+                    FontSize="22" 
+                    FontAttributes="Bold"/>
+                <Label 
+                    Text="Marcus Callaham" 
+                    VerticalOptions="Center" 
+                    HorizontalOptions="Center"
+                    TextColor="White"
+                    FontSize="20" 
+                    FontAttributes="Bold"/>
+                <Label 
+                    Text="Hacer un tuxmandado" 
+                    VerticalOptions="Center" 
+                    HorizontalOptions="Center"
+                    TextColor="White"
+                    FontSize="20" 
+                    FontAttributes="Bold"/>
+                <Image
+                    Source="tuxlogo.png"
+                    HorizontalOptions="Center"
+                    HeightRequest="100"
+                    WidthRequest="300"></Image>
+                <Frame
+                    CornerRadius="25" 
+                    Padding="80,0" 
+                    BackgroundColor="#EFCB4B" 
+                    HorizontalOptions="Center" 
+                    Margin="0,5,0,10">
+                    <Button 
+                        HeightRequest="50"
+                        BackgroundColor="Transparent"
+                        Text="Tuxmandar"
+                        FontSize="16"
+                        FontAttributes="Bold"
+                        TextColor="#174188"
+                        VerticalOptions="Center"
+                        HorizontalOptions="Center"
+                        Command="{Binding TuxMandarCommand}"/>
+                </Frame>
+            </StackLayout>
+         </ScrollView>
     </ContentPage.Content>
 </ContentPage>

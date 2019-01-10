@@ -35,10 +35,10 @@
 	<key>XSAppIconAssets</key>
 	<string>Assets.xcassets/AppIcon.appiconset</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Usando localización</string>
+	<string>Can we use your location at all times?</string>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string>Usar localización siempre</string>
+	<string>Can we use your location when your app is being used?</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>Usar localización siempre</string>
+	<string>Can we use your location at all times?</string>
 </dict>
 </plist>

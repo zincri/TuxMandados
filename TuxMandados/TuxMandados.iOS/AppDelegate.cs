@@ -1,10 +1,11 @@
 ﻿
 
-using Foundation;
-using UIKit;
-using Xamarin.Forms.GoogleMaps.iOS;
+
 namespace TuxMandados.iOS
 {
+    using Foundation;
+    using UIKit;
+    using Xamarin.Forms.GoogleMaps.iOS;
     // The UIApplicationDelegate for the application. This class is responsible for launching the 
     // User Interface of the application, as well as listening (and optionally responding) to 
     // application events from iOS.
@@ -21,8 +22,13 @@ namespace TuxMandados.iOS
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
             global::Xamarin.Forms.Forms.Init();
-            Xamarin.FormsMaps.Init();
-            Xamarin.FormsGoogleMaps.Init("AIzaSyCUuG9Ir8lXLITRga9G93Z286WyruRmJDc");
+            var platformConfig = new PlatformConfig
+            {
+                ImageFactory = new CachingImageFactory()
+            };
+            Xamarin.FormsGoogleMaps.Init("AIzaSyCUuG9Ir8lXLITRga9G93Z286WyruRmJDc", platformConfig);
+
+            //Xamarin.FormsGoogleMaps.Init("AIzaSyCUuG9Ir8lXLITRga9G93Z286WyruRmJDc");
             //bool flag = Xamarin.FormsGoogleMaps.IsInitialized;
             LoadApplication(new App());
 

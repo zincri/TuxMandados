@@ -10,7 +10,6 @@ namespace TuxMandados
     {
 
         #region Properties
-
         #endregion
         public App()
         {

@@ -23,9 +23,12 @@ namespace TuxMandados.iOS
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
             global::Xamarin.Forms.Forms.Init();
-            LoadApplication(new App());
-            //Xamarin.FormsGoogleMaps.Init("AIzaSyAJZLzKxCiRWv_l5DhVNucrK4tjDjYA3N4");
             Xamarin.FormsMaps.Init();
+            Xamarin.FormsGoogleMaps.Init("AIzaSyCUuG9Ir8lXLITRga9G93Z286WyruRmJDc");
+
+            LoadApplication(new App());
+
+            //Xamarin.FormsMaps.Init();
             return base.FinishedLaunching(app, options);
         }
     }

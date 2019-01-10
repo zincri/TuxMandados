@@ -6,6 +6,11 @@
         #endregion
         private static MainViewModel instance;//Objeto principal
         #region ViewModels
+        public OrderViewModel Order
+        {
+            get;
+            set;
+        }
         public ForgotViewModel Forgot
         {
             get;

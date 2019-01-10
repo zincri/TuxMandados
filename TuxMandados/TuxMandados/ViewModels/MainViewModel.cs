@@ -31,6 +31,11 @@
             get;
             set;
         }
+        public OrdersViewModel Orders
+        {
+            get;
+            set;
+        }
         #endregion
         #region Constructors
         public MainViewModel()

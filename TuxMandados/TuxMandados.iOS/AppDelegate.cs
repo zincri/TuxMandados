@@ -24,8 +24,8 @@ namespace TuxMandados.iOS
         {
             global::Xamarin.Forms.Forms.Init();
             Xamarin.FormsMaps.Init();
-            Xamarin.FormsGoogleMaps.Init("AIzaSyCUuG9Ir8lXLITRga9G93Z286WyruRmJDc");
-
+            //Xamarin.FormsGoogleMaps.Init("AIzaSyCUuG9Ir8lXLITRga9G93Z286WyruRmJDc");
+            //bool flag = Xamarin.FormsGoogleMaps.IsInitialized;
             LoadApplication(new App());
 
             //Xamarin.FormsMaps.Init();

@@ -18,112 +18,107 @@
                     WidthRequest="300">
                 </Image>
                 <StackLayout
+                    VerticalOptions="CenterAndExpand"
                     Orientation="Vertical"
-                    HorizontalOptions="CenterAndExpand"
-                    VerticalOptions="CenterAndExpand">
-                    
+                    Padding="30"
+                    Margin="0,0,0,0">
                     <Frame
-                        BackgroundColor="#0047BA"
-                        HorizontalOptions="Center"
-                        WidthRequest="300"
-                        CornerRadius="35"
-                        Padding="3"
-                        Margin="5">
-                        <Frame 
-                            BackgroundColor="#002E6D"
-                            VerticalOptions="FillAndExpand"
-                            HorizontalOptions="FillAndExpand"
-                            CornerRadius="35"
-                            Padding="0">
-                            <Entry
-                                VerticalOptions="Center"
-                                TextColor="#EFCB4B"
-                                FontSize="16"
-                                Margin="15,10,15,10"
-                                HorizontalTextAlignment="Center"
-                                Placeholder="USUARIO"
-                                PlaceholderColor="#FFD700"
-                                BackgroundColor="Transparent"
-                                Text="{Binding Usuario, Mode=TwoWay}">
-                            </Entry>
-                        </Frame>
+                        Margin="0,10,0,0"
+                        HasShadow="true"
+                        OutlineColor="#002E6D"
+                        BackgroundColor="#002E6D"
+                        HeightRequest="60"
+                        CornerRadius="30"
+                        Padding="10,0">
+                        <Entry 
+                            TextColor="#EFCB4B"
+                            FontSize="16"
+                            HeightRequest="60"
+                            
+                            HorizontalTextAlignment="Center"
+                            Placeholder="USUARIO"
+                            PlaceholderColor="#FFD700"
+                            BackgroundColor="Transparent"
+                            VerticalOptions="Center"
+                            Text="{Binding Usuario, Mode=TwoWay}"></Entry>
                     </Frame>
-                    
-                    <Frame 
-                        BackgroundColor="#0047BA"
-                        HorizontalOptions="Center"
-                        WidthRequest="300"
-                        CornerRadius="35"
-                        Padding="3"
-                        Margin="5">
-                        <Frame 
-                            BackgroundColor="#002E6D"
-                            VerticalOptions="FillAndExpand"
-                            HorizontalOptions="FillAndExpand"
-                            CornerRadius="35"
-                            Padding="0">
-                            <Entry  
-                                TextColor="#EFCB4B"
-                                FontSize="16"
-                                Margin="15,10,15,10"
-                                HorizontalTextAlignment="Center"
-                                Placeholder="CONTRASEÑA"
-                                PlaceholderColor="#FFD700"
-                                BackgroundColor="Transparent"
-                                IsPassword="True"
-                                Text="{Binding Password, Mode=TwoWay}">
-                            </Entry>
-                        </Frame>
+                    <Frame
+                        Margin="0,10,0,0"
+                        HasShadow="true"
+                        OutlineColor="#002E6D"
+                        BackgroundColor="#002E6D"
+                        HeightRequest="60"
+                        CornerRadius="30"
+                        Padding="10,0"
+                        >
+                        <Entry 
+                            TextColor="#EFCB4B"
+                            FontSize="16"
+                            
+                            HeightRequest="60"
+                            HorizontalTextAlignment="Center"
+                            Placeholder="CONTRASEÑA"
+                            PlaceholderColor="#FFD700"
+                            BackgroundColor="Transparent"
+                            IsPassword="True"
+                            VerticalOptions="Center"
+                            Text="{Binding Password, Mode=TwoWay}"></Entry>
                     </Frame>
-                    
                 </StackLayout>
                     
                 <StackLayout
-                Orientation="Vertical"
-                HorizontalOptions="CenterAndExpand"
-                VerticalOptions="CenterAndExpand">
-                <Frame 
-                    CornerRadius="25"
-                    Padding="80,0"
-                    BackgroundColor="#EFCB4B"
-                    HorizontalOptions="Center"
-                    Margin="0,5,0,10">
-                    <Button
-                        HeightRequest="50"
-                        BackgroundColor="Transparent"
-                        Text="Iniciar sesión"
-                        FontSize="16"
-                        FontAttributes="Bold"
-                        TextColor="#174188"
-                        VerticalOptions="Center"
-                        HorizontalOptions="Center"
-                        Command="{Binding LoginCommand}"/>
-                </Frame>
-                <Frame
-                    CornerRadius="25"
-                    Padding="80,0"
-                    BackgroundColor="#174188"
-                    HorizontalOptions="Center"
-                    Margin="0,5,0,10">
-                    <Button
-                        HeightRequest="50"
-                        BackgroundColor="Transparent"
-                        Text=" Registrarse "
-                        FontSize="16"
-                        FontAttributes="Bold"
-                        TextColor="#EFCB4B"
-                        VerticalOptions="Center"
-                        HorizontalOptions="Center"
-                        Command="{Binding RegisterCommand}"/>
-                </Frame>
-                    <Label HorizontalOptions="Center"
-                   TextColor="#EFCB4B"
-                   FontSize="16"
-                   Text="¿Olvidé mi contraseña?">
-                        <Label.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding ForgotPassword}" />
-                        </Label.GestureRecognizers>
-                    </Label>
+                    VerticalOptions="CenterAndExpand"
+                    Orientation="Vertical"
+                    Padding="30"
+                    Margin="0,0,0,0">
+                    <Frame
+                        Padding="0,0"
+                        Margin="0,0"
+                        CornerRadius="25"
+                        BackgroundColor="#EFCB4B"
+                        HeightRequest="50">
+                        <Button
+                            Margin="0,0"
+                            Padding="50,0"
+                            CornerRadius="25"
+                            HeightRequest="50"
+                            BackgroundColor="#EFCB4B"
+                            Text="Iniciar sesión"
+                            FontSize="16"
+                            FontAttributes="Bold"
+                            TextColor="#174188"
+                            VerticalOptions="Center"
+                            HorizontalOptions="Center"
+                            Command="{Binding LoginCommand}"/>
+                   </Frame>
+                    <Frame
+                        BackgroundColor="#174188"
+                        Padding="0,0"
+                        Margin="0,0"
+                        CornerRadius="25"
+                        HeightRequest="50">
+                        <Button
+                            Margin="0,0"
+                            Padding="50,0"
+                            CornerRadius="25"
+                            HeightRequest="50"
+                            BackgroundColor="#174188"
+                            Text="Registrarse"
+                            FontSize="16"
+                            FontAttributes="Bold"
+                            TextColor="#EFCB4B"
+                            VerticalOptions="Center"
+                            HorizontalOptions="Center"
+                            Command="{Binding RegisterCommand}"/>
+                    </Frame>
+                        <Label HorizontalOptions="Center"
+                       TextColor="#EFCB4B"
+                       FontSize="16"
+                       Text="¿Olvidé mi contraseña?">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding ForgotPassword}" />
+                            </Label.GestureRecognizers>
+                        </Label>
                 </StackLayout>
             </StackLayout>
         </ScrollView>

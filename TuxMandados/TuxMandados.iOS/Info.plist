@@ -51,9 +51,5 @@
 			</array>
 		</dict>
 	</array>
-	<key>MKDirectionsApplicationSupportedModes</key>
-	<array>
-		<string>MKDirectionsModeOther</string>
-	</array>
 </dict>
 </plist>

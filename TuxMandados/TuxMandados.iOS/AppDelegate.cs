@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿
 
 using Foundation;
 using UIKit;
-
+using Xamarin.Forms.GoogleMaps.iOS;
 namespace TuxMandados.iOS
 {
     // The UIApplicationDelegate for the application. This class is responsible for launching the 
@@ -24,7 +22,7 @@ namespace TuxMandados.iOS
         {
             global::Xamarin.Forms.Forms.Init();
             Xamarin.FormsMaps.Init();
-            //Xamarin.FormsGoogleMaps.Init("AIzaSyCUuG9Ir8lXLITRga9G93Z286WyruRmJDc");
+            Xamarin.FormsGoogleMaps.Init("AIzaSyCUuG9Ir8lXLITRga9G93Z286WyruRmJDc");
             //bool flag = Xamarin.FormsGoogleMaps.IsInitialized;
             LoadApplication(new App());
 

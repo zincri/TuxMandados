@@ -1,8 +1,16 @@
 ﻿namespace TuxMandados.ViewModels
 {
+    using System.Collections.Generic;
+    using TuxMandados.Models;
+
     public class MainViewModel
     {
         #region Properties
+        public List<Land> OrdersList
+        {
+            get;
+            set;
+        }
         #endregion
         private static MainViewModel instance;//Objeto principal
         #region ViewModels

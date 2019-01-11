@@ -190,5 +190,6 @@
     <BundleResource Include="Resources\info.png" />
     <BundleResource Include="Resources\profile.png" />
     <BundleResource Include="Resources\orders.png" />
+    <BundleResource Include="Resources\ic_chevron_right.png" />
   </ItemGroup>
 </Project>

@@ -7,9 +7,6 @@
         public OrdersPage()
         {
             InitializeComponent();
-            var mainViewModel = MainViewModel.GetInstance();
-            //mainViewModel.Token = token;
-            mainViewModel.Orders = new OrdersViewModel();
         }
     }
 }

@@ -55,7 +55,7 @@
                                             TextColor="Black">
                                         </Label>
                                         <Label 
-                                            Text="{Binding Region}"
+                                            Text="{Binding Hora}"
                                             TextColor="Gray">
                                         </Label>
                                     </StackLayout>

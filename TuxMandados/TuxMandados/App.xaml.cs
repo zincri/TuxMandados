@@ -16,6 +16,8 @@ namespace TuxMandados
             InitializeComponent();
 
             NavigationPage objeto = new NavigationPage(new LoginPage());
+            objeto.BarBackgroundColor = Color.FromHex("#002E6D");
+            objeto.BarTextColor = Color.FromHex("#EFCB4B");
             MainPage = objeto;
             //MainPage = new MasterTuxMandPage();
         }

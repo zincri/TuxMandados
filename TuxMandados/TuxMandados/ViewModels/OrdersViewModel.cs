@@ -84,7 +84,9 @@
 
             }
 
-            var response = await this.apiService.GetList<Land>("http://restcountries.eu", "/rest", "/v2/all");
+            //var response = await this.apiService.GetList<Land>("http://restcountries.eu", "/rest", "/v2/all");
+            var response = await this.apiService.GetList<Order>("http://restcountries.eu", "/rest", "/v2/all");
+
             if (!response.IsSuccess)
             {
                 this.IsRefreshing = false;
@@ -92,7 +94,7 @@
                 await App.Current.MainPage.Navigation.PopAsync();
                 return;
             }
-            MainViewModel.GetInstance().OrdersList = (List<Land>)response.Result;
+            MainViewModel.GetInstance().OrdersList = (List<Order>)response.Result;
             this.IsRefreshing = false;
             this.Orders = new ObservableCollection<OrderItemViewModel>(ToOrderItemViewModel());
 
@@ -102,30 +104,9 @@
         {
             return MainViewModel.GetInstance().OrdersList.Select(landlst => new OrderItemViewModel
             {
-                Alpha2Code = landlst.Alpha2Code,
-                Alpha3Code = landlst.Alpha3Code,
-                AltSpellings = landlst.AltSpellings,
-                Area = landlst.Area,
-                Borders = landlst.Borders,
-                CallingCodes = landlst.CallingCodes,
-                Capital = landlst.Capital,
-                Cioc = landlst.Cioc,
-                Currencies = landlst.Currencies,
-                Demonym = landlst.Demonym,
-                Flag = landlst.Flag,
-                Gini = landlst.Gini,
-                Languages = landlst.Languages,
-                Latlng = landlst.Latlng,
                 Name = landlst.Name,
-                NativeName = landlst.NativeName,
-                NumericCode = landlst.NumericCode,
-                Population = landlst.Population,
-                Region = landlst.Region,
-                RegionalBlocs = landlst.RegionalBlocs,
-                Subregion = landlst.Subregion,
-                Timezones = landlst.Timezones,
-                TopLevelDomain = landlst.TopLevelDomain,
-                Translations = landlst.Translations,
+                Hora = landlst.Hora,
+                Fecha = landlst.Fecha,
             });
 
         }

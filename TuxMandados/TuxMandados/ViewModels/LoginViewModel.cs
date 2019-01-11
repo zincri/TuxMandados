@@ -112,6 +112,7 @@
             IsRunning = true;
             var mainViewModel = MainViewModel.GetInstance();
             mainViewModel.Home = new HomeViewModel();
+            mainViewModel.Orders = new OrdersViewModel();//Lista de pedidos
             await App.Current.MainPage.Navigation.PushAsync(new HomeTabbedPage());
             IsEnable = true;
             IsRunning = false;

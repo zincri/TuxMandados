@@ -6,7 +6,7 @@
     public class MainViewModel
     {
         #region Properties
-        public List<Land> OrdersList
+        public List<Order> OrdersList
         {
             get;
             set;

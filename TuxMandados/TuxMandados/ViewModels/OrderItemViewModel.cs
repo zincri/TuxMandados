@@ -3,7 +3,7 @@
     using System.Windows.Input;
     using GalaSoft.MvvmLight.Command;
     using TuxMandados.Models;
-    public class OrderItemViewModel : Land
+    public class OrderItemViewModel : Order
     {
         public OrderItemViewModel()
         {

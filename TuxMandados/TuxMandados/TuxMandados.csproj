@@ -25,6 +25,9 @@
     <ProjectReference Include="..\..\TuxMandados.Domain\TuxMandados.Domain.csproj" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Remove="Views\TabbedPage.cs" />
+  </ItemGroup>
+  <ItemGroup>
     <Compile Update="Views\MasterTuxMandPageMenuItem.cs">
       <SubType>Code</SubType>
     </Compile>

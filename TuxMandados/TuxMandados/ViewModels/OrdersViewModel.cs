@@ -28,6 +28,7 @@
 
         public OrdersViewModel()
         {
+            this.IsRefreshing = false;
             this.order = new Order();
             this.apiService = new ApiService();
             this.LoadOrders();
@@ -84,7 +85,6 @@
 
             }
 
-            //var response = await this.apiService.GetList<Land>("http://restcountries.eu", "/rest", "/v2/all");
             var response = await this.apiService.GetList<Order>("http://restcountries.eu", "/rest", "/v2/all");
 
             if (!response.IsSuccess)
@@ -94,9 +94,10 @@
                 await App.Current.MainPage.Navigation.PopAsync();
                 return;
             }
-            MainViewModel.GetInstance().OrdersList = (List<Order>)response.Result;
             this.IsRefreshing = false;
+            MainViewModel.GetInstance().OrdersList = (List<Order>)response.Result;
             this.Orders = new ObservableCollection<OrderItemViewModel>(ToOrderItemViewModel());
+
         }
 
         private IEnumerable<OrderItemViewModel> ToOrderItemViewModel()

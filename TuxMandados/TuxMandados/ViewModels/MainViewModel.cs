@@ -49,6 +49,11 @@
             get;
             set;
         }
+        public TokenResponse Token
+        {
+            get;
+            set;
+        }
         #endregion
         #region Constructors
         public MainViewModel()

@@ -6,10 +6,12 @@
     using System.Runtime.CompilerServices;
     using System.Windows.Input;
     using TuxMandados.Views;
+    using TuxMandados.Services;
 
     public class LoginViewModel : INotifyPropertyChanged
     {
         #region Vars  
+        private ApiService apiService;
         private bool _isRunning;
         private bool _isEnable;
         private string _usuario;
@@ -95,8 +97,9 @@
         #region Constructors
         public LoginViewModel()
         {
-            this.Usuario = "UserEjemplo";
-            this.Password = "Passejemplo";
+            this.apiService = new ApiService();
+            this.Usuario = "usuario";
+            this.Password = "123456";
             this.IsEnable = true;
             this.IsRunning =  false;
         
@@ -110,10 +113,63 @@
         {
             IsEnable = false;
             IsRunning = true;
+            //Faltan las validaciones para el exceso de caracteres en los campos de usuario y contraseña
+            if (string.IsNullOrEmpty(this.Usuario))
+            {
+                await App.Current.MainPage.DisplayAlert(
+                "Error",
+                "El usuario está vacío!",
+                "Ok");
+                this.Password = string.Empty;
+                IsRunning = false;
+                IsEnable = true;
+                return;
+            }
+            if (string.IsNullOrEmpty(this.Password))
+            {
+                await App.Current.MainPage.DisplayAlert(
+                "Error",
+                "La contraseña está vacía!",
+                "Ok");
+                this.Password = string.Empty;
+                IsRunning = false;
+                IsEnable = true;
+                return;
+            }
+            //Antes de consumir el servicio valida hay que validar la conexion!
+
+            var token = await this.apiService.GetToken(
+                "http://servicio.bla.bla.net",
+                this.Usuario,
+                this.Password);
+            if (token == null)
+            {
+                IsRunning = false;
+                IsEnable = true;
+                await App.Current.MainPage.DisplayAlert(
+                "Error",
+                "Ocurrió algun problema!",
+                "Ok");
+                this.Password = string.Empty;
+                return;
+
+            }
+            if (string.IsNullOrEmpty(token.AccessToken))
+            {
+                IsRunning = false;
+                IsEnable = true;
+                await App.Current.MainPage.DisplayAlert(
+                "Error",
+                token.ErrorDescription,
+                "Ok");
+                this.Password = string.Empty;
+                return;
+            }
+
             var mainViewModel = MainViewModel.GetInstance();
-            mainViewModel.Home = new HomeViewModel();
-            mainViewModel.Orders = new OrdersViewModel();//Lista de pedidos
-            await App.Current.MainPage.Navigation.PushAsync(new HomeTabbedPage());
+            mainViewModel.Token = token;
+            await App.Current.MainPage.Navigation.PushAsync(new AppTabbedPage());
+            this.Password = string.Empty;
             IsEnable = true;
             IsRunning = false;
         }

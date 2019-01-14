@@ -14,7 +14,7 @@
         #endregion
         private static MainViewModel instance;//Objeto principal
         #region ViewModels
-        public OrderViewModel Order
+        public NewOrderViewModel NewOrder
         {
             get;
             set;

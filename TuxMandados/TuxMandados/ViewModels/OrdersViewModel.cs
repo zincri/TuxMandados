@@ -97,7 +97,6 @@
             MainViewModel.GetInstance().OrdersList = (List<Order>)response.Result;
             this.IsRefreshing = false;
             this.Orders = new ObservableCollection<OrderItemViewModel>(ToOrderItemViewModel());
-
         }
 
         private IEnumerable<OrderItemViewModel> ToOrderItemViewModel()

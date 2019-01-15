@@ -11,6 +11,16 @@
             get;
             set;
         }
+        public string Token
+        {
+            get;
+            set;
+        }
+        public string TokenType
+        {
+            get;
+            set;
+        }
         #endregion
         private static MainViewModel instance;//Objeto principal
         #region ViewModels
@@ -45,11 +55,6 @@
             set;
         }
         public OrdersViewModel Orders
-        {
-            get;
-            set;
-        }
-        public TokenResponse Token
         {
             get;
             set;

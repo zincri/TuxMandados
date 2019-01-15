@@ -7,6 +7,7 @@
     using System.Windows.Input;
     using TuxMandados.Views;
     using TuxMandados.Services;
+    using TuxMandados.Helpers;
 
     public class LoginViewModel : INotifyPropertyChanged
     {
@@ -167,7 +168,10 @@
             }
 
             var mainViewModel = MainViewModel.GetInstance();
-            mainViewModel.Token = token;
+            mainViewModel.Token = token.AccessToken;
+            mainViewModel.TokenType = token.TokenType;
+            Settings.Token = token.AccessToken;
+            Settings.TokenType = token.TokenType;
             await App.Current.MainPage.Navigation.PushAsync(new AppTabbedPage());
             this.Password = string.Empty;
             IsEnable = true;

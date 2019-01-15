@@ -172,7 +172,9 @@
             mainViewModel.TokenType = token.TokenType;
             Settings.Token = token.AccessToken;
             Settings.TokenType = token.TokenType;
-            await App.Current.MainPage.Navigation.PushAsync(new AppTabbedPage());
+            //await App.Current.MainPage.Navigation.PushAsync(new AppTabbedPage());
+            //Ya no voy a apilar las paginas con el push ahora solo cambiare la MainPage
+            App.Current.MainPage = new AppTabbedPage();
             this.Password = string.Empty;
             IsEnable = true;
             IsRunning = false;

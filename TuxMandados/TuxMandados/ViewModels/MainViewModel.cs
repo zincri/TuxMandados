@@ -24,6 +24,12 @@
         #endregion
         private static MainViewModel instance;//Objeto principal
         #region ViewModels
+        
+        public ProfileViewModel Profile
+        {
+            get;
+            set;
+        }
         public NewOrderViewModel NewOrder
         {
             get;

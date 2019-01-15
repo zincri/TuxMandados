@@ -13,6 +13,7 @@
             mainViewModel.Home = new HomeViewModel();
             mainViewModel.Orders = new OrdersViewModel();
             mainViewModel.Orders.IsRefreshing = false;
+            mainViewModel.Profile = new ProfileViewModel();
 
 
             //var navigationPage = new NavigationPage(new SchedulePageCS());

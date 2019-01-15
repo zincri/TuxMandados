@@ -14,13 +14,10 @@
         }
 
         #region Setting Constants
-
         private const string token = "Token";
         private const string tokenType = "TokenType";
         private static readonly string SettingsDefault = string.Empty;
-
         #endregion
-
 
         public static string Token
         {

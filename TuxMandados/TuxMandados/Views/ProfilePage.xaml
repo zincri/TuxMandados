@@ -3,13 +3,20 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     x:Class="TuxMandados.Views.ProfilePage"
+    BindingContext="{Binding Main,Source={StaticResource Locator}}"
     Icon="profile"
     Title="Perfil">
     <ContentPage.Content>
-        <StackLayout>
+        <ScrollView
+            BindingContext="{Binding Profile}">
+            <StackLayout>
                 <Label Text="Profile!"
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+                <Button
+                    Text="Logout"
+                    Command="{Binding LogoutCommand}"></Button>
+            </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

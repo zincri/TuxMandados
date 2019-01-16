@@ -1,12 +1,18 @@
 ﻿namespace TuxMandados.ViewModels
 {
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using TuxMandados.Models;
 
     public class MainViewModel
     {
         #region Properties
         public List<Order> OrdersList
+        {
+            get;
+            set;
+        }
+        public ObservableCollection<ProfileItemViewModel> MenusProfile
         {
             get;
             set;

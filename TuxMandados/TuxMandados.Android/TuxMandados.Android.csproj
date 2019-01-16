@@ -108,6 +108,8 @@
     <AndroidResource Include="Resources\drawable\LaunchScreen.storyboard" />
     <AndroidResource Include="Resources\drawable\tuxlogo.png" />
     <AndroidResource Include="Resources\drawable\ic_chevron_right.png" />
+    <AndroidResource Include="Resources\drawable\ic_exit_to_app.png" />
+    <AndroidResource Include="Resources\drawable\ic_settings.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\drawable-hdpi\" />

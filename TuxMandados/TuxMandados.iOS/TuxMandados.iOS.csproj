@@ -194,5 +194,7 @@
     <BundleResource Include="Resources\profile.png" />
     <BundleResource Include="Resources\orders.png" />
     <BundleResource Include="Resources\ic_chevron_right.png" />
+    <BundleResource Include="Resources\ic_exit_to_app.png" />
+    <BundleResource Include="Resources\ic_settings.png" />
   </ItemGroup>
 </Project>

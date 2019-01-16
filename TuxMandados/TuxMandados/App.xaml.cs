@@ -8,6 +8,8 @@ namespace TuxMandados
 {
     public partial class App : Application
     {
+        public static NavigationPage Navigator { get; internal set; }
+        public static AppTabbedPage Tabbed { get; internal set; }
 
         #region Properties
         #endregion

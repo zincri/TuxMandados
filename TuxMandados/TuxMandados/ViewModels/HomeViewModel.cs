@@ -57,11 +57,14 @@ namespace TuxMandados.ViewModels
             var mainViewModel = MainViewModel.GetInstance();
             mainViewModel.NewOrder = new NewOrderViewModel();
             await App.Current.MainPage.Navigation.PushAsync(new NewOrderPage());
+
+            //await App.Navigator.Navigation.PushAsync(new NewOrderPage());
             //Despues de lanzar el nuevo mandado y se mande el mantado a un tuxmandadero
             //se puede poner aqui abajo una seccion de codigo donde verifique el await de
             //aqui arriba una vez lanzado y terminado el pedido, se habilitara un boton de
             //ver "detalle del mandado" o se lanzara una actividad que solo tenga ese boton,
             // o bien redirigir a otra vista donde solo este el detalle del pedido.
+
             return;
         }
 

@@ -23,6 +23,8 @@
             Children.Add(new OrdersPage() { Icon = "orders.png", Title = "Pedidos" });
             Children.Add(new AboutPage() { Icon = "info.png", Title = "Nosotros" });
             Children.Add(new ProfilePage() { Icon = "profile.png", Title = "Perfil" });
+            //App.Navigator = new NavigationPage(this);
+            //App.Tabbed = this;
         }
     }
 }

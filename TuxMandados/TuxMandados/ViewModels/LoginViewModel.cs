@@ -8,6 +8,7 @@
     using TuxMandados.Views;
     using TuxMandados.Services;
     using TuxMandados.Helpers;
+    using Xamarin.Forms;
 
     public class LoginViewModel : INotifyPropertyChanged
     {
@@ -121,6 +122,7 @@
                 "Error",
                 "El usuario está vacío!",
                 "Ok");
+                await App.Current.MainPage.Navigation.PopAsync();
                 this.Password = string.Empty;
                 IsRunning = false;
                 IsEnable = true;
@@ -132,6 +134,7 @@
                 "Error",
                 "La contraseña está vacía!",
                 "Ok");
+                await App.Current.MainPage.Navigation.PopAsync();
                 this.Password = string.Empty;
                 IsRunning = false;
                 IsEnable = true;
@@ -151,6 +154,7 @@
                 "Error",
                 "Ocurrió algun problema!",
                 "Ok");
+                await App.Current.MainPage.Navigation.PopAsync();
                 this.Password = string.Empty;
                 return;
 
@@ -163,6 +167,7 @@
                 "Error",
                 token.ErrorDescription,
                 "Ok");
+                await App.Current.MainPage.Navigation.PopAsync();
                 this.Password = string.Empty;
                 return;
             }
@@ -174,7 +179,13 @@
             Settings.TokenType = token.TokenType;
             //await App.Current.MainPage.Navigation.PushAsync(new AppTabbedPage());
             //Ya no voy a apilar las paginas con el push ahora solo cambiare la MainPage
-            App.Current.MainPage = new AppTabbedPage();
+
+            App.Current.MainPage = new NavigationPage(new AppTabbedPage())
+            {
+                BarBackgroundColor = Color.FromHex("#002E6D"),
+                BarTextColor = Color.FromHex("#EFCB4B"),
+            };
+            App.Navigator = (NavigationPage)App.Current.MainPage;
             this.Password = string.Empty;
             IsEnable = true;
             IsRunning = false;

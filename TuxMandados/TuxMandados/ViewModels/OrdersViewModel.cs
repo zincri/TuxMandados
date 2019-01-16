@@ -74,16 +74,16 @@
 
             this.IsRefreshing = true;
             //Check Connection
-
+            /*
             var connection = await this.apiService.CheckConnection();
             if (!connection.IsSuccess)
             {
                 this.IsRefreshing = false;
                 await App.Current.MainPage.DisplayAlert("Error", connection.Message, "Accept");
-                await App.Current.MainPage.Navigation.PopAsync();
                 return;
 
             }
+            */           
 
             var response = await this.apiService.GetList<Order>("http://restcountries.eu", "/rest", "/v2/all");
 
@@ -91,7 +91,6 @@
             {
                 this.IsRefreshing = false;
                 await App.Current.MainPage.DisplayAlert("Error", response.Message, "Accept");
-                await App.Current.MainPage.Navigation.PopAsync();
                 return;
             }
             this.IsRefreshing = false;

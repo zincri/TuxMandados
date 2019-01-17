@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:progress="clr-namespace:Syncfusion.XForms.ProgressBar;assembly=Syncfusion.SfProgressBar.XForms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"             
              x:Class="TuxMandados.Views.HomePage"
              BindingContext="{Binding Main,Source={StaticResource Locator}}"
              Icon="homeworld"
@@ -36,7 +35,7 @@
                     Source="tuxlogo.png"
                     HorizontalOptions="Center"
                     HeightRequest="100"
-                    WidthRequest="300"></Image>
+                    WidthRequest="300"/>
                 <Frame
                     CornerRadius="25" 
                     Padding="80,0" 
@@ -54,25 +53,6 @@
                         HorizontalOptions="Center"
                         Command="{Binding TuxMandarCommand}"/>
                 </Frame>
-                <progress:SfLinearProgressBar x:Name="RangeColorWithGradientProgressBar"
-                                         HorizontalOptions="Center"
-                                        VerticalOptions="Center"
-                                        Margin="20,20,20,0"
-                                        Progress="100"
-                                        ValueChanged="RangeColorWithGradiantProgressBar_ValueChanged"
-                                        >
-
-                    <!--Range colors collection with fadding-->
-                    <progress:SfLinearProgressBar.RangeColors>
-                        <progress:RangeColorCollection>
-                            <progress:RangeColor IsGradient="true" Color="#36BBE1" Start="0" End="20"/>
-                            <progress:RangeColor IsGradient="true" Color="#9AEDE1" Start="20" End="40"/>
-                            <progress:RangeColor IsGradient="true" Color="#FFDC28" Start="40" End="60"/>
-                            <progress:RangeColor IsGradient="true" Color="#E15E0D" Start="60" End="80"/>
-                            <progress:RangeColor IsGradient="true" Color="#1C96C5" Start="80" End="100"/>
-                        </progress:RangeColorCollection>
-                    </progress:SfLinearProgressBar.RangeColors>
-                </progress:SfLinearProgressBar>
             </StackLayout>
          </ScrollView>
     </ContentPage.Content>

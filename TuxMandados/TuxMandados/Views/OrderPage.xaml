@@ -1,195 +1,187 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:progress="clr-namespace:Syncfusion.XForms.ProgressBar;assembly=Syncfusion.SfProgressBar.XForms"
              x:Class="TuxMandados.Views.OrderPage"
-             BindingContext="{Binding Main,Source={StaticResource Locator}}"
              BackgroundColor="#002E6D"
-             Title="Realiza un Tuxmandado">
+              Title="Detalle del mandado">
     <ContentPage.Content>
-        <ScrollView BindingContext="{Binding Order}">
+        <ScrollView>
             <StackLayout>
-                <Label 
-                    HorizontalOptions="Center" 
-                    TextColor="#EFCB4B" 
-                    FontAttributes="Bold" 
-                    FontSize="16" 
-                    Text="Descripción del mandado"/>
-                <Frame 
-                    BackgroundColor="#0047BA" 
-                    HorizontalOptions="Center" 
-                    WidthRequest="300" 
-                    CornerRadius="30" 
-                    Padding="3" 
-                    Margin="5">
-                    <Frame 
-                        BackgroundColor="#002E6D" 
-                        VerticalOptions="FillAndExpand" 
-                        HorizontalOptions="FillAndExpand" 
-                        CornerRadius="30" 
-                        Padding="0">
-                        <Editor 
-                            MaxLength="300" 
-                            Keyboard="Plain" 
-                            HorizontalOptions="FillAndExpand"   
-                            VerticalOptions="Center"
-                            InputTransparent="False" 
-                            TextColor="#EFCB4B" 
-                            Text="{Binding Descripcion,Mode=TwoWay}" 
-                            HeightRequest="100" 
-                            WidthRequest="50" 
-                            BackgroundColor="Transparent"/>
-                    </Frame>
-                </Frame>
-
-                <Label 
-                    HorizontalOptions="Center" 
-                    TextColor="#EFCB4B" 
-                    FontAttributes="Bold" 
-                    FontSize="16" 
-                    Text="Lugar del Mandado"/>
-                <Frame 
-                    BackgroundColor="#0047BA" 
-                    HorizontalOptions="Center" 
-                    WidthRequest="300" 
-                    CornerRadius="30" 
-                    Padding="3" 
-                    Margin="5">
-                    <Frame 
-                        BackgroundColor="#002E6D" 
-                        VerticalOptions="FillAndExpand" 
-                        HorizontalOptions="FillAndExpand" 
-                        CornerRadius="30" 
-                        Padding="0">
-                        <Editor 
-                            MaxLength="300" 
-                            Keyboard="Plain" 
-                            HorizontalOptions="FillAndExpand"   
-                            VerticalOptions="Center"
-                            InputTransparent="False" 
-                            TextColor="#EFCB4B" 
-                            Text="{Binding LMandado,Mode=TwoWay}" 
-                            HeightRequest="100" 
-                            WidthRequest="50" 
-                            BackgroundColor="Transparent"/>
-                    </Frame>
-                </Frame>
-                <Frame 
-                    CornerRadius="20" 
-                    Padding="40,0"  
-                    BackgroundColor="#EFCB4B" 
-                    HorizontalOptions="Center" 
-                    Margin="0,5,0,10">
-                    <Button 
-                        x:Name="BtnMap_Origen"  
-                        HeightRequest="50"   
-                        BackgroundColor="Transparent" 
-                        Text="Ver mapa" 
-                        FontSize="16" 
-                        FontAttributes="Bold" 
-                        TextColor="#174188" 
-                        VerticalOptions="Center" 
-                        HorizontalOptions="Center" 
-                        Command="{Binding MapCommand}"/>
-                </Frame>
-                <Label 
-                    HorizontalOptions="Center" 
-                    TextColor="#EFCB4B" 
-                    FontAttributes="Bold" 
-                    FontSize="16" 
-                    Text="Lugar de entrega"/>
-                <Frame 
-                    BackgroundColor="#0047BA" 
-                    HorizontalOptions="Center" 
-                    WidthRequest="300" 
-                    CornerRadius="30" 
-                    Padding="3" 
-                    Margin="5">
-                    <Frame 
-                        BackgroundColor="#002E6D" 
-                        VerticalOptions="FillAndExpand" 
-                        HorizontalOptions="FillAndExpand" 
-                        CornerRadius="30" 
-                        Padding="0">
-                        <Editor 
-                            MaxLength="300" 
-                            Keyboard="Plain" 
-                            HorizontalOptions="FillAndExpand"   
-                            VerticalOptions="Center"
-                            InputTransparent="False" 
-                            TextColor="#EFCB4B" 
-                            Text="{Binding LEntrega,Mode=TwoWay}" 
-                            HeightRequest="100" 
-                            WidthRequest="50" 
-                            BackgroundColor="Transparent"/>
-                    </Frame>
-                </Frame>
-                <Frame 
-                    CornerRadius="20" 
-                    Padding="40,0"  
-                    BackgroundColor="#EFCB4B" 
-                    HorizontalOptions="Center" 
-                    Margin="0,5,0,10">
-                    <Button 
-                        x:Name="BtnMap_Destino"  
-                        HeightRequest="50"   
-                        BackgroundColor="Transparent" 
-                        Text="Ver mapa" 
-                        FontSize="16" 
-                        FontAttributes="Bold" 
-                        TextColor="#174188" 
-                        VerticalOptions="Center" 
-                        HorizontalOptions="Center"
-                        Command="{Binding MapCommand}"/>
-                </Frame>
-                <StackLayout 
-                    Orientation="Horizontal">
-                    <Switch 
-                        IsToggled="{Binding Ubicacion,Mode=TwoWay}"
-                        IsVisible="true" 
-                        HorizontalOptions="EndAndExpand" />
+                <Image
+                    Source="iconostux08.png"
+                    HorizontalOptions="Center"
+                    HeightRequest="100"
+                    WidthRequest="300"/>
+                <Label Text="Preparando TuxMandado"
+                       FontSize="Medium"
+                       HorizontalOptions="Center" 
+                       TextColor="White"/>
+                <progress:SfLinearProgressBar x:Name="RangeColorWithGradientProgressBar"
+                                        HorizontalOptions="Center"
+                                        VerticalOptions="Center"
+                                        Margin="20,20,20,0"
+                                        Progress="100"
+                                        ValueChanged="RangeColorWithGradiantProgressBar_ValueChanged">
+                    <progress:SfLinearProgressBar.RangeColors>
+                        <progress:RangeColorCollection>
+                            <progress:RangeColor IsGradient="true" Color="#36BBE1" Start="0" End="20"/>
+                            <progress:RangeColor IsGradient="true" Color="#9AEDE1" Start="20" End="40"/>
+                            <progress:RangeColor IsGradient="true" Color="#FFDC28" Start="40" End="60"/>
+                            <progress:RangeColor IsGradient="true" Color="#E15E0D" Start="60" End="80"/>
+                            <progress:RangeColor IsGradient="true" Color="#1C96C5" Start="80" End="100"/>
+                        </progress:RangeColorCollection>
+                    </progress:SfLinearProgressBar.RangeColors>
+                </progress:SfLinearProgressBar>
+                <StackLayout
+                    VerticalOptions="CenterAndExpand"
+                    Orientation="Vertical"
+                    Padding="30"
+                    Margin="0,0,0,0">
                     <Label 
-                        HorizontalOptions="StartAndExpand" 
-                        TextColor="#EFCB4B" 
-                        FontAttributes="Bold" 
-                        FontSize="16" 
-                        Text="Usar Ubicación actual"/>
-                </StackLayout>
-                <BoxView 
-                    Color="#EFCB4B" 
-                    HeightRequest="5" 
-                    WidthRequest="300" 
-                    HorizontalOptions="Center"/>
-                <StackLayout 
-                    Orientation="Horizontal">
-                    <Switch
-                        IsToggled="{Binding Llamar,Mode=TwoWay}"
-                        IsVisible="true" 
-                        HorizontalOptions="EndAndExpand" />
+                            Text="Tuxmandadero"
+                            TextColor="White"
+                            FontSize="16" />
+                    <Frame
+                        Margin="0,10,0,0"
+                        HasShadow="true"
+                        OutlineColor="White"
+                        BackgroundColor="#002E6D"
+                        HeightRequest="60"
+                        CornerRadius="30"
+                        Padding="10,0">
+                        <Label 
+                            HorizontalOptions="Center"
+                            VerticalOptions="Center"
+                            Text="Alberto Cruz"
+                            TextColor="White"
+                            FontSize="16" />
+                    </Frame>
                     <Label 
-                        HorizontalOptions="StartAndExpand" 
-                        TextColor="#EFCB4B" 
-                        FontAttributes="Bold" 
-                        FontSize="16" 
-                        Text="Llamar a Tuxmandadero"/>
+                            Text="Celular"
+                            TextColor="White"
+                            FontSize="16" />
+                    <Frame
+                        Margin="0,10,0,0"
+                        HasShadow="true"
+                        OutlineColor="White"
+                        BackgroundColor="#002E6D"
+                        HeightRequest="60"
+                        CornerRadius="30"
+                        Padding="10,0">
+                        <Label
+                            HorizontalOptions="Center"
+                            VerticalOptions="Center"
+                            Text="9612345678"
+                            TextColor="White"
+                            FontSize="16" />
+                    </Frame>
+                    <Button
+                            Margin="5,0"
+                            Padding="130,0"
+                            CornerRadius="25"
+                            HeightRequest="50"
+                            BackgroundColor="#EFCB4B"
+                            Text="Llamar"
+                            FontSize="Medium"                            
+                            TextColor="#174188"                            
+                            HorizontalOptions="Center"/>
+                    <Label 
+                            Text="Tuxmandado"
+                            TextColor="White"
+                            FontSize="16" />
+                    <Frame
+                        Margin="0,10,0,0"
+                        HasShadow="true"
+                        OutlineColor="White"
+                        BackgroundColor="#002E6D"
+                        HeightRequest="60"
+                        CornerRadius="30"
+                        Padding="10,0">
+                        <Label 
+                            HorizontalOptions="Center"
+                            VerticalOptions="Center"
+                            Text="Alitas de pollo wings"
+                            TextColor="White"
+                            FontSize="16" />
+                    </Frame>
+                    <Label 
+                            Text="Dirección de TuxMandado"
+                            TextColor="White"
+                            FontSize="16" />
+                    <Frame
+                        Margin="0,10,0,0"
+                        HasShadow="true"
+                        OutlineColor="White"
+                        BackgroundColor="#002E6D"
+                        HeightRequest="60"
+                        CornerRadius="30"
+                        Padding="10,0">
+                        <Label
+                            HorizontalOptions="Center"
+                            VerticalOptions="Center"
+                            Text="19 sur y 4 Oriente"
+                            TextColor="White"
+                            FontSize="16" />
+                    </Frame>
+                    <Label 
+                            Text="Dirección de Destino"
+                            TextColor="White"
+                            FontSize="16" />
+                    <Frame
+                        Margin="0,10,0,0"
+                        HasShadow="true"
+                        OutlineColor="White"
+                        BackgroundColor="#002E6D"
+                        HeightRequest="60"
+                        CornerRadius="30"
+                        Padding="10,0">
+                        <Label 
+                            HorizontalOptions="Center"
+                            VerticalOptions="Center"
+                            Text="4 oriente 5 sur"
+                            TextColor="White"
+                            FontSize="16" />
+                    </Frame>
+                    <Label 
+                            Text="Costo"
+                            TextColor="White"
+                            FontSize="16" />
+                    <Frame
+                        Margin="0,10,0,0"
+                        HasShadow="true"
+                        OutlineColor="White"
+                        BackgroundColor="#002E6D"
+                        HeightRequest="60"
+                        CornerRadius="30"
+                        Padding="10,0">
+                        <Label 
+                            HorizontalOptions="Center"
+                            VerticalOptions="Center"
+                            Text="$120"
+                            TextColor="White"
+                            FontSize="16" />
+                    </Frame>
+                    <Label 
+                            Text="Tiempo Estimado"
+                            TextColor="White"
+                            FontSize="16" />
+                    <Frame
+                        Margin="0,10,0,0"
+                        HasShadow="true"
+                        OutlineColor="White"
+                        BackgroundColor="#002E6D"
+                        HeightRequest="60"
+                        CornerRadius="30"
+                        Padding="10,0">
+                        <Label 
+                            HorizontalOptions="Center"
+                            VerticalOptions="Center"
+                            Text="00:45 horas"
+                            TextColor="White"
+                            FontSize="16" />
+                    </Frame>
                 </StackLayout>
-                <Frame 
-                    CornerRadius="25" 
-                    Padding="80,0"  
-                    BackgroundColor="#EFCB4B" 
-                    HorizontalOptions="Center" 
-                    Margin="0,5,0,10">
-                    <Button 
-                        x:Name="BtnSend"  
-                        HeightRequest="50"   
-                        BackgroundColor="Transparent" 
-                        Text="Enviar" 
-                        FontSize="16" 
-                        FontAttributes="Bold" 
-                        TextColor="#174188" 
-                        VerticalOptions="Center" 
-                        HorizontalOptions="Center"
-                        Command="{Binding SendCommand}"/>
-                </Frame>
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>

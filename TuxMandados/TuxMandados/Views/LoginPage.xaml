@@ -36,7 +36,7 @@
                             HeightRequest="60"
                             
                             HorizontalTextAlignment="Center"
-                            Placeholder="USUARIO"
+                            Placeholder="usuario"
                             PlaceholderColor="#FFD700"
                             BackgroundColor="Transparent"
                             VerticalOptions="Center"
@@ -49,21 +49,39 @@
                         BackgroundColor="#002E6D"
                         HeightRequest="60"
                         CornerRadius="30"
-                        Padding="10,0"
-                        >
+                        Padding="10,0">
                         <Entry 
                             TextColor="#EFCB4B"
                             FontSize="16"
                             
                             HeightRequest="60"
                             HorizontalTextAlignment="Center"
-                            Placeholder="CONTRASEÑA"
+                            Placeholder="contraseña"
                             PlaceholderColor="#FFD700"
                             BackgroundColor="Transparent"
                             IsPassword="True"
                             VerticalOptions="Center"
                             Text="{Binding Password, Mode=TwoWay}"></Entry>
                     </Frame>
+                </StackLayout>
+                    <ActivityIndicator
+                        Margin="0,5"
+                        VerticalOptions="CenterAndExpand"
+                        IsRunning="{Binding IsRunning, Mode=TwoWay}">
+                    </ActivityIndicator>
+                    <StackLayout
+                        Orientation="Vertical"
+                        HorizontalOptions="CenterAndExpand"
+                        VerticalOptions="CenterAndExpand">
+                        <Switch
+                            IsToggled="{Binding IsRemembered,Mode=TwoWay}"
+                            HorizontalOptions="Center"
+                            VerticalOptions="Center"/>
+                        <Label
+                            HorizontalOptions="Center"
+                            VerticalOptions="Center"
+                            Text="Rememberme"
+                            TextColor="White"/>
                 </StackLayout>
                     
                 <StackLayout

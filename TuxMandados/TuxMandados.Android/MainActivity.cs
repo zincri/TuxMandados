@@ -18,6 +18,7 @@ namespace TuxMandados.Droid
             ToolbarResource = Resource.Layout.Toolbar;
 
             base.OnCreate(savedInstanceState);
+            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("NjA2MTlAMzEzNjJlMzQyZTMwSDRyL0gwY29TK0doNUhpT0JwQTk2UjNvb2pYUC9OSlMvZlY3MHo1K2toOD0=");
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             Xamarin.FormsMaps.Init(this, savedInstanceState);
             Xamarin.FormsGoogleMaps.Init(this,savedInstanceState);

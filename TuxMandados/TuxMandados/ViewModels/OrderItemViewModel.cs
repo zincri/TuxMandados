@@ -3,6 +3,7 @@
     using System.Windows.Input;
     using GalaSoft.MvvmLight.Command;
     using TuxMandados.Models;
+    using TuxMandados.Views;
     public class OrderItemViewModel : Order
     {
         public OrderItemViewModel()
@@ -20,10 +21,10 @@
         #region Methods
         private async void SelectOrder()
         {
-            await App.Current.MainPage.DisplayAlert("Message", "Item clicked", "Ok");
+            //await App.Current.MainPage.DisplayAlert("Message", "Item clicked", "Ok");
            //MainViewModel.GetInstance().Order = new OrderViewModel(this);
             //await App.Current.MainPage.Navigation.PushAsync(new LandPage());
-            //await App.Current.MainPage.Navigation.PushAsync(new LandTabbedPage());
+            await App.Current.MainPage.Navigation.PushAsync(new OrderPage());
         }
         #endregion
     }

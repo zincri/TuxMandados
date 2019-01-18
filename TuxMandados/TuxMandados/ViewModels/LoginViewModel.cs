@@ -15,6 +15,7 @@
         #region Vars  
         private ApiService apiService;
         private bool _isRunning;
+        private bool _isRemembered;
         private bool _isEnable;
         private string _usuario;
         private string _password;
@@ -69,6 +70,18 @@
                 OnPropertyChanged();
             }
         }
+        public bool IsRemembered
+        {
+            get
+            {
+                return _isRemembered;
+            }
+            set
+            {
+                _isRemembered = value;
+                OnPropertyChanged();
+            }
+        }
         #endregion
 
         #region Commands
@@ -104,6 +117,7 @@
             this.Password = "123456";
             this.IsEnable = true;
             this.IsRunning =  false;
+            this.IsRemembered =  false;
         
         }
         #endregion
@@ -122,7 +136,6 @@
                 "Error",
                 "El usuario está vacío!",
                 "Ok");
-                await App.Current.MainPage.Navigation.PopAsync();
                 this.Password = string.Empty;
                 IsRunning = false;
                 IsEnable = true;
@@ -134,7 +147,6 @@
                 "Error",
                 "La contraseña está vacía!",
                 "Ok");
-                await App.Current.MainPage.Navigation.PopAsync();
                 this.Password = string.Empty;
                 IsRunning = false;
                 IsEnable = true;
@@ -154,7 +166,6 @@
                 "Error",
                 "Ocurrió algun problema!",
                 "Ok");
-                await App.Current.MainPage.Navigation.PopAsync();
                 this.Password = string.Empty;
                 return;
 
@@ -167,28 +178,28 @@
                 "Error",
                 token.ErrorDescription,
                 "Ok");
-                await App.Current.MainPage.Navigation.PopAsync();
                 this.Password = string.Empty;
                 return;
             }
+            this.Password = string.Empty;
+            IsEnable = true;
+            IsRunning = false;
 
             var mainViewModel = MainViewModel.GetInstance();
             mainViewModel.Token = token.AccessToken;
             mainViewModel.TokenType = token.TokenType;
-            Settings.Token = token.AccessToken;
-            Settings.TokenType = token.TokenType;
-            //await App.Current.MainPage.Navigation.PushAsync(new AppTabbedPage());
-            //Ya no voy a apilar las paginas con el push ahora solo cambiare la MainPage
-
+            if (this.IsRemembered)
+            {
+                Settings.Token = token.AccessToken;
+                Settings.TokenType = token.TokenType;
+            }
             App.Current.MainPage = new NavigationPage(new AppTabbedPage())
             {
                 BarBackgroundColor = Color.FromHex("#002E6D"),
-                BarTextColor = Color.FromHex("#EFCB4B"),
+                BarTextColor = Color.FromHex("#EFCB4B")
             };
             App.Navigator = (NavigationPage)App.Current.MainPage;
-            this.Password = string.Empty;
-            IsEnable = true;
-            IsRunning = false;
+
         }
 
 

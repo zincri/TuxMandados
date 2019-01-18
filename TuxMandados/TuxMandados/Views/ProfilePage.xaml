@@ -7,15 +7,9 @@
     Icon="profile"
     Title="Perfil">
     <ContentPage.Content>
-        <ScrollView
-            BindingContext="{Binding Profile}">
+        <ScrollView>
             <StackLayout>
-                <Label Text="Profile!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-                <Button
-                    Text="Logout"
-                    Command="{Binding LogoutCommand}"></Button>
+                <Label Text="Profile page"/>
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>

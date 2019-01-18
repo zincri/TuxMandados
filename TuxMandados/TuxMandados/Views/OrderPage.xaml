@@ -78,7 +78,7 @@
                     </Frame>
                     <Button
                             Margin="5,0"
-                            Padding="130,0"
+                            Padding="125,0"
                             CornerRadius="25"
                             HeightRequest="50"
                             BackgroundColor="#EFCB4B"

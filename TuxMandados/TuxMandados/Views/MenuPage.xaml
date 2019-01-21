@@ -2,13 +2,50 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TuxMandados.Views.MenuPage"
-             BindingContext="{Binding Main,Source={StaticResource Locator}}">
+             BindingContext="{Binding Main,Source={StaticResource Locator}}"
+             Icon="ic_settings"
+             Title="General">
     <ContentPage.Content>
-        <StackLayout
-            BindingContext="{Binding Menu}">
-                <Label Text="Menu page!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+        <ScrollView>
+            <StackLayout>
+                <Image
+                    HorizontalOptions="Center"
+                    WidthRequest="100"
+                    Source="tuxlogo">
+                </Image>
+                <ListView 
+                    ItemsSource="{Binding Menus}"
+                    HasUnevenRows="True"
+                    SeparatorVisibility="None">   
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Grid>
+                                    <Grid.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding NavigateCommand}"/>
+                                    </Grid.GestureRecognizers>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"></ColumnDefinition>
+                                        <ColumnDefinition Width="auto"></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+                                    <Label 
+                                        Grid.Column="0"
+                                        VerticalOptions="Center"
+                                        TextColor="Black"
+                                        Text="{Binding Title}">
+                                    </Label>
+                                    <Image 
+                                        Grid.Column="1"
+                                        Source="{Binding Icon}"
+                                        WidthRequest="50"
+                                        HeightRequest="50">
+                                    </Image>
+                                </Grid>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+            </ListView>
+            </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

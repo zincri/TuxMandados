@@ -16,15 +16,10 @@
             mainViewModel.Profile = new ProfileViewModel();
             mainViewModel.About = new AboutViewModel();
 
-            //var navigationPage = new NavigationPage(new SchedulePageCS());
-            //navigationPage.Icon = "schedule.png";
-            //navigationPage.Title = "Schedule";
             Children.Add(new HomePage() { Icon = "homeworld.png", Title = "Inicio" });
             Children.Add(new OrdersPage() { Icon = "orders.png", Title = "Pedidos" });
             Children.Add(new AboutPage() { Icon = "info.png", Title = "Nosotros" });
-            Children.Add(new ProfilePage() { Icon = "profile.png", Title = "Perfil" });
-            //App.Navigator = new NavigationPage(this);
-            //App.Tabbed = this;
+            Children.Add(new MenuPage() { Icon = "profile.png", Title = "General" });
         }
     }
 }

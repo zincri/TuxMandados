@@ -1,5 +1,6 @@
 ﻿namespace TuxMandados.ViewModels
 {
+    using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using TuxMandados.Models;
@@ -12,7 +13,7 @@
             get;
             set;
         }
-        public ObservableCollection<ProfileItemViewModel> MenusProfile
+        public ObservableCollection<MenuItemViewModel> Menus
         {
             get;
             set;
@@ -35,11 +36,13 @@
             get;
             set;
         }
+        /* Borrada temporalmente
         public ProfileViewModel Profile
         {
             get;
             set;
         }
+        */
         public NewOrderViewModel NewOrder
         {
             get;
@@ -60,11 +63,13 @@
             get;
             set;
         }
+        /* Borrada temporalmente
         public MenuViewModel Menu
         {
             get;
             set;
         }
+        */
         public NewClientViewModel NewClient
         {
             get;
@@ -81,6 +86,7 @@
         {
             instance = this;
             this.Login = new LoginViewModel();
+            this.LoadMenu();
         }
         #endregion
 
@@ -91,6 +97,23 @@
             if (instance == null)
                 return new MainViewModel();
             return instance;
+        }
+        private void LoadMenu()
+        {
+            this.Menus = new ObservableCollection<MenuItemViewModel>();
+            this.Menus.Add(new MenuItemViewModel
+            {
+                Icon = "ic_settings",
+                NamePage = "LoginPage",
+                Title = "Mi Perfil"
+            });
+            this.Menus.Add(new MenuItemViewModel
+            {
+                Icon = "ic_exit_to_app",
+                NamePage = "LoginPage",
+                Title = "Salir"
+            }
+            );
         }
         #endregion
     }

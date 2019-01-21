@@ -25,20 +25,21 @@
                                         <TapGestureRecognizer Command="{Binding NavigateCommand}"/>
                                     </Grid.GestureRecognizers>
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="Auto"></ColumnDefinition>
                                         <ColumnDefinition Width="*"></ColumnDefinition>
+                                        <ColumnDefinition Width="auto"></ColumnDefinition>
                                     </Grid.ColumnDefinitions>
-                                    <Image 
-                                        Source="{Binding Icon}"
-                                        WidthRequest="50"
-                                        HeightRequest="50">
-                                    </Image>
                                     <Label 
-                                        Grid.Column="1"
+                                        Grid.Column="0"
                                         VerticalOptions="Center"
                                         TextColor="Black"
                                         Text="{Binding Title}">
                                     </Label>
+                                    <Image 
+                                        Grid.Column="1"
+                                        Source="{Binding Icon}"
+                                        WidthRequest="50"
+                                        HeightRequest="50">
+                                    </Image>
                                 </Grid>
                             </ViewCell>
                         </DataTemplate>

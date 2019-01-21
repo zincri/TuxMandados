@@ -3,14 +3,66 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     x:Class="TuxMandados.Views.AboutPage"
+    BindingContext="{Binding Main,Source={StaticResource Locator}}"
     Icon="info"
-    Title="Acerca de Nosotros">
+    Title="Acerca de Nosotros"
+    BackgroundColor="#002E6D">
     <ContentPage.Content>
-        <StackLayout>
-            <WebView x:Name="webview" 
-                     VerticalOptions="FillAndExpand" 
-                     HorizontalOptions="FillAndExpand"
-                     />
-        </StackLayout>
+        <ScrollView 
+            BindingContext="{Binding About}">
+            <StackLayout>
+                <Frame 
+                    CornerRadius="10" 
+                    Padding="0" 
+                    BackgroundColor="#EFCB4B" 
+                    HeightRequest="40" 
+                    Margin="30">
+                    <Label 
+                        Text="INVITACIÓN" 
+                        Font="26" 
+                        FontAttributes="Bold" 
+                        HorizontalTextAlignment="Center" 
+                        VerticalTextAlignment="Center" 
+                        TextColor="#174188" />
+                </Frame>
+                <Label 
+                    Text="RECOMIENDA A LOS DEMAS SOBRE" 
+                    Font="26" 
+                    FontAttributes="Bold" 
+                    HorizontalTextAlignment="Center" 
+                    TextColor="#FFFFFF"/>
+                <Image 
+                    Source="tuxlogo.png" 
+                    HorizontalOptions="Center" 
+                    HeightRequest="100" 
+                    WidthRequest="300"/>
+                <Label 
+                    Text="Ingrese el correo electrónico de la persona que desea recomendar:" 
+                    Font="18" 
+                    FontAttributes="Italic" 
+                    Margin="10" 
+                    HorizontalTextAlignment="Center" 
+                    TextColor="#FFFFFF"/>
+                <Entry 
+                    x:Name="txtCorreo"
+                    Text="{Binding Correo}"
+                    FontSize="18" 
+                    TextColor="#FFFFFF" 
+                    Keyboard="Email" 
+                    Margin="10" 
+                    BackgroundColor="Transparent"/>
+                <Button
+                            Margin="5,0"
+                            Padding="125,0"
+                            CornerRadius="25"
+                            HeightRequest="50"
+                            BackgroundColor="#EFCB4B"
+                            Text="Enviar"
+                            FontSize="Medium"                            
+                            TextColor="#174188"                            
+                            HorizontalOptions="Center"
+                            Command="{Binding SendCommand}"/>
+            </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

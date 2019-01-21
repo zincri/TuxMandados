@@ -15,10 +15,23 @@ namespace TuxMandados.ViewModels
         #region Vars  
         private bool _isEnable;
         private string _correo;
+        private HtmlWebViewSource _htmlSource;
         public event PropertyChangedEventHandler PropertyChanged;
         #endregion
 
         #region Properties
+        public HtmlWebViewSource HmtlSource
+        {
+            get
+            {
+                return _htmlSource;
+            }
+            set
+            {
+                _htmlSource = value;
+                OnPropertyChanged();
+            }
+        }
         public string Correo
         {
             get
@@ -48,6 +61,8 @@ namespace TuxMandados.ViewModels
         public AboutViewModel()
         {
             this.Correo = "correo@hotmail.com";
+            
+            
         }
         #endregion
 

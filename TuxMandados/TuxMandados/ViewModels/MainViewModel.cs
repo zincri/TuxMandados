@@ -30,7 +30,11 @@
         #endregion
         private static MainViewModel instance;//Objeto principal
         #region ViewModels
-        
+        public AboutViewModel About
+        {
+            get;
+            set;
+        }
         public ProfileViewModel Profile
         {
             get;

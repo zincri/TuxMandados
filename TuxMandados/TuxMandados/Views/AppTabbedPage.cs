@@ -14,7 +14,7 @@
             mainViewModel.Orders = new OrdersViewModel();
             mainViewModel.Orders.IsRefreshing = false;
             mainViewModel.Profile = new ProfileViewModel();
-
+            mainViewModel.About = new AboutViewModel();
 
             //var navigationPage = new NavigationPage(new SchedulePageCS());
             //navigationPage.Icon = "schedule.png";

@@ -23,6 +23,7 @@
     <Folder Include="Infrastructure\" />
     <Folder Include="Models\" />
     <Folder Include="Services\" />
+    <Folder Include="Views\Repartidor\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\TuxMandados.Domain\TuxMandados.Domain.csproj" />

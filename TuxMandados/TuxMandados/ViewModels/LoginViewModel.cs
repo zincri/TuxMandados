@@ -204,9 +204,9 @@
             }
             else
             {
-                App.Current.MainPage = new NavigationPage(new Views.Repartidor.AppTabbedPage())
+                App.Current.MainPage = new NavigationPage(new Views.Repartidor.R_AppTabbedPage())
                 {
-                    BarBackgroundColor = Color.FromHex("#002E6D"),
+                    BarBackgroundColor = Color.FromHex("#33CAFF"),
                     BarTextColor = Color.FromHex("#EFCB4B")
                 };
                 App.Navigator = (NavigationPage)App.Current.MainPage;

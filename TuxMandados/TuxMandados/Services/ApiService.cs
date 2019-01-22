@@ -146,7 +146,8 @@
                     return new TokenResponse
                     {
                         AccessToken = "6cuIiwbghKtnMkcbpbKr7gF4nZ4AErIsvyuvdSfz84ve9qQTyBvwCFsaXsGJikeT\n23mFFe4cptahbuR58ejeuLG0frCQ9VNVFZmzp7e9OkB6A0toXrCnsVo9QYIEHFa3\nbg5G7lgo3iaGNC712QpeBik4Hy71i6MvApFH8GgDXkP3V1ZIR3mdhtbEeOdUzBcl\nRwUWGvCGaZ0Xj1CMR19lKfu8F8D2EEBesb3Tk4LuXUz2fg7UXMvHo8TYhKeazgvz\nYe7Ou453IpDozQzhDQEjoyPpmMyuAHW1UhZIA6lP4U76xeejO5kJAGNO3JMs56e0\nmh1JsArQ8mMSoK8l9D0qLXLDJxyC7m5BiWkrQ66T5LYNMaWySTS3Qn4NDI0gKOE5\nvBrsCJxIVMEuw5BvadUyboQM7HCvRBBf28VoHKLmSBzoTqiDKDSZ9xLCJ9QzBBz2\nzmiDi2oZK9FZwUCd9MHgFbcodadpYleOmrteLIF5pqWagJ8MickwK1HiQybspo5L\nQEEK6i7Oi2iK2lGOPWJd00WWrbaGJl1iL7C1mhHQsuJFOuGIkeNvSnVB6WXaicwF\nb6XAM4TsfUz0a404zT79YV17SnszLShh5uvsxUqkpugIuxZ6MwOiOGakKd7EOpnX",
-                        TokenType = "bearer"
+                        TokenType = "owner"//TokenType = "bearer"
+                        //TokenType = "bearer"
                     };
                 }
 

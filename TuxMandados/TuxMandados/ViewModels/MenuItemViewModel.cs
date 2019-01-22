@@ -8,12 +8,11 @@
     using TuxMandados.Helpers;
     using TuxMandados.Views;
 
-    public class MenuItemViewModel : INotifyPropertyChanged
+    public class MenuItemViewModel
     {
         public string Icon { get; set; }
         public string Title { get; set; }
         public string NamePage { get; set; }
-        public event PropertyChangedEventHandler PropertyChanged;
         #region Commands
 
         public ICommand NavigateCommand
@@ -38,13 +37,6 @@
                 App.Current.MainPage = new LoginPage();
             }
 
-        }
-        private void OnPropertyChanged([CallerMemberName] String propertyName = "")
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
         }
         #endregion
     }

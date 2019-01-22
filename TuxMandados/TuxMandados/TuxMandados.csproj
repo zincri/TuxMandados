@@ -30,6 +30,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="Views\TabbedPage.cs" />
+    <Compile Remove="Models\Land.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Update="Views\MasterTuxMandPageMenuItem.cs">

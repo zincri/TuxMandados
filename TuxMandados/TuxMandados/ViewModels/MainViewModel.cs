@@ -70,6 +70,11 @@
             set;
         }
         */
+        public OrderViewModel Order
+        {
+            get;
+            set;
+        }
         public NewClientViewModel NewClient
         {
             get;

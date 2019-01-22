@@ -21,9 +21,7 @@
         #region Methods
         private async void SelectOrder()
         {
-            //await App.Current.MainPage.DisplayAlert("Message", "Item clicked", "Ok");
-           //MainViewModel.GetInstance().Order = new OrderViewModel(this);
-            //await App.Current.MainPage.Navigation.PushAsync(new LandPage());
+            MainViewModel.GetInstance().Order = new OrderViewModel(this);
             await App.Current.MainPage.Navigation.PushAsync(new OrderPage());
         }
         #endregion

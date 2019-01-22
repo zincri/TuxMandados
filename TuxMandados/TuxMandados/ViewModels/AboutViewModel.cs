@@ -8,6 +8,7 @@ namespace TuxMandados.ViewModels
     using System.Windows.Input;
     using GalaSoft.MvvmLight.Command;
     using TuxMandados.Views;
+    using TuxMandados.Interfaces;
     using Xamarin.Forms;
     public class AboutViewModel : INotifyPropertyChanged
     {
@@ -20,7 +21,7 @@ namespace TuxMandados.ViewModels
         #endregion
 
         #region Properties
-        public HtmlWebViewSource HmtlSource
+        public HtmlWebViewSource HtmlSource
         {
             get
             {
@@ -61,7 +62,7 @@ namespace TuxMandados.ViewModels
         public AboutViewModel()
         {
             this.Correo = "correo@hotmail.com";
-            
+           // HtmlSource.BaseUrl=DependencyService.Get<IBase>
             
         }
         #endregion

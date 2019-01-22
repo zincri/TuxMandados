@@ -10,6 +10,7 @@ namespace TuxMandados.Views
         public NewOrderPage()
         {
             InitializeComponent();
+            //Ya se armo
         }
     }
 }

@@ -13,6 +13,11 @@
             get;
             set;
         }
+        public List<Order> R_OrdersList
+        {
+            get;
+            set;
+        }
         public ObservableCollection<MenuItemViewModel> Menus
         {
             get;
@@ -75,12 +80,22 @@
             get;
             set;
         }
+        public R_OrderViewModel R_Order
+        {
+            get;
+            set;
+        }
         public NewClientViewModel NewClient
         {
             get;
             set;
         }
         public OrdersViewModel Orders
+        {
+            get;
+            set;
+        }
+        public R_OrdersViewModel R_Orders
         {
             get;
             set;

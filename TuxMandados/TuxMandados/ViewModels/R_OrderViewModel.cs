@@ -1,19 +1,17 @@
-﻿
-namespace TuxMandados.ViewModels
+﻿namespace TuxMandados.ViewModels
 {
     using System;
     using System.ComponentModel;
     using System.Runtime.CompilerServices;
     using TuxMandados.Models;
-
-    public class OrderViewModel : INotifyPropertyChanged
+    public class R_OrderViewModel
     {
         #region Vars
         public event PropertyChangedEventHandler PropertyChanged;
         #endregion
         #region Properties
         public Order Order
-        { 
+        {
             get;
             set;
         }
@@ -24,7 +22,7 @@ namespace TuxMandados.ViewModels
         #endregion
 
         #region Constructors
-        public OrderViewModel(Order order)
+        public R_OrderViewModel(Order order)
         {
             this.Order = order;
         }

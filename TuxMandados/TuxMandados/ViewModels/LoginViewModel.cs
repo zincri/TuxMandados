@@ -193,7 +193,17 @@
                 Settings.Token = token.AccessToken;
                 Settings.TokenType = token.TokenType;
             }
-            if(mainViewModel.TokenType.Equals("bearer"))
+            if(mainViewModel.TokenType.Equals("owner"))
+            {
+                App.Current.MainPage = new NavigationPage(new Views.Repartidor.R_AppTabbedPage())
+                {
+                    BarBackgroundColor = Color.FromHex("#33CAFF"),
+                    BarTextColor = Color.FromHex("#000000")
+                };
+                App.Navigator = (NavigationPage)App.Current.MainPage;
+
+            }
+            else
             {
                 App.Current.MainPage = new NavigationPage(new AppTabbedPage())
                 {
@@ -201,15 +211,7 @@
                     BarTextColor = Color.FromHex("#EFCB4B")
                 };
                 App.Navigator = (NavigationPage)App.Current.MainPage;
-            }
-            else
-            {
-                App.Current.MainPage = new NavigationPage(new Views.Repartidor.R_AppTabbedPage())
-                {
-                    BarBackgroundColor = Color.FromHex("#33CAFF"),
-                    BarTextColor = Color.FromHex("#EFCB4B")
-                };
-                App.Navigator = (NavigationPage)App.Current.MainPage;
+
             }
 
         }

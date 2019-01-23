@@ -27,7 +27,7 @@ namespace TuxMandados.iOS
                 ImageFactory = new CachingImageFactory()
             };
             Xamarin.FormsGoogleMaps.Init("AIzaSyCUuG9Ir8lXLITRga9G93Z286WyruRmJDc", platformConfig);
-
+            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("NjA2MTlAMzEzNjJlMzQyZTMwSDRyL0gwY29TK0doNUhpT0JwQTk2UjNvb2pYUC9OSlMvZlY3MHo1K2toOD0=");
             //Xamarin.FormsGoogleMaps.Init("AIzaSyCUuG9Ir8lXLITRga9G93Z286WyruRmJDc");
             //bool flag = Xamarin.FormsGoogleMaps.IsInitialized;
             LoadApplication(new App());

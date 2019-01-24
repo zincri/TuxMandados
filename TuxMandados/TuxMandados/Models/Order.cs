@@ -14,5 +14,8 @@ namespace TuxMandados.Models
         [JsonProperty(PropertyName = "fecha")]
         public string Fecha { get; set; }
 
+        [JsonProperty(PropertyName = "atendido")]
+        public bool Atendido { get; set; }
+
     }
 }

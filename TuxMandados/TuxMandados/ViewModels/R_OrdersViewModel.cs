@@ -101,11 +101,12 @@ namespace TuxMandados.ViewModels
 
         private IEnumerable<R_OrderItemViewModel> ToOrderItemViewModel()
         {
-            return MainViewModel.GetInstance().OrdersList.Select(landlst => new R_OrderItemViewModel
+            return MainViewModel.GetInstance().OrdersList.Select(lst => new R_OrderItemViewModel
             {
-                Name = landlst.Name,
-                Hora = landlst.Hora,
-                Fecha = landlst.Fecha,
+                Name = lst.Name,
+                Hora = lst.Hora,
+                Fecha = lst.Fecha,
+                Atendido = lst.Atendido
             });
 
         }

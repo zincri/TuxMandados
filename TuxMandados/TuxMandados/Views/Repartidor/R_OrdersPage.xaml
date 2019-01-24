@@ -59,11 +59,18 @@
                                             TextColor="Gray">
                                         </Label>
                                     </StackLayout>
-                                    <Image 
+                                    
+                                    <StackLayout
                                         Grid.Column="2"
-                                        HorizontalOptions="End" 
-                                        Source="ic_chevron_right">
-                                    </Image>
+                                        HorizontalOptions="End" >
+                                        <Image 
+                                            Source="ic_chevron_right">
+                                        </Image>
+                                        <Label 
+                                            Text="{Binding Atendido}"
+                                            TextColor="Black">
+                                        </Label>
+                                    </StackLayout>
                                 </Grid>
                             </Frame>
                         </ViewCell>

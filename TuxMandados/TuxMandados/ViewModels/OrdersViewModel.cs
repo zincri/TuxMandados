@@ -101,11 +101,12 @@
 
         private IEnumerable<OrderItemViewModel> ToOrderItemViewModel()
         {
-            return MainViewModel.GetInstance().OrdersList.Select(landlst => new OrderItemViewModel
+            return MainViewModel.GetInstance().OrdersList.Select(lst => new OrderItemViewModel
             {
-                Name = landlst.Name,
-                Hora = landlst.Hora,
-                Fecha = landlst.Fecha,
+                Name = lst.Name,
+                Hora = lst.Hora,
+                Fecha = lst.Fecha,
+                Atendido = lst.Atendido
             });
 
         }

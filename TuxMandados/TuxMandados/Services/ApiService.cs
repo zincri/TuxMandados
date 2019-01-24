@@ -13,7 +13,14 @@
 
     public class ApiService
     {
-        //Method que nos sirve para checar la conexion de internet haciendo un ping a Google 
+         
+        /// <summary>
+        /// Checks the connection.
+        /// Este Metodo sirve para checar la conexion de internet haciendo un ping a Google
+        /// Antes de cada servicio se debe validar la conexion, falta pornerle el try y catch
+        /// sin try y catch el metodo devolvera una excepcion cuando haga el ping.
+        /// </summary>
+        /// <returns>The connection.</returns>
         public async Task<Response> CheckConnection()
         {
             if (!CrossConnectivity.Current.IsConnected)
@@ -43,7 +50,15 @@
             };
         }
 
-        //Method que nos sirve para obtener la lista de mandados realizados(Statica por lo pronto)
+        /// <summary>
+        /// Gets the list.
+        /// Este Metodo sirve para obtener la lista de mandados realizados(Statica por lo pronto)
+        /// </summary>
+        /// <returns>The list.</returns>
+        /// <param name="urlBase">URL base.</param>
+        /// <param name="servicePrefix">Service prefix.</param>
+        /// <param name="controller">Controller.</param>
+        /// <typeparam name="T">The 1st type parameter.</typeparam>
         public async Task<Response> GetList<T>(
             string urlBase,
             string servicePrefix,
@@ -52,7 +67,6 @@
             try
             {
                 var client = new HttpClient();
-                //string URL = string.Format("http://restcountries.eu/rest/v2/all");
                 client.BaseAddress = new Uri(urlBase);
                 var url = string.Format("{0}{1}", servicePrefix, controller);
                 //var response = await client.GetAsync(url);

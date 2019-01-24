@@ -22,7 +22,8 @@
         private async void SelectOrder()
         {
             MainViewModel.GetInstance().Order = new OrderViewModel(this);
-            await App.Current.MainPage.Navigation.PushAsync(new OrderPage());
+            await App.Navigator.Navigation.PushAsync(new OrderPage());
+            //await App.Current.MainPage.Navigation.PushAsync(new OrderPage());
         }
         #endregion
     }

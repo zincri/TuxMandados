@@ -188,6 +188,7 @@
             var mainViewModel = MainViewModel.GetInstance();
             mainViewModel.Token = token.AccessToken;
             mainViewModel.TokenType = token.TokenType;
+            mainViewModel.LoadMenu();
             if (this.IsRemembered)
             {
                 Settings.Token = token.AccessToken;

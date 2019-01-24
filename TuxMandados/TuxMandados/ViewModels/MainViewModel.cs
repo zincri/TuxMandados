@@ -106,7 +106,7 @@
         {
             instance = this;
             this.Login = new LoginViewModel();
-            this.LoadMenu();
+            //this.LoadMenu(); Comentare el menu porque no se como instanciarlo al mismo tiempo sin obtener el tokenType
         }
         #endregion
 
@@ -118,22 +118,56 @@
                 return new MainViewModel();
             return instance;
         }
-        private void LoadMenu()
+        public void LoadMenu()
         {
             this.Menus = new ObservableCollection<MenuItemViewModel>();
-            this.Menus.Add(new MenuItemViewModel
+            if (TokenType.Equals("owner")) 
             {
-                Icon = "ic_settings",
-                NamePage = "LoginPage",
-                Title = "Mi Perfil"
-            });
-            this.Menus.Add(new MenuItemViewModel
-            {
-                Icon = "ic_exit_to_app",
-                NamePage = "LoginPage",
-                Title = "Salir"
+                this.Menus.Add(new MenuItemViewModel
+                {
+                    Icon = "ic_settings",
+                    NamePage = "LoginPage",
+                    Title = "Mi Perfil"
+                });
+                this.Menus.Add(new MenuItemViewModel
+                {
+                    Icon = "ic_settings",
+                    NamePage = "LoginPage",
+                    Title = "Mi Perfil"
+                });
+                this.Menus.Add(new MenuItemViewModel
+                {
+                    Icon = "ic_settings",
+                    NamePage = "LoginPage",
+                    Title = "Mi Perfil"
+                });
+                this.Menus.Add(new MenuItemViewModel
+                {
+                    Icon = "ic_exit_to_app",
+                    NamePage = "LoginPage",
+                    Title = "Salir"
+                }
+                );
             }
-            );
+            else 
+            {
+                this.Menus.Add(new MenuItemViewModel
+                {
+                    Icon = "ic_settings",
+                    NamePage = "LoginPage",
+                    Title = "Mi Perfil"
+                });
+                this.Menus.Add(new MenuItemViewModel
+                {
+                    Icon = "ic_exit_to_app",
+                    NamePage = "LoginPage",
+                    Title = "Salir"
+                }
+                );
+
+            }
+
+
         }
         #endregion
     }

@@ -17,7 +17,6 @@ namespace TuxMandados.ViewModels
             get;
             set;
         }
-
         #endregion
 
         #region Commands

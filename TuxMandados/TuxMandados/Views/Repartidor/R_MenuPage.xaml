@@ -9,7 +9,43 @@
     <ContentPage.Content>
         <ScrollView>
             <StackLayout>
-                <Label Text="Menu page"/>
+                <Image
+                    HorizontalOptions="Center"
+                    WidthRequest="100"
+                    Source="tuxlogo">
+                </Image>
+                <ListView 
+                    ItemsSource="{Binding Menus}"
+                    HasUnevenRows="True"
+                    SeparatorVisibility="None">   
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Grid>
+                                    <Grid.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding NavigateCommand}"/>
+                                    </Grid.GestureRecognizers>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"></ColumnDefinition>
+                                        <ColumnDefinition Width="auto"></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+                                    <Label 
+                                        Grid.Column="0"
+                                        VerticalOptions="Center"
+                                        TextColor="Black"
+                                        Text="{Binding Title}">
+                                    </Label>
+                                    <Image 
+                                        Grid.Column="1"
+                                        Source="{Binding Icon}"
+                                        WidthRequest="50"
+                                        HeightRequest="50">
+                                    </Image>
+                                </Grid>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+            </ListView>
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>

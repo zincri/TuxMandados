@@ -188,6 +188,7 @@
                         BackgroundColor="Red"
                         HeightRequest="50">
                         <Button
+                            IsEnabled="false"
                             Margin="0,0"
                             Padding="35,0"
                             CornerRadius="25"
@@ -198,7 +199,8 @@
                             FontAttributes="Bold"
                             TextColor="White"
                             VerticalOptions="Center"
-                            HorizontalOptions="Center"/>
+                            HorizontalOptions="Center"
+                            Command="{Binding IgnoreCommand}"/>
                    </Frame>
                    <Frame
                         HorizontalOptions="EndAndExpand"
@@ -208,6 +210,7 @@
                         BackgroundColor="Green"
                         HeightRequest="50">
                         <Button
+                            IsEnabled="false"
                             Margin="0,0"
                             Padding="35,0"
                             CornerRadius="25"
@@ -218,7 +221,8 @@
                             FontAttributes="Bold"
                             TextColor="White"
                             VerticalOptions="Center"
-                            HorizontalOptions="Center"/>
+                            HorizontalOptions="Center"
+                            Command="{Binding AcceptCommand}"/>
                    </Frame>
                 </StackLayout>
             </StackLayout>

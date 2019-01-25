@@ -130,9 +130,9 @@
                             Command="{Binding RegisterCommand}"/>
                     </Frame>
                         <Label HorizontalOptions="Center"
-                       TextColor="#EFCB4B"
-                       FontSize="16"
-                       Text="¿Olvidé mi contraseña?">
+                           TextColor="#EFCB4B"
+                           FontSize="16"
+                           Text="¿Olvidé mi contraseña?">
                             <Label.GestureRecognizers>
                                 <TapGestureRecognizer Command="{Binding ForgotPassword}" />
                             </Label.GestureRecognizers>

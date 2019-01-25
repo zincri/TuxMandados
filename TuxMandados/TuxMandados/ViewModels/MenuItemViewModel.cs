@@ -7,6 +7,7 @@
     using GalaSoft.MvvmLight.Command;
     using TuxMandados.Helpers;
     using TuxMandados.Views;
+    using Xamarin.Forms;
 
     public class MenuItemViewModel
     {
@@ -34,7 +35,12 @@
                 var mainViewModel = MainViewModel.GetInstance();
                 mainViewModel.Token = String.Empty;
                 mainViewModel.TokenType = String.Empty;
-                App.Current.MainPage = new LoginPage();
+                //App.Current.MainPage = new LoginPage();
+
+                NavigationPage objeto = new NavigationPage(new LoginPage());
+                objeto.BarBackgroundColor = Color.FromHex("#002E6D");
+                objeto.BarTextColor = Color.FromHex("#EFCB4B");
+                App.Current.MainPage = objeto;
             }
 
         }

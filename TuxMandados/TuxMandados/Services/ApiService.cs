@@ -81,13 +81,13 @@
                 Order h = new Order();
                 Order i = new Order();
                 a.Name = "Zincri"; a.Hora = "12:00"; a.Fecha = "12/12/12"; a.Atendido = false;
-                b.Name = "Jesus"; b.Hora = "12:00"; b.Fecha = "12/12/12"; b.Atendido = false;
+                b.Name = "Cypres T"; b.Hora = "12:00"; b.Fecha = "12/12/12"; b.Atendido = true;
                 c.Name = "Edrey"; c.Hora = "12:00"; c.Fecha = "12/12/12"; c.Atendido = false;
                 d.Name = "Zincri"; d.Hora = "12:00"; d.Fecha = "12/12/12"; d.Atendido = false;
-                e.Name = "Jesus"; e.Hora = "12:00"; e.Fecha = "12/12/12"; e.Atendido = false;
+                e.Name = "Cypres"; e.Hora = "12:00"; e.Fecha = "12/12/12"; e.Atendido = false;
                 f.Name = "Edrey"; f.Hora = "12:00"; f.Fecha = "12/12/12"; f.Atendido = false;
                 g.Name = "Zincri"; g.Hora = "12:00"; g.Fecha = "12/12/12"; g.Atendido = false;
-                h.Name = "Jesus"; h.Hora = "12:00"; h.Fecha = "12/12/12"; h.Atendido = false;
+                h.Name = "Cypres"; h.Hora = "12:00"; h.Fecha = "12/12/12"; h.Atendido = false;
                 i.Name = "Edrey"; i.Hora = "12:00"; i.Fecha = "12/12/12"; i.Atendido = false;
                 list.Add(a);
                 list.Add(b);
@@ -160,8 +160,8 @@
                     return new TokenResponse
                     {
                         AccessToken = "6cuIiwbghKtnMkcbpbKr7gF4nZ4AErIsvyuvdSfz84ve9qQTyBvwCFsaXsGJikeT\n23mFFe4cptahbuR58ejeuLG0frCQ9VNVFZmzp7e9OkB6A0toXrCnsVo9QYIEHFa3\nbg5G7lgo3iaGNC712QpeBik4Hy71i6MvApFH8GgDXkP3V1ZIR3mdhtbEeOdUzBcl\nRwUWGvCGaZ0Xj1CMR19lKfu8F8D2EEBesb3Tk4LuXUz2fg7UXMvHo8TYhKeazgvz\nYe7Ou453IpDozQzhDQEjoyPpmMyuAHW1UhZIA6lP4U76xeejO5kJAGNO3JMs56e0\nmh1JsArQ8mMSoK8l9D0qLXLDJxyC7m5BiWkrQ66T5LYNMaWySTS3Qn4NDI0gKOE5\nvBrsCJxIVMEuw5BvadUyboQM7HCvRBBf28VoHKLmSBzoTqiDKDSZ9xLCJ9QzBBz2\nzmiDi2oZK9FZwUCd9MHgFbcodadpYleOmrteLIF5pqWagJ8MickwK1HiQybspo5L\nQEEK6i7Oi2iK2lGOPWJd00WWrbaGJl1iL7C1mhHQsuJFOuGIkeNvSnVB6WXaicwF\nb6XAM4TsfUz0a404zT79YV17SnszLShh5uvsxUqkpugIuxZ6MwOiOGakKd7EOpnX",
-                        TokenType = "owner"
-                        //TokenType = "bearer"
+                        //TokenType = "owner"¡
+                        TokenType = "bearer"
                     };
                 }
 

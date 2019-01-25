@@ -95,8 +95,8 @@ namespace TuxMandados.ViewModels
             }
             this.IsRefreshing = false;
             MainViewModel.GetInstance().OrdersList = (List<Order>)response.Result;
-            this.Orders = new ObservableCollection<R_OrderItemViewModel>(ToOrderItemViewModel());
-
+            //this.Orders = new ObservableCollection<R_OrderItemViewModel>(ToOrderItemViewModel());
+            this.Orders = new ObservableCollection<R_OrderItemViewModel>(ToOrderItemViewModel().Where( l => l.Atendido==false));
         }
 
         private IEnumerable<R_OrderItemViewModel> ToOrderItemViewModel()
@@ -106,7 +106,8 @@ namespace TuxMandados.ViewModels
                 Name = lst.Name,
                 Hora = lst.Hora,
                 Fecha = lst.Fecha,
-                Atendido = lst.Atendido
+                Atendido = lst.Atendido,
+                AtendidoText = (lst.Atendido)?"Atendido" : "Sin atender",
             });
 
         }

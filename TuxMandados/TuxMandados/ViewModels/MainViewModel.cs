@@ -13,11 +13,12 @@
             get;
             set;
         }
+        /*Posiblemente no nos sirve
         public List<Order> R_OrdersList
         {
             get;
             set;
-        }
+        }*/
         public ObservableCollection<MenuItemViewModel> Menus
         {
             get;

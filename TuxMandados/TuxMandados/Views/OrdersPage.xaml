@@ -27,7 +27,7 @@
                                 CornerRadius="20"
                                 Margin="5"
                                 HasShadow="true"
-                                HeightRequest="100">
+                                HeightRequest="80">
 
                                 <Frame.GestureRecognizers>
                                     <TapGestureRecognizer Command="{Binding SelectOrderCommand}"/>
@@ -37,7 +37,7 @@
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="*"/>
                                         <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="0.5*"/>
+                                        <ColumnDefinition Width="0.4*"/>
                                     </Grid.ColumnDefinitions>
                                     <Image 
                                         Grid.Column="0"
@@ -59,11 +59,15 @@
                                             TextColor="Gray">
                                         </Label>
                                     </StackLayout>
-                                    <Image 
+                                    <StackLayout
                                         Grid.Column="2"
-                                        HorizontalOptions="End" 
-                                        Source="ic_chevron_right">
-                                    </Image>
+                                        HorizontalOptions="End" >
+                                        <Image 
+                                            HorizontalOptions="CenterAndExpand"
+                                            VerticalOptions="CenterAndExpand"
+                                            Source="ic_chevron_right">
+                                        </Image>
+                                    </StackLayout>
                                 </Grid>
                             </Frame>
                         </ViewCell>

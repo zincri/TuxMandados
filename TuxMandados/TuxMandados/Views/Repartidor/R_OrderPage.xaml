@@ -180,50 +180,34 @@
                 </StackLayout>
                 <StackLayout
                     Orientation="Horizontal">
-                    <Frame
-                        HorizontalOptions="StartAndExpand"
-                        Padding="0,0"
+                    <Button
+                        IsEnabled="false"
                         Margin="0,0"
+                        Padding="35,0"
                         CornerRadius="25"
+                        HeightRequest="50"
                         BackgroundColor="Red"
-                        HeightRequest="50">
-                        <Button
-                            IsEnabled="false"
-                            Margin="0,0"
-                            Padding="35,0"
-                            CornerRadius="25"
-                            HeightRequest="50"
-                            BackgroundColor="Red"
-                            Text="Ignorar"
-                            FontSize="16"
-                            FontAttributes="Bold"
-                            TextColor="White"
-                            VerticalOptions="Center"
-                            HorizontalOptions="Center"
-                            Command="{Binding IgnoreCommand}"/>
-                   </Frame>
-                   <Frame
-                        HorizontalOptions="EndAndExpand"
-                        Padding="0,0"
+                        Text="Ignorar"
+                        FontSize="16"
+                        FontAttributes="Bold"
+                        TextColor="White"
+                        VerticalOptions="Center"
+                        HorizontalOptions="StartAndExpand"
+                        Command="{Binding IgnoreCommand}"/>
+                    <Button
+                        IsEnabled="false"
                         Margin="0,0"
+                        Padding="35,0"
                         CornerRadius="25"
+                        HeightRequest="50"
                         BackgroundColor="Green"
-                        HeightRequest="50">
-                        <Button
-                            IsEnabled="false"
-                            Margin="0,0"
-                            Padding="35,0"
-                            CornerRadius="25"
-                            HeightRequest="50"
-                            BackgroundColor="Green"
-                            Text="Aceptar"
-                            FontSize="16"
-                            FontAttributes="Bold"
-                            TextColor="White"
-                            VerticalOptions="Center"
-                            HorizontalOptions="Center"
-                            Command="{Binding AcceptCommand}"/>
-                   </Frame>
+                        Text="Aceptar"
+                        FontSize="16"
+                        FontAttributes="Bold"
+                        TextColor="White"
+                        VerticalOptions="Center"
+                        HorizontalOptions="EndAndExpand"
+                        Command="{Binding AcceptCommand}"/>
                 </StackLayout>
             </StackLayout>
         </ScrollView>

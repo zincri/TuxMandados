@@ -51,6 +51,12 @@
     <PackageReference Include="Syncfusion.Licensing">
       <Version>16.4.0.42</Version>
     </PackageReference>
+    <PackageReference Include="Xam.Plugin.Media">
+      <Version>4.0.1.5</Version>
+    </PackageReference>
+    <PackageReference Include="Xam.Plugins.Forms.ImageCircle">
+      <Version>3.0.0.5</Version>
+    </PackageReference>
     <PackageReference Include="Xam.Plugins.Settings">
       <Version>3.1.1</Version>
     </PackageReference>
@@ -126,12 +132,7 @@
     <AndroidResource Include="Resources\drawable-xxhdpi\ic_exit_to_app.png" />
     <AndroidResource Include="Resources\drawable-xxxhdpi\ic_exit_to_app.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Resources\drawable-hdpi\" />
-    <Folder Include="Resources\drawable-xhdpi\" />
-    <Folder Include="Resources\drawable-xxhdpi\" />
-    <Folder Include="Resources\drawable-xxxhdpi\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\TuxMandados\TuxMandados.csproj">
       <Project>{22D75688-9281-4947-9841-067E65093454}</Project>

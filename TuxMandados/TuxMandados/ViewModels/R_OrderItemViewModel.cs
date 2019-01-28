@@ -55,7 +55,8 @@
             else 
             {
                 MainViewModel.GetInstance().R_Order = new R_OrderViewModel(this);
-                await App.Navigator.Navigation.PushAsync(new R_OrderPage());
+                await App.Current.MainPage.Navigation.PushAsync(new R_OrderPage());
+                //await App.Navigator.Navigation.PushAsync(new R_OrderPage());
             }
         }
         private void OnPropertyChanged([CallerMemberName] String propertyName = "")

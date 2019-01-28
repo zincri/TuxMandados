@@ -178,10 +178,14 @@
                             FontSize="16" />
                     </Frame>
                 </StackLayout>
+                <ActivityIndicator
+                        Margin="0,5"
+                        VerticalOptions="CenterAndExpand"
+                        IsRunning="{Binding IsRunning, Mode=TwoWay}">
+                    </ActivityIndicator>
                 <StackLayout
                     Orientation="Horizontal">
                     <Button
-                        IsEnabled="false"
                         Margin="0,0"
                         Padding="35,0"
                         CornerRadius="25"
@@ -195,7 +199,6 @@
                         HorizontalOptions="StartAndExpand"
                         Command="{Binding IgnoreCommand}"/>
                     <Button
-                        IsEnabled="false"
                         Margin="0,0"
                         Padding="35,0"
                         CornerRadius="25"
@@ -207,7 +210,8 @@
                         TextColor="White"
                         VerticalOptions="Center"
                         HorizontalOptions="EndAndExpand"
-                        Command="{Binding AcceptCommand}"/>
+                        Command="{Binding AcceptCommand}"
+                        IsEnabled="{Binding IsEnable,Mode=TwoWay}"/>
                 </StackLayout>
             </StackLayout>
         </ScrollView>

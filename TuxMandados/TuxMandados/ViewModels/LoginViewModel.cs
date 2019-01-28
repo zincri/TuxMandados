@@ -153,7 +153,19 @@
                 return;
             }
             //Antes de consumir el servicio valida hay que validar la conexion!
+            var conection = await this.apiService.CheckConnection();
+            if (!conection.IsSuccess)
+            {
 
+                IsRunning = false;
+                IsEnable = true;
+                await App.Current.MainPage.DisplayAlert(
+                "Error",
+                "Checa tu conexion a internet!",
+                "Ok");
+                this.Password = string.Empty;
+                return;
+            }
             var token = await this.apiService.GetToken(
                 "http://servicio.bla.bla.net",
                 this.Usuario,

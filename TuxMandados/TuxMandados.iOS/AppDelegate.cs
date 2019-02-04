@@ -4,6 +4,7 @@
 namespace TuxMandados.iOS
 {
     using Foundation;
+    using ImageCircle.Forms.Plugin.iOS;
     using UIKit;
     using Xamarin.Forms.GoogleMaps.iOS;
     // The UIApplicationDelegate for the application. This class is responsible for launching the 
@@ -22,6 +23,7 @@ namespace TuxMandados.iOS
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
             global::Xamarin.Forms.Forms.Init();
+            ImageCircleRenderer.Init();
             var platformConfig = new PlatformConfig
             {
                 ImageFactory = new CachingImageFactory()

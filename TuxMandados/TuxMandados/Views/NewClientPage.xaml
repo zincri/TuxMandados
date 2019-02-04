@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:controls="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin.Abstractions" 
+             xmlns:controls="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin"
              x:Class="TuxMandados.Views.NewClientPage"
              BindingContext="{Binding Main,Source={StaticResource Locator}}"
              BackgroundColor="#002E6D"
@@ -11,19 +11,25 @@
             BindingContext="{Binding NewClient}">
             <StackLayout
                 Padding="5">
-                <controls:CircleImage 
-                    Aspect="AspectFill"
-                    HeightRequest="250"
-                    Source="{Binding ImageSource}">
-                    <controls:CircleImage.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding ChangeImageCommand}" />
-                    </controls:CircleImage.GestureRecognizers>
-                </controls:CircleImage>
+                <StackLayout
+                    Padding="0,30">
+                    <controls:CircleImage 
+                        Aspect="AspectFill"
+                        HorizontalOptions="CenterAndExpand"
+                        VerticalOptions="CenterAndExpand"
+                        HeightRequest="200"
+                        WidthRequest="200"
+                        Source="{Binding ImageSource}">
+                        <controls:CircleImage.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding ChangeImageCommand}" />
+                        </controls:CircleImage.GestureRecognizers>
+                    </controls:CircleImage>
+                </StackLayout>
                 <Label 
                     HorizontalOptions="Center" 
                     FontSize="Small" 
-                    Text="Cambiar Imagen" 
-                    TextColor="Black">
+                    Text="Toca la imagen para cambiarla" 
+                    TextColor="White">
                 </Label>
                 <ActivityIndicator
                     IsRunning="{Binding IsRunning, Mode=TwoWay}">

@@ -5,6 +5,7 @@ namespace TuxMandados.Models
     using Newtonsoft.Json;
     public class Order //MODELO DE EL PEDIDO
     {
+        //    -- CAMPOS TEMPORALES --
         [JsonProperty(PropertyName = "name")]
         public string Name { get; set; }
 
@@ -16,6 +17,8 @@ namespace TuxMandados.Models
 
         [JsonProperty(PropertyName = "atendido")]
         public bool Atendido { get; set; }
+        //    -- CAMPOS TEMPORALES --
+
 
     }
 }

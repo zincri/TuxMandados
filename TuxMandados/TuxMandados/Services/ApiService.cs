@@ -173,8 +173,32 @@
                 return null;
             }
         }
+        /*
 
-
+        public async Task<ValidUserJson> GetValidarUsuario(string url, SolicitudValidarUsuario solicitudValidarUsuario)
+        {
+            try
+            {
+                var data = JsonConvert.SerializeObject(solicitudValidarUsuario);
+                var content = new StringContent(data, Encoding.UTF8, "application/json");
+                var response = await Client.PostAsync(url, content);
+                if (response.IsSuccessStatusCode)
+                {
+                    var json = await response.Content.ReadAsStringAsync();
+                    if (json.Substring(0, 5) != "Error")
+                    {
+                        var resultado = (ValidUserJson)JsonConvert.DeserializeObject(json, typeof(ValidUserJson));
+                        return resultado;
+                    }
+                }
+                return null;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+        */
     }
 
 }

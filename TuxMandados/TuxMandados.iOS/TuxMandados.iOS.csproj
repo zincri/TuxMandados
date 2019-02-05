@@ -156,6 +156,12 @@
     <PackageReference Include="Syncfusion.Xamarin.SfProgressBar.IOS">
       <Version>16.4.0.42</Version>
     </PackageReference>
+    <PackageReference Include="Xam.Plugin.Media">
+      <Version>4.0.1.5</Version>
+    </PackageReference>
+    <PackageReference Include="Xam.Plugins.Forms.ImageCircle">
+      <Version>3.0.0.5</Version>
+    </PackageReference>
     <PackageReference Include="Xam.Plugins.Settings">
       <Version>3.1.1</Version>
     </PackageReference>
@@ -202,5 +208,6 @@
     <BundleResource Include="Resources\ic_chevron_right.png" />
     <BundleResource Include="Resources\ic_exit_to_app.png" />
     <BundleResource Include="Resources\ic_settings.png" />
+    <BundleResource Include="Resources\no_image.png" />
   </ItemGroup>
 </Project>

@@ -9,6 +9,7 @@
     using TuxMandados.Services;
     using TuxMandados.Helpers;
     using Xamarin.Forms;
+    using TuxMandados.Models;
 
     public class LoginViewModel : INotifyPropertyChanged
     {
@@ -166,10 +167,12 @@
                 this.Password = string.Empty;
                 return;
             }
+            SolicitudLogin solicitud = new SolicitudLogin();
+            solicitud.usuario = Usuario;
+            solicitud.password = Password;
             var token = await this.apiService.GetToken(
-                "http://servicio.bla.bla.net",
-                this.Usuario,
-                this.Password);
+                "http://www.creativasoftlineapps.com/ScriptAppTuxmandados/frmLogin.aspx",
+                solicitud);
             if (token == null)
             {
                 IsRunning = false;
@@ -206,7 +209,7 @@
                 Settings.Token = token.AccessToken;
                 Settings.TokenType = token.TokenType;
             }
-            if(mainViewModel.TokenType.Equals("owner"))
+            if(mainViewModel.TokenType.Equals("repartidor"))
             {
                 App.Current.MainPage = new NavigationPage(new Views.Repartidor.R_AppTabbedPage())
                 {

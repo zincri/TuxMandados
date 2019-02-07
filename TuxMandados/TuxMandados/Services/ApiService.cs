@@ -132,22 +132,37 @@
         //Method que nos sirve para obtener un token cuando el usuario se loggea
         public async Task<TokenResponse> GetToken(
             string urlBase,
-            string username,
-            string password)
+            SolicitudLogin solicitud)
         {
             try
             {
-                //var client = new HttpClient();
-                //client.BaseAddress = new Uri(urlBase);
-                //var response = await client.PostAsync("Token",
-                //    new StringContent(string.Format(
-                //    "grant_type=password&username={0}&password={1}",
-                //    username, password),
-                //    Encoding.UTF8, "application/x-www-form-urlencoded"));
-                //var resultJSON = await response.Content.ReadAsStringAsync();
-                //var result = JsonConvert.DeserializeObject<TokenResponse>(
-                //    resultJSON);
-                //return result;
+                var Client = new HttpClient();
+                string url = urlBase;
+                
+                var data = JsonConvert.SerializeObject(solicitud);
+                var content = new StringContent(data, Encoding.UTF8, "application/json");
+                var response = await Client.PostAsync(url, content);
+                if (response.IsSuccessStatusCode)
+                {
+                    var json = await response.Content.ReadAsStringAsync();
+                    
+                    if (json.Substring(0, 5) != "Error")
+                    {
+                        var resultado = (TokenResponse)JsonConvert.DeserializeObject(json, typeof(TokenResponse));
+
+                        return resultado;
+                    }
+                    return null;
+                }
+                else
+                {
+                    return new TokenResponse
+                    {
+                        ErrorDescription = "Las credenciales no son validas"
+                    };
+                }
+
+                /*
                 if (!(username.Equals("usuario")) || !(password.Equals("123456")))
                 {
                     return new TokenResponse
@@ -164,7 +179,7 @@
                         //TokenType = "bearer"
                     };
                 }
-
+                */
 
 
             }
@@ -199,6 +214,6 @@
             }
         }
         */
-    }
+            }
 
 }

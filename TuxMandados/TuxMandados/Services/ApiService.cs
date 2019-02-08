@@ -23,31 +23,43 @@
         /// <returns>The connection.</returns>
         public async Task<Response> CheckConnection()
         {
-            if (!CrossConnectivity.Current.IsConnected)
+            try
             {
+                if (!CrossConnectivity.Current.IsConnected)
+                {
+                    return new Response
+                    {
+                        IsSuccess = false,
+                        Message = "Por favor checa tu conexion en ajustes.",
+                    };
+                }
+
+                var isReachable = await CrossConnectivity.Current.IsRemoteReachable(
+                    "google.com");
+                if (!isReachable)
+                {
+                    return new Response
+                    {
+                        IsSuccess = false,
+                        Message = "Checa tu conexion a internet.",
+                    };
+                }
+
+                return new Response
+                {
+                    IsSuccess = true,
+                    Message = "Ok",
+                };
+            }
+            catch (Exception)
+            {
+
                 return new Response
                 {
                     IsSuccess = false,
-                    Message = "Please turn on your internet settings.",
+                    Message = "Algo salio mal, vuelve a intentarlo.",
                 };
             }
-
-            var isReachable = await CrossConnectivity.Current.IsRemoteReachable(
-                "google.com");
-            if (!isReachable)
-            {
-                return new Response
-                {
-                    IsSuccess = false,
-                    Message = "Check you internet connection.",
-                };
-            }
-
-            return new Response
-            {
-                IsSuccess = true,
-                Message = "Ok",
-            };
         }
 
         /// <summary>
@@ -129,7 +141,12 @@
             }
         }
 
-        //Method que nos sirve para obtener un token cuando el usuario se loggea
+        /// <summary>
+        /// Metodo que sirve para obtener el token de persistencia cuando el usuario se loggea
+        /// </summary>
+        /// <param name="urlBase"> nos sirve para pasarle la url del servicio</param>
+        /// <param name="solicitud">no sirve para mandar los datos del usuario</param>
+        /// <returns></returns>
         public async Task<TokenResponse> GetToken(
             string urlBase,
             SolicitudLogin solicitud)
@@ -145,42 +162,27 @@
                 if (response.IsSuccessStatusCode)
                 {
                     var json = await response.Content.ReadAsStringAsync();
-                    
+
                     if (json.Substring(0, 5) != "Error")
                     {
                         var resultado = (TokenResponse)JsonConvert.DeserializeObject(json, typeof(TokenResponse));
-
                         return resultado;
                     }
-                    return null;
+                    else
+                    {
+                        return new TokenResponse
+                        {
+                            ErrorDescription = "Las credenciales no son validas"
+                        };
+                    }
                 }
                 else
                 {
                     return new TokenResponse
                     {
-                        ErrorDescription = "Las credenciales no son validas"
+                        ErrorDescription = "Ocurrió un error, intentelo mas tarde."
                     };
                 }
-
-                /*
-                if (!(username.Equals("usuario")) || !(password.Equals("123456")))
-                {
-                    return new TokenResponse
-                    {
-                        ErrorDescription = "Las credenciales no son validas"
-                    };
-                }
-                else 
-                {
-                    return new TokenResponse
-                    {
-                        AccessToken = "6cuIiwbghKtnMkcbpbKr7gF4nZ4AErIsvyuvdSfz84ve9qQTyBvwCFsaXsGJikeT\n23mFFe4cptahbuR58ejeuLG0frCQ9VNVFZmzp7e9OkB6A0toXrCnsVo9QYIEHFa3\nbg5G7lgo3iaGNC712QpeBik4Hy71i6MvApFH8GgDXkP3V1ZIR3mdhtbEeOdUzBcl\nRwUWGvCGaZ0Xj1CMR19lKfu8F8D2EEBesb3Tk4LuXUz2fg7UXMvHo8TYhKeazgvz\nYe7Ou453IpDozQzhDQEjoyPpmMyuAHW1UhZIA6lP4U76xeejO5kJAGNO3JMs56e0\nmh1JsArQ8mMSoK8l9D0qLXLDJxyC7m5BiWkrQ66T5LYNMaWySTS3Qn4NDI0gKOE5\nvBrsCJxIVMEuw5BvadUyboQM7HCvRBBf28VoHKLmSBzoTqiDKDSZ9xLCJ9QzBBz2\nzmiDi2oZK9FZwUCd9MHgFbcodadpYleOmrteLIF5pqWagJ8MickwK1HiQybspo5L\nQEEK6i7Oi2iK2lGOPWJd00WWrbaGJl1iL7C1mhHQsuJFOuGIkeNvSnVB6WXaicwF\nb6XAM4TsfUz0a404zT79YV17SnszLShh5uvsxUqkpugIuxZ6MwOiOGakKd7EOpnX",
-                        TokenType = "owner"
-                        //TokenType = "bearer"
-                    };
-                }
-                */
-
 
             }
             catch
@@ -188,32 +190,7 @@
                 return null;
             }
         }
-        /*
-
-        public async Task<ValidUserJson> GetValidarUsuario(string url, SolicitudValidarUsuario solicitudValidarUsuario)
-        {
-            try
-            {
-                var data = JsonConvert.SerializeObject(solicitudValidarUsuario);
-                var content = new StringContent(data, Encoding.UTF8, "application/json");
-                var response = await Client.PostAsync(url, content);
-                if (response.IsSuccessStatusCode)
-                {
-                    var json = await response.Content.ReadAsStringAsync();
-                    if (json.Substring(0, 5) != "Error")
-                    {
-                        var resultado = (ValidUserJson)JsonConvert.DeserializeObject(json, typeof(ValidUserJson));
-                        return resultado;
-                    }
-                }
-                return null;
-            }
-            catch (Exception)
-            {
-                return null;
-            }
-        }
-        */
-            }
+        
+    }
 
 }

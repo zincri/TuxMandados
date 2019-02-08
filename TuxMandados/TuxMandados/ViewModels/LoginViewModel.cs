@@ -114,7 +114,7 @@
         public LoginViewModel()
         {
             this.apiService = new ApiService();
-            this.Usuario = "usuario";
+            this.Usuario = "eacr77";
             this.Password = "123456";
             this.IsEnable = true;
             this.IsRunning =  false;
@@ -167,6 +167,7 @@
                 this.Password = string.Empty;
                 return;
             }
+
             SolicitudLogin solicitud = new SolicitudLogin();
             solicitud.usuario = Usuario;
             solicitud.password = Password;

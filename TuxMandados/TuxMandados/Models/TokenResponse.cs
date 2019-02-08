@@ -6,6 +6,18 @@ namespace TuxMandados.Models
     public class TokenResponse
     {
         #region Properties
+        [JsonProperty(PropertyName = "resultado")]
+        public object Resultado { get; set; }
+
+        [JsonProperty(PropertyName = "token")]
+        public string AccessToken { get; set; }
+
+        [JsonProperty(PropertyName = "rol")]
+        public string TokenType { get; set; }
+
+        [JsonProperty(PropertyName = "error_description")]
+        public string ErrorDescription { get; set; }
+        /*
         [JsonProperty(PropertyName = "access_token")]
         public string AccessToken { get; set; }
 
@@ -26,6 +38,7 @@ namespace TuxMandados.Models
 
         [JsonProperty(PropertyName = "error_description")]
         public string ErrorDescription { get; set; }
+        */
         #endregion
     }
 }

@@ -155,7 +155,9 @@
             {
                 var Client = new HttpClient();
                 string url = urlBase;
-                
+
+                solicitud.usuario = "marco77";
+                solicitud.password = "qwerty77";
                 var data = JsonConvert.SerializeObject(solicitud);
                 var content = new StringContent(data, Encoding.UTF8, "application/json");
                 var response = await Client.PostAsync(url, content);

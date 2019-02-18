@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:controls="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
              x:Class="TuxMandados.Views.NewClientPage"
              BindingContext="{Binding Main,Source={StaticResource Locator}}"
              BackgroundColor="#002E6D"
@@ -43,6 +44,8 @@
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
@@ -101,7 +104,7 @@
                             BackgroundColor="#174188"
                             Margin="2">
                             <Entry  
-                                Text="{Binding Apellidos, Mode=TwoWay}"
+                                Text="{Binding ApePat, Mode=TwoWay}"
                                 TextColor="#FFFFFF"
                                 BackgroundColor="Transparent"
                                 Placeholder="Apellidos"></Entry>
@@ -110,6 +113,34 @@
                     <Image
                         Grid.Column="0"
                         Grid.Row="2"
+                        x:Name="img7"
+                        HeightRequest="50"
+                        HorizontalOptions="Center"
+                        Aspect="AspectFit"
+                        Source="iconostux11.png"/>
+                    <Frame
+                        Grid.Column="1"
+                        Grid.Row="2"
+                        Grid.ColumnSpan="3"
+                        CornerRadius="35"
+                        Padding="0"
+                        BackgroundColor="#EFCB4B"
+                        Margin="0">
+                        <Frame 
+                            CornerRadius="35"
+                            Padding="0"
+                            BackgroundColor="#174188"
+                            Margin="2">
+                            <Entry  
+                                Text="{Binding ApeMat, Mode=TwoWay}"
+                                TextColor="#FFFFFF"
+                                BackgroundColor="Transparent"
+                                Placeholder="Apellidos"></Entry>
+                        </Frame>
+                    </Frame>
+                    <Image
+                        Grid.Column="0"
+                        Grid.Row="3"
                         x:Name="img3"
                         HeightRequest="50"
                         HorizontalOptions="Center"
@@ -117,7 +148,7 @@
                         Source="iconostux10.png"/>
                     <Frame 
                         Grid.Column="1"
-                        Grid.Row="2"
+                        Grid.Row="3"
                         Grid.ColumnSpan="3"
                         CornerRadius="35"
                         Padding="0"
@@ -138,7 +169,7 @@
                     </Frame>
                     <Image
                         Grid.Column="0"
-                        Grid.Row="3"
+                        Grid.Row="4"
                         x:Name="img4"
                         HeightRequest="50"
                         HorizontalOptions="Center"
@@ -146,7 +177,7 @@
                         Source="iconostux09.png"/>
                     <Frame
                         Grid.Column="1"
-                        Grid.Row="3"
+                        Grid.Row="4"
                         Grid.ColumnSpan="3"
                         CornerRadius="35"
                         Padding="0"
@@ -166,7 +197,65 @@
                     </Frame>
                     <Image 
                         Grid.Column="0"
-                        Grid.Row="4"
+                        Grid.Row="5"
+                        x:Name="img11"
+                        HeightRequest="50"
+                        HorizontalOptions="Center"
+                        Aspect="AspectFit"
+                        Source="iconostux08.png"/>
+                    <Frame 
+                        Grid.Column="1"
+                        Grid.Row="5"
+                        Grid.ColumnSpan="3"
+                        CornerRadius="35"
+                        Padding="0"
+                        BackgroundColor="#EFCB4B"
+                        Margin="0">
+                        <Frame
+                            CornerRadius="35"
+                            Padding="0"
+                            BackgroundColor="#174188"
+                            Margin="2">
+                            <DatePicker                                 
+                                Format="dd-MM-yyyy" 
+                                MinimumDate="01-01-1910" 
+                                MaximumDate="{x:Static sys:DateTime.Now}" 
+                                TextColor="#FFFFFF" 
+                                BackgroundColor="Transparent"
+                                Date="{Binding Fecha,Mode=TwoWay}"/>
+                        </Frame>
+                    </Frame>
+                    <Image 
+                        Grid.Column="0"
+                        Grid.Row="6"
+                        x:Name="img9"
+                        HeightRequest="50"
+                        HorizontalOptions="Center"
+                        Aspect="AspectFit"
+                        Source="iconostux08.png"/>
+                    <Frame 
+                        Grid.Column="1"
+                        Grid.Row="6"
+                        Grid.ColumnSpan="3"
+                        CornerRadius="35"
+                        Padding="0"
+                        BackgroundColor="#EFCB4B"
+                        Margin="0">
+                        <Frame
+                            CornerRadius="35"
+                            Padding="0"
+                            BackgroundColor="#174188"
+                            Margin="2">
+                            <Entry
+                                Text="{Binding Usuario, Mode=TwoWay}"
+                                TextColor="#FFFFFF"
+                                BackgroundColor="Transparent"
+                                Placeholder="Correo"></Entry>
+                        </Frame>
+                    </Frame>
+                    <Image 
+                        Grid.Column="0"
+                        Grid.Row="7"
                         x:Name="img5"
                         HeightRequest="50"
                         HorizontalOptions="Center"
@@ -174,7 +263,7 @@
                         Source="iconostux08.png"/>
                     <Frame 
                         Grid.Column="1"
-                        Grid.Row="4"
+                        Grid.Row="7"
                         Grid.ColumnSpan="3"
                         CornerRadius="35"
                         Padding="0"
@@ -194,7 +283,7 @@
                     </Frame>
                     <Image
                         Grid.Column="0"
-                        Grid.Row="5"
+                        Grid.Row="8"
                         x:Name="img6"
                         HeightRequest="50"
                         HorizontalOptions="Center"
@@ -202,7 +291,7 @@
                         Source="iconostux13.png"/>
                     <Frame
                         Grid.Column="1"
-                        Grid.Row="5"
+                        Grid.Row="8"
                         Grid.ColumnSpan="3"
                         CornerRadius="35"
                         Padding="0"
@@ -223,15 +312,15 @@
                     </Frame>
                     <Image 
                         Grid.Column="0"
-                        Grid.Row="6"
-                        x:Name="img7"   
+                        Grid.Row="9"
+                        x:Name="img14"   
                         HeightRequest="50"
                         HorizontalOptions="Center"
                         Aspect="AspectFit"  
                         Source="iconostux13.png"/>
                     <Frame
                         Grid.Column="1"
-                        Grid.Row="6"
+                        Grid.Row="9"
                         Grid.ColumnSpan="3"
                         CornerRadius="35"
                         Padding="0"
@@ -251,13 +340,10 @@
                         </Frame>
                     </Frame>
                 </Grid>
-                <Frame 
-                    CornerRadius="25"
-                    Padding="80,0"
-                    BackgroundColor="#EFCB4B"
-                    HorizontalOptions="Center"
-                    Margin="0,5,0,10">
+                
                     <Button
+                        CornerRadius="25"
+                        Padding="80,0"
                         HeightRequest="50"
                         BackgroundColor="Transparent"
                         Command="{Binding SaveClientCommand}"
@@ -267,7 +353,7 @@
                         TextColor="#174188"
                         VerticalOptions="Center"
                         HorizontalOptions="Center"/>
-                </Frame>
+               
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>

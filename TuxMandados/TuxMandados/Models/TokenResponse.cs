@@ -12,6 +12,9 @@ namespace TuxMandados.Models
         [JsonProperty(PropertyName = "token")]
         public string AccessToken { get; set; }
 
+        [JsonProperty(PropertyName = "id")]
+        public int Id { get; set; }
+
         [JsonProperty(PropertyName = "rol")]
         public string TokenType { get; set; }
 

@@ -156,8 +156,8 @@
                 var Client = new HttpClient();
                 string url = urlBase;
 
-                solicitud.usuario = "marco77";
-                solicitud.password = "qwerty77";
+                solicitud.usuario = "eacr77";
+                solicitud.password = "123456";
                 var data = JsonConvert.SerializeObject(solicitud);
                 var content = new StringContent(data, Encoding.UTF8, "application/json");
                 var response = await Client.PostAsync(url, content);
@@ -187,8 +187,9 @@
                 }
 
             }
-            catch
+            catch (Exception ex)
             {
+                string a = ex.Message;
                 return null;
             }
         }

@@ -156,6 +156,8 @@
         private async void SendMethod()
         {
 
+
+
             await App.Current.MainPage.DisplayAlert("Correcto", "Tuxmandado", "ok");
         }
 

@@ -25,7 +25,7 @@ namespace TuxMandados.Models
         [JsonProperty(PropertyName = "hora_entregado")]
         public TimeSpan? Hora_Entregado { get; set; }
 
-        [JsonProperty(PropertyName = "hora_entregado")]
+        [JsonProperty(PropertyName = "estado")]
         public string Estado { get; set; }
 
         [JsonProperty(PropertyName = "descripcion")]

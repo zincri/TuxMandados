@@ -7,16 +7,43 @@ namespace TuxMandados.ViewModels
     using System.Runtime.CompilerServices;
     using System.Windows.Input;
     using GalaSoft.MvvmLight.Command;
+    using TuxMandados.Helpers;
+    using TuxMandados.Services;
     using TuxMandados.Views;
+    using Xamarin.Forms;
+    //using Xamarin.Essentials;
+    using System.Security.Cryptography.X509Certificates;
+    using System.Net.Mail;
+    using TuxMandados.Models;
+    using System.Threading.Tasks;
+    using System.Collections.Generic;
+    using System.Net;
+
     public class ForgotViewModel : INotifyPropertyChanged
     {
+        #region Private Vars
+        private ApiService apiService;
+        #endregion
         #region Vars  
         private bool _isEnable;
         private string _correo;
+        private bool _isRunning;
         public event PropertyChangedEventHandler PropertyChanged;
         #endregion
 
         #region Properties
+        public bool IsRunning
+        {
+            get
+            {
+                return _isRunning;
+            }
+            set
+            {
+                _isRunning = value;
+                OnPropertyChanged();
+            }
+        }
         public string Correo
         {
             get
@@ -46,6 +73,7 @@ namespace TuxMandados.ViewModels
         public ForgotViewModel()
         {
             this.Correo = "correo@hotmail.com";
+            this.apiService = new ApiService();
         }
         #endregion
 
@@ -68,8 +96,99 @@ namespace TuxMandados.ViewModels
         #region Methods       
         private async void SendMethod()
         {
+            if (string.IsNullOrEmpty(this.Correo))
+            {
+                await Application.Current.MainPage.DisplayAlert(
+                    "Error",
+                    "El campo email está vacío!",
+                    "Ok");
+                return;
+            }
+            if (!RegexUtilities.IsValidEmail(this.Correo))
+            {
+                await Application.Current.MainPage.DisplayAlert(
+                    "Error",
+                    "¡¡Ingresa un correo valido !!",
+                    "Ok");
+                return;
+            }
+           this.IsRunning = true;
+           this.IsEnable = false;
+            var checkConnetion = await this.apiService.CheckConnection();
+            if (!checkConnetion.IsSuccess)
+            {
+                this.IsRunning = false;
+                this.IsEnable = true;
+                await Application.Current.MainPage.DisplayAlert(
+                    "Error",
+                    "Checa tu conexion a internet!",
+                    "Ok");
+                return;
+            }
+            SolicitudValidUsuario soli = new SolicitudValidUsuario();
+            soli.correo = this.Correo;
+            var res = await this.apiService.ValidarCorreo(
+                "http://www.creativasoftlineapps.com/ScriptAppTuxmandados/frmValidarCorreo.aspx",
+                soli);
+            if (res == null)
+            {
+                IsRunning = false;
+                IsEnable = true;
+                await App.Current.MainPage.DisplayAlert(
+                "Error",
+                "Ocurrió algun problema!",
+                "Ok");
+                return;
+            }
+            if(res.Valido==0)
+            {
+                IsRunning = false;
+                IsEnable = true;
+                await App.Current.MainPage.DisplayAlert(
+                "Error",
+                "No tenemos ningun usuario asociado a la cuenta",
+                "Ok");
+                return;
+            }                       
+            //await SendEmail("tuxmandados.18@gmail.com","Intrucciones de recuperacion de contraseña",Mail);            
+            await EnviarCorreo(@"</html><!DOCTYPE html><html><head><title> Que pex papu </title></head><body><h1>U
+Este es el link d erecuperacion de contraseña ajajajjajjaj</h1></body></html>");
             await App.Current.MainPage.DisplayAlert("Éxito", "Correo enviado", "ok");
-            return;
+            await App.Current.MainPage.Navigation.PopAsync();
+            IsEnable = true;
+            IsRunning = false;
+        }
+        public async Task EnviarCorreo(string mensaje)
+        {
+            
+
+            try
+            {
+                MailMessage mail = new MailMessage();
+                SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
+                mail.From = new MailAddress("tuxmandados.18@gmail.com");//Este debe ser nuestro correo Gmail al que le dimos los permisos necesarios es decir el que envia los correos
+                mail.To.Add(Correo);//este es el correo al que llegara el correo
+                mail.Subject = "Recuperacion de contraseña";// El titulo del mensaje
+                mail.IsBodyHtml = true;
+                mail.Body = mensaje;//El mensaje que se almaceno en el estring
+               
+                SmtpServer.Port = 587;
+                SmtpServer.Credentials = new System.Net.NetworkCredential("tuxmandados.18@gmail.com", "Tu%m4nd4d0s");// aqui debe ir nuestro correo Gmail y nuestra contraseña
+                SmtpServer.EnableSsl = true;
+                ServicePointManager.ServerCertificateValidationCallback = delegate (object sender, X509Certificate certificate, X509Chain chain, System.Net.Security.SslPolicyErrors sslPolicyErrors) {
+                    return true;
+                };
+                SmtpServer.Send(mail);
+                
+            }
+
+            catch (Exception ex)
+            {
+                await App.Current.MainPage.DisplayAlert(
+               "Error",
+               "Ocurrio un problema enviando el correo de recuperacion",
+               "Ok");
+            }
         }
         private void OnPropertyChanged([CallerMemberName] String propertyName = "")
         {

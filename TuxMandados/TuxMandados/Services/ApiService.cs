@@ -191,63 +191,7 @@
                 return null;
             }
         }
-        /*
-        /// <summary>
-        /// Metodo que sirve para registrar un nuevo usuario
-        /// </summary>
-        /// <param name="urlBase"> Objeto para pasarle la url del servicio</param>
-        /// <param name="solicitud">Objeto para enviar los datos de registro</param>
-        /// <returns></returns>
-        public async Task<Response> SetUser(
-            string urlBase,
-            SolicitudACUsuario solicitud)
-        {
-            try
-            {
-                var Client = new HttpClient();
-                string url = urlBase;
-
-                var data = JsonConvert.SerializeObject(solicitud);
-                var content = new StringContent(data, Encoding.UTF8, "application/json");
-                var response = await Client.PostAsync(url, content);
-                if (response.IsSuccessStatusCode)
-                {
-                    var json = await response.Content.ReadAsStringAsync();
-
-                    if (json.Substring(0, 5) != "Error")
-                    {
-                        //var resultado = (UserResponse)JsonConvert.DeserializeObject(json, typeof(UserResponse));
-                        //return resultado;
-                        return new Response
-                        {
-                            IsSuccess = true,
-                            Result= JsonConvert.DeserializeObject<UserResponse>(json)
-                        };
-                    }
-                    else
-                    {
-                        return new Response
-                        {
-                            IsSuccess= false,
-                            Message = "Los datos no fueron enviados correctamente"
-                        };
-                    }
-                }
-                else
-                {
-                    return new Response
-                    {
-                        IsSuccess=false,
-                        Message = "Ocurrió un error, intentelo mas tarde."
-                    };
-                }
-
-            }
-            catch
-            {
-                return null;
-            }
-        }*/
+       
         /// <summary>
         /// Metodo que sirve para enviar cualquier solicitud post
         /// </summary>
@@ -280,6 +224,40 @@
                 }
                 return null;
 
+            }
+            catch
+            {
+                return null;
+            }
+        }
+        /// <summary>
+        /// Metodo que sirve para enviar solicitud post para validar email
+        /// </summary>
+        /// <param name="urlBase"> Objeto para pasarle la url del servicio</param>
+        /// <param name="solicitud">Objeto para enviar el email a validar</param>
+        /// <returns></returns>
+        public async Task<ValidCorreoResponse> ValidarCorreo(
+            string urlBase,
+            SolicitudValidUsuario solicitud)
+        {
+            try
+            {
+                var Client = new HttpClient();
+                string url = urlBase;
+                var data = JsonConvert.SerializeObject(solicitud);
+                var content = new StringContent(data, Encoding.UTF8, "application/json");
+                var response = await Client.PostAsync(url, content);
+                if (response.IsSuccessStatusCode)
+                {
+                    var json = await response.Content.ReadAsStringAsync();
+                    if (json.Substring(0, 5) != "Error")
+                    {
+                        var resultado = (ValidCorreoResponse)JsonConvert.DeserializeObject(json, typeof(ValidCorreoResponse));
+                        return resultado;
+                    }
+
+                }
+                return null;
             }
             catch
             {

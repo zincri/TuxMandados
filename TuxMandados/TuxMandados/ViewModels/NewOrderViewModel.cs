@@ -6,6 +6,8 @@
     using System.Runtime.CompilerServices;
     using System.Windows.Input;
     using TuxMandados.Views;
+    using Xamarin.Forms.GoogleMaps;
+
     public class NewOrderViewModel : INotifyPropertyChanged
     {
         #region Vars  
@@ -16,6 +18,7 @@
         private string _descripcion;
         private string _lmandado;
         private string _lentrega;
+        public static Pin pin;
         public event PropertyChangedEventHandler PropertyChanged;
         #endregion
         #region Properties
@@ -146,19 +149,27 @@
             IsRunning = true;
             //  var mainViewModel = MainViewModel.GetInstance();
             //  mainViewModel.Home = new HomeViewModel();
+            //pin = new Pin();
             await App.Current.MainPage.Navigation.PushAsync(new SMapPage());
+            if(pin == null)
+            {
+                await App.Current.MainPage.DisplayAlert("Mensaje", "pin null", "ok");
+            }
             IsEnable = true;
             IsRunning = false;
         }
 
 
-
         private async void SendMethod()
         {
+            /*AHERE QUEDE*/
+            if(pin == null) {
+                await App.Current.MainPage.DisplayAlert("Incorrecto", "Varifica los datos", "ok");
+            }
+            else {
+                await App.Current.MainPage.DisplayAlert("Correcto", "Tuxmandado", "ok");
+            }
 
-
-
-            await App.Current.MainPage.DisplayAlert("Correcto", "Tuxmandado", "ok");
         }
 
         private void OnPropertyChanged([CallerMemberName] String propertyName = "")

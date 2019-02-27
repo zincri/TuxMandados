@@ -7,6 +7,8 @@ using Xamarin.Forms.GoogleMaps;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using TuxMandados.ViewModels;
+using System.Windows.Input;
+using GalaSoft.MvvmLight.Command;
 
 namespace TuxMandados.Views
 {
@@ -23,7 +25,7 @@ namespace TuxMandados.Views
                MapSpan.FromCenterAndRadius(
                    new Position(16.7514123, -93.1393565), Distance.FromMiles(3)));
 
-
+            
             map.PinDragEnd += async (sender, e) => {
                 var lat = _pin.Position.Latitude;
                 var lon = _pin.Position.Longitude;
@@ -68,5 +70,6 @@ namespace TuxMandados.Views
 
             };
         }
+
     }
 }

@@ -7,6 +7,9 @@
     using System.Windows.Input;
     using TuxMandados.Views;
     using Xamarin.Forms.GoogleMaps;
+    using Xamarin.Essentials;
+    using System.Collections.Generic;
+    using System.Linq;
 
     public class NewOrderViewModel : INotifyPropertyChanged
     {
@@ -19,6 +22,7 @@
         private string _lmandado;
         private string _lentrega;
         public static Pin pin;
+        Location x;
         public event PropertyChangedEventHandler PropertyChanged;
         #endregion
         #region Properties
@@ -124,6 +128,15 @@
                 return new RelayCommand(SendMethod);
             }
         }
+        ICommand UseUbication
+        {
+            get
+            {
+                return new RelayCommand(UseUbicationMethod);
+            }
+        }
+
+
 
         #endregion
 
@@ -153,7 +166,7 @@
             await App.Current.MainPage.Navigation.PushAsync(new SMapPage());
             if(pin == null)
             {
-                await App.Current.MainPage.DisplayAlert("Mensaje", "pin null", "ok");
+                //await App.Current.MainPage.DisplayAlert("Mensaje", "pin null", "ok");
             }
             IsEnable = true;
             IsRunning = false;
@@ -162,13 +175,60 @@
 
         private async void SendMethod()
         {
-            /*AHERE QUEDE*/
-            if(pin == null) {
-                await App.Current.MainPage.DisplayAlert("Incorrecto", "Varifica los datos", "ok");
+            /*antes de cada servicio comprueba la conexion*/
+            if (Ubicacion) 
+            {
+                UseUbicationMethod();
+
+            }
+
+            if (pin == null) {
+                await App.Current.MainPage.DisplayAlert("Incorrecto", "Verifica los datos", "ok");
             }
             else {
                 await App.Current.MainPage.DisplayAlert("Correcto", "Tuxmandado", "ok");
             }
+
+        }
+
+        private async void UseUbicationMethod()
+        {
+            try
+            {
+                var location = await Geolocation.GetLastKnownLocationAsync();
+
+                if (location != null)
+                {
+                    Geocoder geo = new Geocoder();
+                    Position posicion = new Position(location.Latitude, location.Longitude);
+                    IEnumerable<string> adresses = await geo.GetAddressesForPositionAsync(posicion);
+                    pin = new Pin()
+                    {
+                        Type = PinType.Place,
+                        Label = "Lugar",
+                        Address = adresses.ElementAt(0),
+                        Position = new Position(posicion.Latitude, posicion.Longitude)
+                    };
+                    Console.WriteLine($"Latitude: {location.Latitude}, Longitude: {location.Longitude}, Altitude: {location.Altitude}");
+                }
+            }
+            catch (FeatureNotSupportedException fnsEx)
+            {
+                // Handle not supported on device exception
+            }
+            catch (FeatureNotEnabledException fneEx)
+            {
+                // Handle not enabled on device exception
+            }
+            catch (PermissionException pEx)
+            {
+                // Handle permission exception
+            }
+            catch (Exception ex)
+            {
+                // Unable to get location
+            }
+
 
         }
 

@@ -10,6 +10,7 @@
     using Xamarin.Essentials;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Threading.Tasks;
 
     public class NewOrderViewModel : INotifyPropertyChanged
     {
@@ -22,7 +23,6 @@
         private string _lmandado;
         private string _lentrega;
         public static Pin pin;
-        Location x;
         public event PropertyChangedEventHandler PropertyChanged;
         #endregion
         #region Properties
@@ -128,13 +128,6 @@
                 return new RelayCommand(SendMethod);
             }
         }
-        ICommand UseUbication
-        {
-            get
-            {
-                return new RelayCommand(UseUbicationMethod);
-            }
-        }
 
 
 
@@ -176,14 +169,18 @@
         private async void SendMethod()
         {
             /*antes de cada servicio comprueba la conexion*/
+
+            /*Modal que bloquee la pantalla*/
+            ModalMapPage modalPage = new ModalMapPage();
+            await App.Navigator.Navigation.PushModalAsync(modalPage);
             if (Ubicacion) 
             {
-                UseUbicationMethod();
-
+                var t = await UseUbicationMethod();
             }
 
+            await App.Navigator.Navigation.PopModalAsync();
             if (pin == null) {
-                await App.Current.MainPage.DisplayAlert("Incorrecto", "Verifica los datos", "ok");
+                await App.Current.MainPage.DisplayAlert("Incorrecto", "Algo ocurrió,por favor intente mas tarde!", "ok");
             }
             else {
                 await App.Current.MainPage.DisplayAlert("Correcto", "Tuxmandado", "ok");
@@ -191,7 +188,7 @@
 
         }
 
-        private async void UseUbicationMethod()
+        private async Task<Pin> UseUbicationMethod()
         {
             try
             {
@@ -209,23 +206,29 @@
                         Address = adresses.ElementAt(0),
                         Position = new Position(posicion.Latitude, posicion.Longitude)
                     };
-                    Console.WriteLine($"Latitude: {location.Latitude}, Longitude: {location.Longitude}, Altitude: {location.Altitude}");
+                    return pin;
+                    //Console.WriteLine($"Latitude: {location.Latitude}, Longitude: {location.Longitude}, Altitude: {location.Altitude}");
                 }
+                return null;
             }
             catch (FeatureNotSupportedException fnsEx)
             {
+                return null;
                 // Handle not supported on device exception
             }
             catch (FeatureNotEnabledException fneEx)
             {
+                return null;
                 // Handle not enabled on device exception
             }
             catch (PermissionException pEx)
             {
+                return null;
                 // Handle permission exception
             }
             catch (Exception ex)
             {
+                return null;
                 // Unable to get location
             }
 

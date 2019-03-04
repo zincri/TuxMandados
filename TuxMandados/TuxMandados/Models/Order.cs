@@ -17,7 +17,7 @@ namespace TuxMandados.Models
         //    -- CAMPOS TEMPORALES --
 
         [JsonProperty(PropertyName = "id")]
-        public bool ID { get; set; }
+        public Int64 ID { get; set; }
 
         [JsonProperty(PropertyName = "hora_pedido")]
         public TimeSpan? Hora_Pedido { get; set; }

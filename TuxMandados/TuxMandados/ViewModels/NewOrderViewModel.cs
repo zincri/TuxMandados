@@ -11,6 +11,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
+    using TuxMandados.Models;
 
     public class NewOrderViewModel : INotifyPropertyChanged
     {
@@ -183,6 +184,8 @@
                 await App.Current.MainPage.DisplayAlert("Incorrecto", "Algo ocurrió,por favor intente mas tarde!", "ok");
             }
             else {
+                Order O = new Order();// hacemos el objeto order, para mandarlo al servicio!
+                
                 await App.Current.MainPage.DisplayAlert("Correcto", "Tuxmandado", "ok");
             }
 

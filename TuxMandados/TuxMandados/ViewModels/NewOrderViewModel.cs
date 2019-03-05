@@ -21,8 +21,8 @@
         private bool _ubicacion;
         private bool _llamar;
         private string _descripcion;
-        private string _lmandado;
-        private string _lentrega;
+        private string _lugarmandado;
+        private string _lugarentrega;
         public static Pin pin;
         public event PropertyChangedEventHandler PropertyChanged;
         #endregion
@@ -63,27 +63,27 @@
                 OnPropertyChanged();
             }
         }
-        public string LMandado
+        public string LugarMandado
         {
             get
             {
-                return _lmandado;
+                return _lugarmandado;
             }
             set
             {
-                _lmandado = value;
+                _lugarmandado = value;
                 OnPropertyChanged();
             }
         }
-        public string LEntrega
+        public string LugarEntrega
         {
             get
             {
-                return _lentrega;
+                return _lugarentrega;
             }
             set
             {
-                _lentrega = value;
+                _lugarentrega = value;
                 OnPropertyChanged();
             }
         }
@@ -138,8 +138,8 @@
         public NewOrderViewModel()
         {
             this.Descripcion = "Desc";
-            this.LMandado = "Manda";
-            this.LEntrega = "Direc";
+            this.LugarMandado = "Manda";
+            this.LugarEntrega = "Direc";
             this.Llamar = false;
             this.Ubicacion = true;
             this.IsEnable = true;
@@ -158,6 +158,8 @@
             //  mainViewModel.Home = new HomeViewModel();
             //pin = new Pin();
             await App.Current.MainPage.Navigation.PushAsync(new SMapPage());
+
+            // Hay que comentar esto por que no nos sirve de nada.
             if(pin == null)
             {
                 //await App.Current.MainPage.DisplayAlert("Mensaje", "pin null", "ok");
@@ -185,7 +187,9 @@
             }
             else {
                 Order O = new Order();// hacemos el objeto order, para mandarlo al servicio!
-                
+                O.Estado = 0;
+                O.Descripcion = Descripcion;
+
                 await App.Current.MainPage.DisplayAlert("Correcto", "Tuxmandado", "ok");
             }
 

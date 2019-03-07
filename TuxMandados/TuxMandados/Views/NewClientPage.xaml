@@ -28,7 +28,7 @@
                 </StackLayout>
                 <Label 
                     HorizontalOptions="Center" 
-                    FontSize="Small" 
+                    FontSize="16" 
                     Text="Toca la imagen para cambiarla" 
                     TextColor="White">
                 </Label>
@@ -345,7 +345,7 @@
                         CornerRadius="25"
                         Padding="80,0"
                         HeightRequest="50"
-                        BackgroundColor="Transparent"
+                        BackgroundColor="#EFCB4B"
                         Command="{Binding SaveClientCommand}"
                         Text="Guardar"
                         FontSize="16"

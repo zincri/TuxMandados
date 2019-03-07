@@ -10,6 +10,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Acr.UserDialogs" Version="7.0.3" />
     <PackageReference Include="Syncfusion.Licensing" Version="16.4.0.42" />
     <PackageReference Include="Syncfusion.Xamarin.SfProgressBar" Version="16.4.0.42" />
     <PackageReference Include="Xam.Plugin.Media" Version="4.0.1.5" />

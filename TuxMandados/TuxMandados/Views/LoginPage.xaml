@@ -5,7 +5,7 @@
     x:Class="TuxMandados.Views.LoginPage"
     BindingContext="{Binding Main,Source={StaticResource Locator}}"
     BackgroundColor="#002E6D"
-    Title="Login">
+    Title="Ingresar a Tuxmandados">
     <ContentPage.Content>
         <ScrollView BindingContext="{Binding Login}">
             <StackLayout
@@ -64,12 +64,7 @@
                             Text="{Binding Password, Mode=TwoWay}"></Entry>
                     </Frame>
                 </StackLayout>
-                    <ActivityIndicator
-                        Margin="0,5"
-                        VerticalOptions="CenterAndExpand"
-                        IsRunning="{Binding IsRunning, Mode=TwoWay}">
-                    </ActivityIndicator>
-                    <StackLayout
+                <StackLayout
                         Orientation="Vertical"
                         HorizontalOptions="CenterAndExpand"
                         VerticalOptions="CenterAndExpand">

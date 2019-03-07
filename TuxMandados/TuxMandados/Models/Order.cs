@@ -50,7 +50,7 @@ namespace TuxMandados.Models
         public float? Puntuacion { get; set; }
 
         [JsonProperty(PropertyName = "ubicacion")]
-        public int Ubicacion { get; set; }
+        public Ubicacion Ubicacion { get; set; }
 
         [JsonProperty(PropertyName = "cliente")]
         public int? Cliente { get; set; }

@@ -12,10 +12,12 @@
     using System.Linq;
     using System.Threading.Tasks;
     using TuxMandados.Models;
+    using TuxMandados.Services;
 
     public class NewOrderViewModel : INotifyPropertyChanged
     {
         #region Vars  
+        private ApiService apiService;
         private bool _isRunning;
         private bool _isEnable;
         private bool _ubicacion;
@@ -137,6 +139,7 @@
         #region Constructors
         public NewOrderViewModel()
         {
+            this.apiService = new ApiService();
             this.Descripcion = "Desc";
             this.LugarMandado = "Manda";
             this.LugarEntrega = "Direc";
@@ -186,10 +189,16 @@
                 await App.Current.MainPage.DisplayAlert("Incorrecto", "Algo ocurrió,por favor intente mas tarde!", "ok");
             }
             else {
-                Order O = new Order();// hacemos el objeto order, para mandarlo al servicio!
-                O.Estado = 0;
-                O.Descripcion = Descripcion;
+                Order solicitud = new Order();// hacemos el objeto order, para mandarlo al servicio!
+                solicitud.Estado = 0;
+                solicitud.Descripcion = Descripcion;
+                solicitud.Ubicacion = new Ubicacion();
+                solicitud.Ubicacion.Latitud = pin.Position.Latitude;
+                solicitud.Ubicacion.Longitud = pin.Position.Longitude;
 
+                var token = await this.apiService.SetOrder(
+                "http://www.creativasoftlineapps.com/ScriptAppTuxmandados/frmLogin.aspx",
+                solicitud);
                 await App.Current.MainPage.DisplayAlert("Correcto", "Tuxmandado", "ok");
             }
 
@@ -199,7 +208,9 @@
         {
             try
             {
-                var location = await Geolocation.GetLastKnownLocationAsync();
+                var request = new GeolocationRequest(GeolocationAccuracy.High);
+                var location = await Geolocation.GetLocationAsync(request);
+                //var location = await Geolocation.GetLastKnownLocationAsync();
 
                 if (location != null)
                 {

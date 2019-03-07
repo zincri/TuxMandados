@@ -155,9 +155,6 @@
             {
                 var Client = new HttpClient();
                 string url = urlBase;
-
-                solicitud.usuario = "eacr77";
-                solicitud.password = "123456";
                 var data = JsonConvert.SerializeObject(solicitud);
                 var content = new StringContent(data, Encoding.UTF8, "application/json");
                 var response = await Client.PostAsync(url, content);
@@ -193,7 +190,58 @@
                 return null;
             }
         }
-        
+
+        /// <summary>
+        /// Este metodo sirve para mandar la peticion de una nueva orden al servidor.
+        /// </summary>
+        /// <returns>The order.</returns>
+        /// <param name="urlBase">URL base.</param>
+        /// <param name="solicitud">Solicitud.</param>
+        public async Task<TokenResponse> SetOrder(
+            string urlBase,
+            Order solicitud)
+        {
+            try
+            {
+                var Client = new HttpClient();
+                string url = urlBase;
+
+                var data = JsonConvert.SerializeObject(solicitud);
+                var content = new StringContent(data, Encoding.UTF8, "application/json");
+                var response = await Client.PostAsync(url, content);
+                if (response.IsSuccessStatusCode)
+                {
+                    var json = await response.Content.ReadAsStringAsync();
+
+                    if (json.Substring(0, 5) != "Error")
+                    {
+                        var resultado = (TokenResponse)JsonConvert.DeserializeObject(json, typeof(TokenResponse));
+                        return resultado;
+                    }
+                    else
+                    {
+                        return new TokenResponse
+                        {
+                            ErrorDescription = "Las credenciales no son validas"
+                        };
+                    }
+                }
+                else
+                {
+                    return new TokenResponse
+                    {
+                        ErrorDescription = "Ocurrió un error, intentelo mas tarde."
+                    };
+                }
+
+            }
+            catch (Exception ex)
+            {
+                string a = ex.Message;
+                return null;
+            }
+        }
+
     }
 
 }

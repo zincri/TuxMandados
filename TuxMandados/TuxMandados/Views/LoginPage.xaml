@@ -80,7 +80,7 @@
                         <Label
                             HorizontalOptions="Center"
                             VerticalOptions="Center"
-                            Text="Rememberme"
+                            Text="Recuerdame"
                             TextColor="White"/>
                 </StackLayout>
                     

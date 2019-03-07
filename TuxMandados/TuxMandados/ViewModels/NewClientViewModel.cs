@@ -10,8 +10,9 @@
     using TuxMandados.Helpers;
     using TuxMandados.Services;
     using Xamarin.Forms;
+    using TuxMandados.Views;
     using Domain;
-
+    using TuxMandados.Models;
     public class NewClientViewModel : INotifyPropertyChanged
     {
         #region Services
@@ -20,15 +21,20 @@
 
         #region Vars
         public event PropertyChangedEventHandler PropertyChanged;
+        private string _usuario;
         private string _nombre;
-        private string _apellidos;
+        private string _apePat;
+        private string _apeMat;
         private string _telefono;
         private string _direccion;
         private string _email;
         private string _password;
+        private DateTime _fecha;
         private string _passwordconfirm;
         private bool _isRunning;
         private bool _isEnabled;
+        private decimal _latitud;
+        private decimal _longitud;
         private ImageSource _imageSource;
         private MediaFile file;
         #endregion
@@ -37,7 +43,8 @@
         public NewClientViewModel()
         {
             this.Nombre = "Nombre_Ejemplo";
-            this.Apellidos = "Apellidos_Ejemplo";
+            this.ApePat = "Apellidos Paterno";
+            this.ApeMat = "Apellidos Materno";
             this.Telefono = "Tele_Ejemplo";
             this.Direccion = "Direccion_Ejemplo";
             this.Email = "Email_Ejemplo";
@@ -87,6 +94,18 @@
                 OnPropertyChanged();
             }
         }
+        public string Usuario
+        {
+            get
+            {
+                return _usuario;
+            }
+            set
+            {
+                _usuario = value;
+                OnPropertyChanged();
+            }
+        }
         public string Nombre
         {
             get
@@ -99,15 +118,27 @@
                 OnPropertyChanged();
             }
         }
-        public string Apellidos
+        public string ApePat
         {
             get
             {
-                return _apellidos;
+                return _apePat;
             }
             set
             {
-                _apellidos = value;
+                _apePat = value;
+                OnPropertyChanged();
+            }
+        }
+        public string ApeMat
+        {
+            get
+            {
+                return _apeMat;
+            }
+            set
+            {
+                _apeMat = value;
                 OnPropertyChanged();
             }
         }
@@ -120,6 +151,42 @@
             set
             {
                 _telefono = value;
+                OnPropertyChanged();
+            }
+        }
+        public decimal Latitud
+        {
+            get
+            {
+                return _latitud;
+            }
+            set
+            {
+                _latitud = value;
+                OnPropertyChanged();
+            }
+        }
+        public decimal Longitud
+        {
+            get
+            {
+                return _longitud;
+            }
+            set
+            {
+                _longitud = value;
+                OnPropertyChanged();
+            }
+        }
+        public DateTime Fecha
+        {
+            get
+            {
+                return _fecha;
+            }
+            set
+            {
+                _fecha = value;
                 OnPropertyChanged();
             }
         }
@@ -190,17 +257,18 @@
             }
         }
         #endregion
-
+                                                                                                                               
         #region Methods
         private async void SaveClientMethod()
         {
-            /*
-            await App.Current.MainPage.DisplayAlert(
-                "Message",
-                "Presionaste el botón",
-                "Ok");
-            return;
-            */
+            if (string.IsNullOrEmpty(this.Usuario))
+            {
+                await Application.Current.MainPage.DisplayAlert(
+                    "Error",
+                    "El campo usuario está vacío!",
+                    "Ok");
+                return;
+            }
             if (string.IsNullOrEmpty(this.Nombre))
             {
                 await Application.Current.MainPage.DisplayAlert(
@@ -210,15 +278,22 @@
                 return;
             }
 
-            if (string.IsNullOrEmpty(this.Apellidos))
+            if (string.IsNullOrEmpty(this.ApePat))
             {
                 await Application.Current.MainPage.DisplayAlert(
                     "Error",
-                    "Los apellidos están vacíos!",
+                    "El apellido paterno esta vacio",
                     "Ok");
                 return;
             }
-
+            if (string.IsNullOrEmpty(this.ApeMat))
+            {
+                await Application.Current.MainPage.DisplayAlert(
+                    "Error",
+                    "El apellido materno esta vacìo",
+                    "Ok");
+                return;
+            }
             if (string.IsNullOrEmpty(this.Email))
             {
                 await Application.Current.MainPage.DisplayAlert(
@@ -227,12 +302,21 @@
                     "Ok");
                 return;
             }
+            // Valida
+            if (this.Fecha.Year >= 2003)
+            {
+                await Application.Current.MainPage.DisplayAlert(
+                    "Error",
+                    "El seleccione una fecha",
+                    "Ok");
+                return;
+            }
 
             if (!RegexUtilities.IsValidEmail(this.Email))
             {
                 await Application.Current.MainPage.DisplayAlert(
                     "Error",
-                    "El campo email es incorrecto!",
+                    "¡¡Ingresa un correo valido !!",
                     "Ok");
                 return;
             }
@@ -268,7 +352,7 @@
             {
                 await Application.Current.MainPage.DisplayAlert(
                     "Error",
-                    "El campo confirmacion de contraseña está vacío!",
+                    "¡¡Confirma tu contraseña!!",
                     "Ok");
                 return;
             }
@@ -277,7 +361,7 @@
             {
                 await Application.Current.MainPage.DisplayAlert(
                     "Error",
-                    "La contraseña no coincide con la confirmacion de la contraseña!",
+                    "¡¡ Las contraseñas no coinciden!!",
                     "Ok");
                 return;
             }
@@ -296,6 +380,7 @@
                     "Ok");
                 return;
             }
+            /*
             byte[] imageArray = null;
             if (this.file != null)
             {
@@ -310,7 +395,48 @@
                 Telefono = this.Telefono,
                 ImageArray = imageArray,
                 Password = this.Password
-            };
+            };*/
+            SolicitudACUsuario solicitud = new SolicitudACUsuario();
+            // Poner las asignaciones correspondientes
+            solicitud.opcion = 1;
+            solicitud.usuario = Usuario;
+            solicitud.email = Email;
+            solicitud.password = Password;
+            solicitud.nombre = Nombre;
+            solicitud.ape_pat = ApePat;
+            solicitud.ape_mat = ApeMat;
+            solicitud.direccion = Direccion;
+            solicitud.fecha = Fecha.ToString("yyyy-MM-dd");
+            solicitud.telefono = Telefono;
+            solicitud.latitud = 19.365M;
+            solicitud.longitud = 78.32M;
+            
+
+
+            var res = await this.apiService.SetUsuario(
+                "http://www.creativasoftlineapps.com/ScriptAppTuxmandados/frmACUsuario.aspx",
+                solicitud);
+            if (res == null)
+            {
+                IsRunning = false;
+                IsEnabled = true;
+                await App.Current.MainPage.DisplayAlert(
+                "Error",
+                "Ocurrió algun problema!",
+                "Ok");
+                
+                return;
+
+            }
+           
+            await App.Current.MainPage.DisplayAlert(
+               "Èxito",
+               "¡¡Registro correcto!!",
+               "Ingresar");
+            await App.Current.MainPage.Navigation.PopAsync();
+            IsEnabled = true;
+            IsRunning = false;
+
 
         }
 

@@ -92,15 +92,15 @@
                 Order g = new Order();
                 Order h = new Order();
                 Order i = new Order();
-                a.Name = "Zincri"; a.Hora = "12:00"; a.Fecha = "12/12/12"; a.Atendido = false;
-                b.Name = "Cypres T"; b.Hora = "12:00"; b.Fecha = "12/12/12"; b.Atendido = true;
-                c.Name = "Edrey"; c.Hora = "12:00"; c.Fecha = "12/12/12"; c.Atendido = false;
-                d.Name = "Ramon"; d.Hora = "12:00"; d.Fecha = "12/12/12"; d.Atendido = false;
-                e.Name = "Ayala"; e.Hora = "12:00"; e.Fecha = "12/12/12"; e.Atendido = false;
-                f.Name = "Vale"; f.Hora = "12:00"; f.Fecha = "12/12/12"; f.Atendido = false;
-                g.Name = "Jajaja"; g.Hora = "12:00"; g.Fecha = "12/12/12"; g.Atendido = false;
-                h.Name = "Equis"; h.Hora = "12:00"; h.Fecha = "12/12/12"; h.Atendido = false;
-                i.Name = "de"; i.Hora = "12:00"; i.Fecha = "12/12/12"; i.Atendido = false;
+                a.Name = "Zincri"; a.Hora = "12:00"; a.Atendido = false;
+                b.Name = "Cypres T"; b.Hora = "12:00";b.Atendido = true;
+                c.Name = "Edrey"; c.Hora = "12:00";c.Atendido = false;
+                d.Name = "Ramon"; d.Hora = "12:00"; d.Atendido = false;
+                e.Name = "Ayala"; e.Hora = "12:00";e.Atendido = false;
+                f.Name = "Vale"; f.Hora = "12:00";  f.Atendido = false;
+                g.Name = "Jajaja"; g.Hora = "12:00";  g.Atendido = false;
+                h.Name = "Equis"; h.Hora = "12:00"; h.Atendido = false;
+                i.Name = "de"; i.Hora = "12:00";  i.Atendido = false;
                 list.Add(a);
                 list.Add(b);
                 list.Add(c);
@@ -155,7 +155,6 @@
             {
                 var Client = new HttpClient();
                 string url = urlBase;
-                
                 var data = JsonConvert.SerializeObject(solicitud);
                 var content = new StringContent(data, Encoding.UTF8, "application/json");
                 var response = await Client.PostAsync(url, content);
@@ -185,12 +184,64 @@
                 }
 
             }
-            catch
+            catch (Exception ex)
             {
+                string a = ex.Message;
                 return null;
             }
         }
-        
+
+        /// <summary>
+        /// Este metodo sirve para mandar la peticion de una nueva orden al servidor.
+        /// </summary>
+        /// <returns>The order.</returns>
+        /// <param name="urlBase">URL base.</param>
+        /// <param name="solicitud">Solicitud.</param>
+        public async Task<TokenResponse> SetOrder(
+            string urlBase,
+            Order solicitud)
+        {
+            try
+            {
+                var Client = new HttpClient();
+                string url = urlBase;
+
+                var data = JsonConvert.SerializeObject(solicitud);
+                var content = new StringContent(data, Encoding.UTF8, "application/json");
+                var response = await Client.PostAsync(url, content);
+                if (response.IsSuccessStatusCode)
+                {
+                    var json = await response.Content.ReadAsStringAsync();
+
+                    if (json.Substring(0, 5) != "Error")
+                    {
+                        var resultado = (TokenResponse)JsonConvert.DeserializeObject(json, typeof(TokenResponse));
+                        return resultado;
+                    }
+                    else
+                    {
+                        return new TokenResponse
+                        {
+                            ErrorDescription = "Las credenciales no son validas"
+                        };
+                    }
+                }
+                else
+                {
+                    return new TokenResponse
+                    {
+                        ErrorDescription = "Ocurrió un error, intentelo mas tarde."
+                    };
+                }
+
+            }
+            catch (Exception ex)
+            {
+                string a = ex.Message;
+                return null;
+            }
+        }
+
     }
 
 }

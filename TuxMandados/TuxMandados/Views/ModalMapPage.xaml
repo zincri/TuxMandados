@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+    x:Class="TuxMandados.Views.ModalMapPage">
+    <ContentPage.Content>
+        <StackLayout
+            Padding="10">
+            <Label
+                Text="Espera mientras optenemos tu localizacion...."
+                FontAttributes="Bold Italic"
+                VerticalOptions="CenterAndExpand"
+                HorizontalOptions="CenterAndExpand"></Label>
+            <ActivityIndicator
+                Margin="0,5"
+                VerticalOptions="CenterAndExpand"
+                HorizontalOptions="CenterAndExpand"
+                IsRunning="true">
+           </ActivityIndicator>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

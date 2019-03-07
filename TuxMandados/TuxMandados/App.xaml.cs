@@ -30,6 +30,7 @@ namespace TuxMandados
                 var mainViewModel = MainViewModel.GetInstance();
                 mainViewModel.Token = Settings.Token;
                 mainViewModel.TokenType = Settings.TokenType;
+                mainViewModel.LoadMenu();
                 App.Current.MainPage = new NavigationPage(new AppTabbedPage())
                 {
                     BarBackgroundColor = Color.FromHex("#002E6D"),

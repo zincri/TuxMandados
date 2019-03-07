@@ -6,16 +6,26 @@
     using System.Runtime.CompilerServices;
     using System.Windows.Input;
     using TuxMandados.Views;
+    using Xamarin.Forms.GoogleMaps;
+    using Xamarin.Essentials;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using TuxMandados.Models;
+    using TuxMandados.Services;
+
     public class NewOrderViewModel : INotifyPropertyChanged
     {
         #region Vars  
+        private ApiService apiService;
         private bool _isRunning;
         private bool _isEnable;
         private bool _ubicacion;
         private bool _llamar;
         private string _descripcion;
-        private string _lmandado;
-        private string _lentrega;
+        private string _lugarmandado;
+        private string _lugarentrega;
+        public static Pin pin;
         public event PropertyChangedEventHandler PropertyChanged;
         #endregion
         #region Properties
@@ -55,27 +65,27 @@
                 OnPropertyChanged();
             }
         }
-        public string LMandado
+        public string LugarMandado
         {
             get
             {
-                return _lmandado;
+                return _lugarmandado;
             }
             set
             {
-                _lmandado = value;
+                _lugarmandado = value;
                 OnPropertyChanged();
             }
         }
-        public string LEntrega
+        public string LugarEntrega
         {
             get
             {
-                return _lentrega;
+                return _lugarentrega;
             }
             set
             {
-                _lentrega = value;
+                _lugarentrega = value;
                 OnPropertyChanged();
             }
         }
@@ -122,14 +132,17 @@
             }
         }
 
+
+
         #endregion
 
         #region Constructors
         public NewOrderViewModel()
         {
+            this.apiService = new ApiService();
             this.Descripcion = "Desc";
-            this.LMandado = "Manda";
-            this.LEntrega = "Direc";
+            this.LugarMandado = "Manda";
+            this.LugarEntrega = "Direc";
             this.Llamar = false;
             this.Ubicacion = true;
             this.IsEnable = true;
@@ -146,16 +159,98 @@
             IsRunning = true;
             //  var mainViewModel = MainViewModel.GetInstance();
             //  mainViewModel.Home = new HomeViewModel();
+            //pin = new Pin();
             await App.Current.MainPage.Navigation.PushAsync(new SMapPage());
+
+            // Hay que comentar esto por que no nos sirve de nada.
+            if(pin == null)
+            {
+                //await App.Current.MainPage.DisplayAlert("Mensaje", "pin null", "ok");
+            }
             IsEnable = true;
             IsRunning = false;
         }
 
 
-
         private async void SendMethod()
         {
-            await App.Current.MainPage.DisplayAlert("Correcto", "Tuxmandado", "ok");
+            /*antes de cada servicio comprueba la conexion*/
+
+            /*Modal que bloquee la pantalla*/
+            ModalMapPage modalPage = new ModalMapPage();
+            await App.Navigator.Navigation.PushModalAsync(modalPage);
+            if (Ubicacion) 
+            {
+                var t = await UseUbicationMethod();
+            }
+
+            await App.Navigator.Navigation.PopModalAsync();
+            if (pin == null) {
+                await App.Current.MainPage.DisplayAlert("Incorrecto", "Algo ocurrió,por favor intente mas tarde!", "ok");
+            }
+            else {
+                Order solicitud = new Order();// hacemos el objeto order, para mandarlo al servicio!
+                solicitud.Estado = 0;
+                solicitud.Descripcion = Descripcion;
+                solicitud.Ubicacion = new Ubicacion();
+                solicitud.Ubicacion.Latitud = pin.Position.Latitude;
+                solicitud.Ubicacion.Longitud = pin.Position.Longitude;
+
+                var token = await this.apiService.SetOrder(
+                "http://www.creativasoftlineapps.com/ScriptAppTuxmandados/frmLogin.aspx",
+                solicitud);
+                await App.Current.MainPage.DisplayAlert("Correcto", "Tuxmandado", "ok");
+            }
+
+        }
+
+        private async Task<Pin> UseUbicationMethod()
+        {
+            try
+            {
+                var request = new GeolocationRequest(GeolocationAccuracy.High);
+                var location = await Geolocation.GetLocationAsync(request);
+                //var location = await Geolocation.GetLastKnownLocationAsync();
+
+                if (location != null)
+                {
+                    Geocoder geo = new Geocoder();
+                    Position posicion = new Position(location.Latitude, location.Longitude);
+                    IEnumerable<string> adresses = await geo.GetAddressesForPositionAsync(posicion);
+                    pin = new Pin()
+                    {
+                        Type = PinType.Place,
+                        Label = "Lugar",
+                        Address = adresses.ElementAt(0),
+                        Position = new Position(posicion.Latitude, posicion.Longitude)
+                    };
+                    return pin;
+                    //Console.WriteLine($"Latitude: {location.Latitude}, Longitude: {location.Longitude}, Altitude: {location.Altitude}");
+                }
+                return null;
+            }
+            catch (FeatureNotSupportedException fnsEx)
+            {
+                return null;
+                // Handle not supported on device exception
+            }
+            catch (FeatureNotEnabledException fneEx)
+            {
+                return null;
+                // Handle not enabled on device exception
+            }
+            catch (PermissionException pEx)
+            {
+                return null;
+                // Handle permission exception
+            }
+            catch (Exception ex)
+            {
+                return null;
+                // Unable to get location
+            }
+
+
         }
 
         private void OnPropertyChanged([CallerMemberName] String propertyName = "")

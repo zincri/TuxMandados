@@ -107,7 +107,8 @@
         {
             instance = this;
             this.Login = new LoginViewModel();
-            //this.LoadMenu(); Comentare el menu porque no se como instanciarlo al mismo tiempo sin obtener el tokenType
+            //Ya no importa tener el LoadMenu aqui -> puedes quitarlo
+            //this.LoadMenu(); //Comentare el menu porque no se como instanciarlo al mismo tiempo sin obtener el tokenType
         }
         #endregion
 
@@ -122,7 +123,7 @@
         public void LoadMenu()
         {
             this.Menus = new ObservableCollection<MenuItemViewModel>();
-            if (TokenType.Equals("owner")) 
+            if (TokenType.Equals("repartidor")) 
             {
                 this.Menus.Add(new MenuItemViewModel
                 {

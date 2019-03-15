@@ -28,6 +28,7 @@
         public static Pin pin;
         public event PropertyChangedEventHandler PropertyChanged;
         #endregion
+
         #region Properties
         public bool Ubicacion
         {
@@ -197,8 +198,8 @@
                 solicitud.Ubicacion.Latitud = pin.Position.Latitude;
                 solicitud.Ubicacion.Longitud = pin.Position.Longitude;
                 solicitudSetOrder.Order = solicitud;
-                solicitudSetOrder.IDUsuario = 123193139193;
-                solicitudSetOrder.IDCliente = 96346235212;
+                solicitudSetOrder.IDUsuario = 3;
+                solicitudSetOrder.IDCliente = 12;
                 
 
                 var token = await this.apiService.SetOrder(

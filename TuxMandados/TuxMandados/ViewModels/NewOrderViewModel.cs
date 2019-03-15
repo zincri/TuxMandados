@@ -186,19 +186,24 @@
 
             await App.Navigator.Navigation.PopModalAsync();
             if (pin == null) {
-                await App.Current.MainPage.DisplayAlert("Incorrecto", "Algo ocurrió,por favor intente mas tarde!", "ok");
+                await App.Current.MainPage.DisplayAlert("Incorrecto", "Algo ocurrió,por favor active el uso de ubicacion en sus ajustes!", "ok");
             }
             else {
                 Order solicitud = new Order();// hacemos el objeto order, para mandarlo al servicio!
-                solicitud.Estado = 0;
+                SolicitudSetOrder solicitudSetOrder = new SolicitudSetOrder();
+                solicitud.Estado = 1;
                 solicitud.Descripcion = Descripcion;
                 solicitud.Ubicacion = new Ubicacion();
                 solicitud.Ubicacion.Latitud = pin.Position.Latitude;
                 solicitud.Ubicacion.Longitud = pin.Position.Longitude;
+                solicitudSetOrder.Order = solicitud;
+                solicitudSetOrder.IDUsuario = 123193139193;
+                solicitudSetOrder.IDCliente = 96346235212;
+                
 
                 var token = await this.apiService.SetOrder(
-                "http://www.creativasoftlineapps.com/ScriptAppTuxmandados/frmLogin.aspx",
-                solicitud);
+                "http://www.creativasoftlineapps.com/ScriptAppTuxmandados/frmSetOrder.aspx",
+                solicitudSetOrder);
                 await App.Current.MainPage.DisplayAlert("Correcto", "Tuxmandado", "ok");
             }
 
@@ -238,6 +243,7 @@
             {
                 return null;
                 // Handle not enabled on device exception
+                //Activa en ajustes tu uso de ubicacion
             }
             catch (PermissionException pEx)
             {

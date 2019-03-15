@@ -277,7 +277,7 @@
         /// <param name="solicitud">Solicitud.</param>
         public async Task<TokenResponse> SetOrder(
             string urlBase,
-            Order solicitud)
+            SolicitudSetOrder solicitud)
         {
             try
             {

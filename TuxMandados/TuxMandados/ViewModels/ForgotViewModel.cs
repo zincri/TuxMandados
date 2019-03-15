@@ -17,12 +17,15 @@ namespace TuxMandados.ViewModels
     using TuxMandados.Models;
     using System.Threading.Tasks;
     using System.Collections.Generic;
+    using Acr.UserDialogs;
     using System.Net;
 
     public class ForgotViewModel : INotifyPropertyChanged
     {
         #region Private Vars
         private ApiService apiService;
+        SolicitudValidUsuario soli;
+        Recovery reco;
         #endregion
         #region Vars  
         private bool _isEnable;
@@ -125,38 +128,59 @@ namespace TuxMandados.ViewModels
                     "Ok");
                 return;
             }
-            SolicitudValidUsuario soli = new SolicitudValidUsuario();
-            soli.correo = this.Correo;
-            var res = await this.apiService.ValidarCorreo(
-                "http://www.creativasoftlineapps.com/ScriptAppTuxmandados/frmValidarCorreo.aspx",
-                soli);
-            if (res == null)
+            reco = new Recovery();
+
+            CallService();
+           
+            
+           
+        }
+        private void CallService()
+        {
+            
+            bool success = false;
+            try
             {
-                IsRunning = false;
-                IsEnable = true;
-                await App.Current.MainPage.DisplayAlert(
-                "Error",
-                "Ocurrió algun problema!",
-                "Ok");
-                return;
+                Device.BeginInvokeOnMainThread(() => UserDialogs.Instance.ShowLoading("Enviando Correo...", MaskType.Black));
+                Task.Run(async () =>
+                {
+
+                    soli = new SolicitudValidUsuario();
+                    soli.correo = this.Correo;
+                    var res = await this.apiService.ValidarCorreo(
+                         "http://www.creativasoftlineapps.com/ScriptAppTuxmandados/frmValidarCorreo.aspx",
+                         soli);
+                    if (res != null)
+                    {
+                        reco.Valido = res.Valido;
+                        reco.Token = res.Token;
+                        success = true;
+                    }
+                }).ContinueWith(res => Device.BeginInvokeOnMainThread(async () =>
+                {
+                    if (success == false)
+                    {
+                        await App.Current.MainPage.DisplayAlert("Ocurrió un error", "El correo ingresado no es valido", "Aceptar");
+                        UserDialogs.Instance.HideLoading();
+                       
+                    }
+                    else
+                    {
+                        await EnviarCorreo("Buen día, lamentamos que haya perdido su contraseña para obtener de nuevo su acceso a Tuxmandados haga" +
+                   " lo siguiente: Copie el token: " + reco.Token + " y a continuación ingrese a la siguiente pagina http://www.creativasoftlineapps.com/ScriptAppTuxmandados/frmRecuperarContraseña.aspx para seguir con el proceso " +
+                   " de recuperacion de su cuenta.");
+                        UserDialogs.Instance.HideLoading();
+                        await App.Current.MainPage.DisplayAlert("Éxito", "Correo enviado", "ok");
+                        await App.Current.MainPage.Navigation.PopAsync();
+                    }
+                }));
             }
-            if(res.Valido==0)
+            catch (Exception ex)
             {
-                IsRunning = false;
-                IsEnable = true;
-                await App.Current.MainPage.DisplayAlert(
-                "Error",
-                "No tenemos ningun usuario asociado a la cuenta",
-                "Ok");
-                return;
-            }                       
-            //await SendEmail("tuxmandados.18@gmail.com","Intrucciones de recuperacion de contraseña",Mail);            
-            await EnviarCorreo(@"</html><!DOCTYPE html><html><head><title> Que pex papu </title></head><body><h1>U
-Este es el link d erecuperacion de contraseña ajajajjajjaj</h1></body></html>");
-            await App.Current.MainPage.DisplayAlert("Éxito", "Correo enviado", "ok");
-            await App.Current.MainPage.Navigation.PopAsync();
-            IsEnable = true;
-            IsRunning = false;
+
+                App.Current.MainPage.DisplayAlert("Ocurrió un error", ex.ToString(), "Aceptar");
+            }
+             
         }
         public async Task EnviarCorreo(string mensaje)
         {
@@ -169,7 +193,7 @@ Este es el link d erecuperacion de contraseña ajajajjajjaj</h1></body></html>")
                 mail.From = new MailAddress("tuxmandados.18@gmail.com");//Este debe ser nuestro correo Gmail al que le dimos los permisos necesarios es decir el que envia los correos
                 mail.To.Add(Correo);//este es el correo al que llegara el correo
                 mail.Subject = "Recuperacion de contraseña";// El titulo del mensaje
-                mail.IsBodyHtml = true;
+                mail.IsBodyHtml = false;
                 mail.Body = mensaje;//El mensaje que se almaceno en el estring
                
                 SmtpServer.Port = 587;

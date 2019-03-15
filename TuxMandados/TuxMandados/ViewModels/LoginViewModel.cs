@@ -10,11 +10,14 @@
     using TuxMandados.Helpers;
     using Xamarin.Forms;
     using TuxMandados.Models;
+    using Acr.UserDialogs;
+    using System.Threading.Tasks;
 
     public class LoginViewModel : INotifyPropertyChanged
     {
         #region Vars  
         private ApiService apiService;
+        string TokenAccess,TokenType,msgError;
         private bool _isRunning;
         private bool _isRemembered;
         private bool _isEnable;
@@ -137,8 +140,7 @@
                 "Error",
                 "El usuario está vacío!",
                 "Ok");
-                this.Password = string.Empty;
-                IsRunning = false;
+                this.Password = string.Empty;               
                 IsEnable = true;
                 return;
             }
@@ -148,17 +150,14 @@
                 "Error",
                 "La contraseña está vacía!",
                 "Ok");
-                this.Password = string.Empty;
-                IsRunning = false;
+                this.Password = string.Empty;               
                 IsEnable = true;
                 return;
             }
             //Antes de consumir el servicio valida hay que validar la conexion!
             var conection = await this.apiService.CheckConnection();
             if (!conection.IsSuccess)
-            {
-
-                IsRunning = false;
+            {               
                 IsEnable = true;
                 await App.Current.MainPage.DisplayAlert(
                 "Error",
@@ -167,72 +166,96 @@
                 this.Password = string.Empty;
                 return;
             }
-
-            SolicitudLogin solicitud = new SolicitudLogin();
-            solicitud.usuario = Usuario;
-            solicitud.password = Password;
-            var token = await this.apiService.GetToken(
-                "http://www.creativasoftlineapps.com/ScriptAppTuxmandados/frmLogin.aspx",
-                solicitud);
-            if (token == null)
-            {
-                IsRunning = false;
-                IsEnable = true;
-                await App.Current.MainPage.DisplayAlert(
-                "Error",
-                "Ocurrió algun problema!",
-                "Ok");
-                this.Password = string.Empty;
-                return;
-
-            }
-            if (string.IsNullOrEmpty(token.AccessToken))
-            {
-                IsRunning = false;
-                IsEnable = true;
-                await App.Current.MainPage.DisplayAlert(
-                "Error",
-                token.ErrorDescription,
-                "Ok");
-                this.Password = string.Empty;
-                return;
-            }
-            this.Password = string.Empty;
-            IsEnable = true;
-            IsRunning = false;
-
-            var mainViewModel = MainViewModel.GetInstance();
-            mainViewModel.Token = token.AccessToken;
-            mainViewModel.TokenType = token.TokenType;
-            mainViewModel.LoadMenu();
-            if (this.IsRemembered)
-            {
-                Settings.Token = token.AccessToken;
-                Settings.TokenType = token.TokenType;
-            }
-            if(mainViewModel.TokenType.Equals("repartidor"))
-            {
-                App.Current.MainPage = new NavigationPage(new Views.Repartidor.R_AppTabbedPage())
-                {
-                    BarBackgroundColor = Color.FromHex("#33CAFF"),
-                    BarTextColor = Color.FromHex("#000000")
-                };
-                App.Navigator = (NavigationPage)App.Current.MainPage;
-
-            }
-            else
-            {
-                App.Current.MainPage = new NavigationPage(new AppTabbedPage())
-                {
-                    BarBackgroundColor = Color.FromHex("#002E6D"),
-                    BarTextColor = Color.FromHex("#EFCB4B")
-                };
-                App.Navigator = (NavigationPage)App.Current.MainPage;
-
-            }
+            CallService();
+           
 
         }
 
+        private void CallService()
+        {
+            bool success = false;
+            try
+            {
+                Device.BeginInvokeOnMainThread(() => UserDialogs.Instance.ShowLoading("Accesando a Tuxmandados...", MaskType.Black));
+                Task.Run(async () =>
+                {
+                    SolicitudLogin solicitud = new SolicitudLogin();
+                    solicitud.usuario = Usuario;
+                    solicitud.password = Password;
+                    var res = await this.apiService.GetToken(
+                        "http://www.creativasoftlineapps.com/ScriptAppTuxmandados/frmLogin.aspx",
+                        solicitud);
+                    if (res != null)
+                    {
+                        TokenAccess = res.AccessToken;
+                        TokenType = res.TokenType;
+                        success = true;
+                        msgError = res.ErrorDescription;
+                    }                   
+                    
+                }).ContinueWith(res => Device.BeginInvokeOnMainThread(async () =>
+                {
+                    if (success == false)
+                    {
+                        await App.Current.MainPage.DisplayAlert("Ocurrió un error", "El acceso no es válido", "Aceptar");
+                        UserDialogs.Instance.HideLoading();
+
+                    }
+                    else
+                    {                        
+                        UserDialogs.Instance.HideLoading();
+                        if (string.IsNullOrEmpty(TokenAccess))
+                        {
+
+                            IsEnable = true;
+                            await App.Current.MainPage.DisplayAlert(
+                            "Error",
+                            msgError,
+                            "Ok");
+                            this.Password = string.Empty;
+                            return;
+                        }
+                        this.Password = string.Empty;
+                        IsEnable = true;
+
+
+                        var mainViewModel = MainViewModel.GetInstance();
+                        mainViewModel.Token = TokenAccess;
+                        mainViewModel.TokenType = TokenType;
+                        mainViewModel.LoadMenu();
+                        if (this.IsRemembered)
+                        {
+                            Settings.Token = TokenAccess;
+                            Settings.TokenType = TokenAccess;
+                        }
+                        if (mainViewModel.TokenType.Equals("repartidor"))
+                        {
+                            App.Current.MainPage = new NavigationPage(new Views.Repartidor.R_AppTabbedPage())
+                            {
+                                BarBackgroundColor = Color.FromHex("#33CAFF"),
+                                BarTextColor = Color.FromHex("#000000")
+                            };
+                            App.Navigator = (NavigationPage)App.Current.MainPage;
+
+                        }
+                        else
+                        {
+                            App.Current.MainPage = new NavigationPage(new AppTabbedPage())
+                            {
+                                BarBackgroundColor = Color.FromHex("#002E6D"),
+                                BarTextColor = Color.FromHex("#EFCB4B")
+                            };
+                            App.Navigator = (NavigationPage)App.Current.MainPage;
+
+                        }
+                    }
+                }));
+            }
+            catch (Exception ex)
+            {
+                App.Current.MainPage.DisplayAlert("Ocurrió un error", ex.ToString(), "Aceptar");
+            }
+        }
 
 
         private async void RegisterMethod()

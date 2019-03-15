@@ -7,6 +7,7 @@ using Android.Views;
 using Android.Widget;
 using Android.OS;
 using Plugin.Permissions;
+using Acr.UserDialogs;
 
 namespace TuxMandados.Droid
 {
@@ -20,6 +21,7 @@ namespace TuxMandados.Droid
 
             base.OnCreate(savedInstanceState);
             Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("NjA2MTlAMzEzNjJlMzQyZTMwSDRyL0gwY29TK0doNUhpT0JwQTk2UjNvb2pYUC9OSlMvZlY3MHo1K2toOD0=");
+            UserDialogs.Init(this);
             Xamarin.Essentials.Platform.Init(this, savedInstanceState); 
            global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             Xamarin.FormsMaps.Init(this, savedInstanceState);

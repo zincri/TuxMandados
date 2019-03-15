@@ -9,7 +9,9 @@ namespace TuxMandados.Models
     {
         #region properties
         [JsonProperty(PropertyName = "valido")]
-        public int Valido { get; set; }        
+        public int Valido { get; set; }
+        [JsonProperty(PropertyName = "token")]
+        public string Token { get; set; }
         #endregion
     }
 }

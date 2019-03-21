@@ -1,15 +1,15 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TuxMandados.Views.EditClientPage"
              xmlns:controls="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin"
              xmlns:sys="clr-namespace:System;assembly=mscorlib"
-             x:Class="TuxMandados.Views.NewClientPage"
+             Title="Datos del cliente"
              BindingContext="{Binding Main,Source={StaticResource Locator}}"
-             BackgroundColor="#002E6D"
-             Title="Nuevo">
+             BackgroundColor="#002E6D">
     <ContentPage.Content>
         <ScrollView
-            BindingContext="{Binding NewClient}">
+            BindingContext="{Binding Profile}">
             <StackLayout
                 Padding="5">
                 <StackLayout
@@ -30,11 +30,9 @@
                     HorizontalOptions="Center" 
                     FontSize="16" 
                     Text="Toca la imagen para cambiarla" 
-                    TextColor="White">
+                    TextColor="White"
+                    IsVisible="{Binding Edit,Mode=TwoWay}">
                 </Label>
-                <ActivityIndicator
-                    IsRunning="{Binding IsRunning, Mode=TwoWay}">
-                </ActivityIndicator>
                 <Grid 
                     VerticalOptions="CenterAndExpand"
                     HorizontalOptions="CenterAndExpand"
@@ -42,6 +40,7 @@
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="50"/>
                         <ColumnDefinition Width="Auto"/>
+                        
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
@@ -53,10 +52,25 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
-                    <Image 
+                    <Label 
                         Grid.Column="0"
                         Grid.Row="0"
+                    HorizontalOptions="Center" 
+                    FontSize="16" 
+                    Text="Editar datos" 
+                    FontAttributes="Bold"
+                    TextColor="White">
+                    </Label>
+                    <Switch ClassId="sw1"
+                        Grid.Column="1"
+                        Grid.Row="0"                     
+                    IsToggled="{Binding Toggl,Mode=TwoWay}"                        
+                    />
+                    <Image 
+                        Grid.Column="0"
+                        Grid.Row="1"
                         x:Name="img1"
                         HeightRequest="50"
                         HorizontalOptions="Center"
@@ -64,7 +78,7 @@
                         Source="iconostux11.png"/>
                     <Frame 
                         Grid.Column="1" 
-                        Grid.Row="0"
+                        Grid.Row="1"
                         Grid.ColumnSpan="3"
                         CornerRadius="35"
                         Padding="0"
@@ -78,13 +92,14 @@
                             <Entry  
                                 Text="{Binding Nombre, Mode=TwoWay}"
                                 TextColor="#FFFFFF"
-                                BackgroundColor="Transparent"
-                                Placeholder="Nombre"></Entry>
+                                BackgroundColor="Transparent"                               
+                                Placeholder="Nombre"
+                                IsEnabled="{Binding Edit, Mode=TwoWay}"/>
                         </Frame>
                     </Frame>
                     <Image
                         Grid.Column="0"
-                        Grid.Row="1"
+                        Grid.Row="2"
                         x:Name="img2"
                         HeightRequest="50"
                         HorizontalOptions="Center"
@@ -92,7 +107,7 @@
                         Source="iconostux11.png"/>
                     <Frame
                         Grid.Column="1"
-                        Grid.Row="1"
+                        Grid.Row="2"
                         Grid.ColumnSpan="3"
                         CornerRadius="35"
                         Padding="0"
@@ -107,12 +122,13 @@
                                 Text="{Binding ApePat, Mode=TwoWay}"
                                 TextColor="#FFFFFF"
                                 BackgroundColor="Transparent"
-                                Placeholder="Apellido Paterno"></Entry>
+                                Placeholder="Apellidos"
+                                IsEnabled="{Binding Edit,Mode=TwoWay}"/>
                         </Frame>
                     </Frame>
                     <Image
                         Grid.Column="0"
-                        Grid.Row="2"
+                        Grid.Row="3"
                         x:Name="img7"
                         HeightRequest="50"
                         HorizontalOptions="Center"
@@ -120,7 +136,7 @@
                         Source="iconostux11.png"/>
                     <Frame
                         Grid.Column="1"
-                        Grid.Row="2"
+                        Grid.Row="3"
                         Grid.ColumnSpan="3"
                         CornerRadius="35"
                         Padding="0"
@@ -135,12 +151,13 @@
                                 Text="{Binding ApeMat, Mode=TwoWay}"
                                 TextColor="#FFFFFF"
                                 BackgroundColor="Transparent"
-                                Placeholder="Apellido Materno"></Entry>
+                                Placeholder="Apellidos"
+                                IsEnabled="{Binding Edit,Mode=TwoWay}"/>
                         </Frame>
                     </Frame>
                     <Image
                         Grid.Column="0"
-                        Grid.Row="3"
+                        Grid.Row="4"
                         x:Name="img3"
                         HeightRequest="50"
                         HorizontalOptions="Center"
@@ -148,7 +165,7 @@
                         Source="iconostux10.png"/>
                     <Frame 
                         Grid.Column="1"
-                        Grid.Row="3"
+                        Grid.Row="4"
                         Grid.ColumnSpan="3"
                         CornerRadius="35"
                         Padding="0"
@@ -164,12 +181,13 @@
                                 TextColor="#FFFFFF"
                                 BackgroundColor="Transparent"
                                 Placeholder="Telefono"
-                                Keyboard="Numeric"></Entry>
+                                Keyboard="Numeric"
+                                IsEnabled="{Binding Edit,Mode=TwoWay}"/>
                         </Frame>
                     </Frame>
                     <Image
                         Grid.Column="0"
-                        Grid.Row="4"
+                        Grid.Row="5"
                         x:Name="img4"
                         HeightRequest="50"
                         HorizontalOptions="Center"
@@ -177,7 +195,7 @@
                         Source="iconostux09.png"/>
                     <Frame
                         Grid.Column="1"
-                        Grid.Row="4"
+                        Grid.Row="5"
                         Grid.ColumnSpan="3"
                         CornerRadius="35"
                         Padding="0"
@@ -192,12 +210,13 @@
                                 Text="{Binding Direccion, Mode=TwoWay}"
                                 TextColor="#FFFFFF"
                                 BackgroundColor="Transparent"
-                                Placeholder="Dirección"></Entry>
+                                Placeholder="Direccion"
+                                IsEnabled="{Binding Edit,Mode=TwoWay}"/>
                         </Frame>
                     </Frame>
                     <Image 
                         Grid.Column="0"
-                        Grid.Row="5"
+                        Grid.Row="6"
                         x:Name="img11"
                         HeightRequest="50"
                         HorizontalOptions="Center"
@@ -205,7 +224,7 @@
                         Source="iconostux08.png"/>
                     <Frame 
                         Grid.Column="1"
-                        Grid.Row="5"
+                        Grid.Row="6"
                         Grid.ColumnSpan="3"
                         CornerRadius="35"
                         Padding="0"
@@ -218,16 +237,17 @@
                             Margin="2">
                             <DatePicker                                 
                                 Format="dd-MM-yyyy" 
-                                MinimumDate="01-01-1950" 
+                                MinimumDate="01-01-1910" 
                                 MaximumDate="{x:Static sys:DateTime.Now}" 
                                 TextColor="#FFFFFF" 
                                 BackgroundColor="Transparent"
-                                Date="{Binding Fecha,Mode=TwoWay}"/>
+                                Date="{Binding Fecha,Mode=TwoWay}"
+                                IsEnabled="{Binding Edit,Mode=TwoWay}"/>
                         </Frame>
                     </Frame>
                     <Image 
                         Grid.Column="0"
-                        Grid.Row="6"
+                        Grid.Row="7"
                         x:Name="img9"
                         HeightRequest="50"
                         HorizontalOptions="Center"
@@ -235,7 +255,7 @@
                         Source="iconostux08.png"/>
                     <Frame 
                         Grid.Column="1"
-                        Grid.Row="6"
+                        Grid.Row="7"
                         Grid.ColumnSpan="3"
                         CornerRadius="35"
                         Padding="0"
@@ -250,12 +270,13 @@
                                 Text="{Binding Usuario, Mode=TwoWay}"
                                 TextColor="#FFFFFF"
                                 BackgroundColor="Transparent"
-                                Placeholder="Usuario"></Entry>
+                                Placeholder="Correo"
+                                IsEnabled="{Binding Edit,Mode=TwoWay}"/>
                         </Frame>
                     </Frame>
                     <Image 
                         Grid.Column="0"
-                        Grid.Row="7"
+                        Grid.Row="8"
                         x:Name="img5"
                         HeightRequest="50"
                         HorizontalOptions="Center"
@@ -263,7 +284,7 @@
                         Source="iconostux08.png"/>
                     <Frame 
                         Grid.Column="1"
-                        Grid.Row="7"
+                        Grid.Row="8"
                         Grid.ColumnSpan="3"
                         CornerRadius="35"
                         Padding="0"
@@ -278,12 +299,13 @@
                                 Text="{Binding Email, Mode=TwoWay}"
                                 TextColor="#FFFFFF"
                                 BackgroundColor="Transparent"
-                                Placeholder="Correo"></Entry>
+                                Placeholder="Correo"
+                                IsEnabled="{Binding Edit,Mode=TwoWay}"/>
                         </Frame>
                     </Frame>
                     <Image
                         Grid.Column="0"
-                        Grid.Row="8"
+                        Grid.Row="9"
                         x:Name="img6"
                         HeightRequest="50"
                         HorizontalOptions="Center"
@@ -291,7 +313,7 @@
                         Source="iconostux13.png"/>
                     <Frame
                         Grid.Column="1"
-                        Grid.Row="8"
+                        Grid.Row="9"
                         Grid.ColumnSpan="3"
                         CornerRadius="35"
                         Padding="0"
@@ -307,12 +329,13 @@
                                 TextColor="#FFFFFF"
                                 BackgroundColor="Transparent"
                                 Placeholder="Contraseña"
-                                IsPassword="True"></Entry>
+                                IsPassword="True"
+                                IsEnabled="{Binding Edit,Mode=TwoWay}"/>
                         </Frame>
                     </Frame>
                     <Image 
                         Grid.Column="0"
-                        Grid.Row="9"
+                        Grid.Row="10"
                         x:Name="img14"   
                         HeightRequest="50"
                         HorizontalOptions="Center"
@@ -320,7 +343,7 @@
                         Source="iconostux13.png"/>
                     <Frame
                         Grid.Column="1"
-                        Grid.Row="9"
+                        Grid.Row="10"
                         Grid.ColumnSpan="3"
                         CornerRadius="35"
                         Padding="0"
@@ -340,8 +363,7 @@
                         </Frame>
                     </Frame>
                 </Grid>
-                
-                    <Button
+                <Button
                         CornerRadius="25"
                         Padding="80,0"
                         HeightRequest="50"
@@ -352,8 +374,8 @@
                         FontAttributes="Bold"
                         TextColor="#174188"
                         VerticalOptions="Center"
-                        HorizontalOptions="Center"/>
-               
+                        HorizontalOptions="Center"
+                        IsVisible="{Binding Edit,Mode=TwoWay}"/>
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>

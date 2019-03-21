@@ -36,11 +36,16 @@
                 mainViewModel.Token = String.Empty;
                 mainViewModel.TokenType = String.Empty;
                 //App.Current.MainPage = new LoginPage();
-
                 NavigationPage objeto = new NavigationPage(new LoginPage());
                 objeto.BarBackgroundColor = Color.FromHex("#002E6D");
                 objeto.BarTextColor = Color.FromHex("#EFCB4B");
                 App.Current.MainPage = objeto;
+            }
+            else if (this.NamePage=="Perfil")
+            {
+                var mainViewModel = MainViewModel.GetInstance();
+                mainViewModel.Profile = new ProfileViewModel();
+                App.Current.MainPage.Navigation.PushAsync(new EditClientPage());
             }
 
         }

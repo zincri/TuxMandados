@@ -49,13 +49,13 @@
             get;
             set;
         }
-        /* Borrada temporalmente
+       
         public ProfileViewModel Profile
         {
             get;
             set;
         }
-        */
+        
         public NewOrderViewModel NewOrder
         {
             get;
@@ -135,7 +135,7 @@
                 this.Menus.Add(new MenuItemViewModel
                 {
                     Icon = "ic_settings",
-                    NamePage = "LoginPage",
+                    NamePage = "Perfil",
                     Title = "Mi Perfil"
                 });
                 this.Menus.Add(new MenuItemViewModel
@@ -163,7 +163,7 @@
                 this.Menus.Add(new MenuItemViewModel
                 {
                     Icon = "ic_settings",
-                    NamePage = "LoginPage",
+                    NamePage = "Perfil",
                     Title = "Mi Perfil"
                 });
                 this.Menus.Add(new MenuItemViewModel

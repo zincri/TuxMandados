@@ -1,14 +1,229 @@
 ﻿namespace TuxMandados.ViewModels
 {
     using GalaSoft.MvvmLight.Command;
+    using Plugin.Media.Abstractions;
     using System;
     using System.ComponentModel;
     using System.Runtime.CompilerServices;
     using System.Windows.Input;
-
+    using Xamarin.Forms;
+    using TuxMandados.Views;
+    using Plugin.Media;
+    using TuxMandados.Models;
+    using TuxMandados.Services;
+    using TuxMandados.Helpers;
     public class ProfileViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
+        #region variables
+        private ApiService apiService;
+        private string _usuario;
+        private string _nombre;
+        private string _apePat;
+        private string _apeMat;
+        private string _telefono;
+        private string _direccion;
+        private string _email;
+        private string _password;
+        private DateTime _fecha;
+        private string _passwordconfirm;
+        private bool _isRunning;
+        private bool _isEnabled;
+        private decimal _latitud;
+        private decimal _longitud;
+        private int _idusuario;
+        private int _tipousuario;
+        private ImageSource _imageSource;
+        private MediaFile file;
+        private bool _toggl;
+        private bool _edit;
+        private int _idcli;
+        private int _idloc;
+        private int _idusu;
+        #endregion
+        #region Properties
+        public int Idcli
+        {
+            get { return _idcli; }
+            set { _idcli = value; }
+        }
+        public int Idloc
+        {
+            get { return _idloc; }
+            set { _idloc = value; }
+        }
+        public int Idusu
+        {
+            get { return _idusu; }
+            set { _idusu = value; }
+        }
+        public int Idusuario
+        {
+            get { return _idusuario; }
+            set { _idusuario = value; }
+        }
+        public int TipoUsuario
+        {
+            get { return _tipousuario; }
+            set { _tipousuario = value; }
+        }
+        public bool Toggl
+        {
+            get { return _toggl; }
+            set
+            {
+                _toggl = value;
+                OnPropertyChanged();
+                if (Toggl)
+                {
+                    Edit = true;
+                }
+                else
+                {
+                    Edit = false;
+                }
+            }
+        }
+        public string Usuario
+        {
+            get { return _usuario; }
+            set
+            {
+                _usuario = value;
+                OnPropertyChanged();
+            }
+        }
+        public string Nombre
+        {
+            get { return _nombre; }
+            set
+            {
+                _nombre = value;
+                OnPropertyChanged();
+            }
+        }
+        public string ApeMat
+        {
+            get { return _apeMat; }
+            set
+            {
+                _apeMat = value;
+                OnPropertyChanged();
+            }
+        }
+        public string ApePat
+        {
+            get { return _apePat; }
+            set
+            {
+                _apePat = value;
+                OnPropertyChanged();
+            }
+        }
+        public string Telefono
+        {
+            get { return _telefono; }
+            set
+            {
+                _telefono = value;
+                OnPropertyChanged();
+            }
+        }
+        public string Direccion
+        {
+            get { return _direccion; }
+            set
+            {
+                _direccion = value;
+                OnPropertyChanged();
+            }
+        }
+        public string Email
+        {
+            get { return _email; }
+            set
+            {
+                _email = value;
+                OnPropertyChanged();
+            }
+        }
+        public string Password
+        {
+            get { return _password; }
+            set
+            {
+                _password = value;
+                OnPropertyChanged();
+            }
+        }
+        public string PasswordConfirm
+        {
+            get { return _passwordconfirm; }
+            set
+            {
+                _passwordconfirm = value;
+                OnPropertyChanged();
+            }
+        }
+        public DateTime Fecha
+        {
+            get { return _fecha; }
+            set
+            {
+                _fecha = value;
+                OnPropertyChanged();
+            }
+        }
+        public decimal Latitud
+        {
+            get { return _latitud; }
+            set
+            {
+                _latitud = value;
+                OnPropertyChanged();
+            }
+        }
+        public decimal Longitud
+        {
+            get { return _longitud; }
+            set
+            {
+                _longitud = value;
+                OnPropertyChanged();
+            }
+        }
+        public bool Edit
+        {
+            get { return _edit; }
+            set
+            {
+                _edit = value;
+                OnPropertyChanged();
+
+            }
+        }
+        public ImageSource ImageSource
+        {
+            get
+            {
+                return _imageSource;
+            }
+            set
+            {
+                _imageSource = value;
+                OnPropertyChanged();
+            }
+        }
+        #endregion
+        public ProfileViewModel()
+        {
+            this.Toggl = false;
+            this.Email = "ansdnf";
+            this.Nombre = "Marco Antonio";
+            this.ApePat = "Morales";
+            this.ApeMat = "Lopez";
+            this.ImageSource = "no_image";
+        }
         #region Commands
 
         public ICommand LogoutCommand
@@ -16,6 +231,20 @@
             get
             {
                 return new RelayCommand(ExitMethod);
+            }
+        }
+        public ICommand SaveClientCommand
+        {
+            get
+            {
+                return new RelayCommand(SaveClientMethod);
+            }
+        }
+        public ICommand ChangeImageCommand
+        {
+            get
+            {
+                return new RelayCommand(ChangeImageMethod);
             }
         }
         #endregion
@@ -27,6 +256,264 @@
                 "Mensaje",
                 "Logout",
                 "Ok");
+        }
+        private async void SaveClientMethod()
+        {
+            if (string.IsNullOrEmpty(this.Usuario))
+            {
+                await Application.Current.MainPage.DisplayAlert(
+                    "Error",
+                    "El campo usuario está vacío!",
+                    "Ok");
+                return;
+            }
+            if (string.IsNullOrEmpty(this.Nombre))
+            {
+                await Application.Current.MainPage.DisplayAlert(
+                    "Error",
+                    "El campo nombre está vacío!",
+                    "Ok");
+                return;
+            }
+
+            if (string.IsNullOrEmpty(this.ApePat))
+            {
+                await Application.Current.MainPage.DisplayAlert(
+                    "Error",
+                    "El apellido paterno esta vacio",
+                    "Ok");
+                return;
+            }
+            if (string.IsNullOrEmpty(this.ApeMat))
+            {
+                await Application.Current.MainPage.DisplayAlert(
+                    "Error",
+                    "El apellido materno esta vacìo",
+                    "Ok");
+                return;
+            }
+            if (string.IsNullOrEmpty(this.Email))
+            {
+                await Application.Current.MainPage.DisplayAlert(
+                    "Error",
+                    "El campo email está vacío!",
+                    "Ok");
+                return;
+            }
+            // Valida
+            if (this.Fecha.Year >= 1960)
+            {
+                await Application.Current.MainPage.DisplayAlert(
+                    "Error",
+                    "El seleccione una fecha",
+                    "Ok");
+                return;
+            }
+
+            if (!RegexUtilities.IsValidEmail(this.Email))
+            {
+                await Application.Current.MainPage.DisplayAlert(
+                    "Error",
+                    "¡¡Ingresa un correo valido !!",
+                    "Ok");
+                return;
+            }
+
+            if (string.IsNullOrEmpty(this.Telefono))
+            {
+                await Application.Current.MainPage.DisplayAlert(
+                    "Error",
+                    "El campo telefono está vacío!",
+                    "Ok");
+                return;
+            }
+
+            if (string.IsNullOrEmpty(this.Password))
+            {
+                await Application.Current.MainPage.DisplayAlert(
+                    "Error",
+                    "El campo contraseña está vacío!",
+                    "Ok");
+                return;
+            }
+
+            if (this.Password.Length < 6)
+            {
+                await Application.Current.MainPage.DisplayAlert(
+                    "Error",
+                    "El campo contraseña debe tener almenos 6 caracteres!",
+                    "Ok");
+                return;
+            }
+
+            if (string.IsNullOrEmpty(this.PasswordConfirm))
+            {
+                await Application.Current.MainPage.DisplayAlert(
+                    "Error",
+                    "¡¡Confirma tu contraseña!!",
+                    "Ok");
+                return;
+            }
+
+            if (this.Password != this.PasswordConfirm)
+            {
+                await Application.Current.MainPage.DisplayAlert(
+                    "Error",
+                    "¡¡ Las contraseñas no coinciden!!",
+                    "Ok");
+                return;
+            }
+
+           
+
+            var checkConnetion = await this.apiService.CheckConnection();
+            if (!checkConnetion.IsSuccess)
+            {
+               
+                await Application.Current.MainPage.DisplayAlert(
+                    "Error",
+                    "Checa tu conexion a internet!",
+                    "Ok");
+                return;
+            }
+            /*
+            byte[] imageArray = null;
+            if (this.file != null)
+            {
+                imageArray = FilesHelper.ReadFully(this.file.GetStream());
+            }
+            //Crear la var de user de acuerdo a los campos que tiene la base de datos!
+            var user = new User
+            {
+                Email = this.Email,
+                Nombre = this.Nombre,
+                Apellidos = this.Apellidos,
+                Telefono = this.Telefono,
+                ImageArray = imageArray,
+                Password = this.Password
+            };*/
+            SolicitudACUsuario solicitud = new SolicitudACUsuario();
+            // Poner las asignaciones correspondientes
+            solicitud.opcion = 2;
+            solicitud.usuario = Usuario;
+            solicitud.email = Email;
+            solicitud.password = Password;
+            solicitud.nombre = Nombre;
+            solicitud.ape_pat = ApePat;
+            solicitud.ape_mat = ApeMat;
+            solicitud.direccion = Direccion;
+            solicitud.fecha = Fecha.ToString("yyyy-MM-dd");
+            solicitud.telefono = Telefono;
+            solicitud.latitud = 19.365M;
+            solicitud.longitud = 78.32M;
+            //solicitud.idusu = Idusuario;
+            //Cambiar la implementacion con async
+            var res = await this.apiService.SetUsuario(
+                "http://www.creativasoftlineapps.com/ScriptAppTuxmandados/frmACUsuario.aspx",
+                solicitud);
+            if (res == null)
+            {               
+                await App.Current.MainPage.DisplayAlert(
+                "Error",
+                "Ocurrió algun problema!",
+                "Ok");
+                return;
+            }
+            await App.Current.MainPage.DisplayAlert(
+               "Èxito",
+               "¡¡Registro correcto!!",
+               "Ingresar");
+            await App.Current.MainPage.Navigation.PopAsync();            
+        }
+        public void Callservice()
+        {
+
+        }
+
+        private async void ChangeImageMethod()
+        {
+            await CrossMedia.Current.Initialize();
+
+            if (CrossMedia.Current.IsCameraAvailable &&
+                CrossMedia.Current.IsTakePhotoSupported)
+            {
+                var source = await Application.Current.MainPage.DisplayActionSheet(
+                    "¿De donde quieres tomar la imagen?",
+                    "Cancelar",
+                    null,
+                    "Desde la galería",
+                    "Desde la cámara");
+
+                if (source == "Cancelar")
+                {
+                    this.file = null;
+                    return;
+                }
+
+                if (source == "Desde la cámara")
+                {
+                    try
+                    {
+                        this.file = await CrossMedia.Current.TakePhotoAsync(
+                        new StoreCameraMediaOptions
+                        {
+                            Directory = "Sample",
+                            Name = "test.jpg",
+                            PhotoSize = PhotoSize.Small,
+                        }
+                    );
+
+                    }
+                    catch (Exception ex)
+                    {
+                        await Application.Current.MainPage.DisplayAlert(
+                            "Mensaje",
+                            "No tienes permisos! Ve a los ajustes de la aplicacion, y habilita la camara.",
+                            "Ok");
+                        return;
+                    }
+                }
+                else
+                {
+                    try
+                    {
+                        this.file = await CrossMedia.Current.PickPhotoAsync();
+                    }
+                    catch (Exception ex)
+                    {
+                        await Application.Current.MainPage.DisplayAlert(
+                            "Mensaje",
+                            "No tienes permisos! Ve a los ajustes de la aplicacion, y habilita la camara.",
+                            "Ok");
+                        return;
+                    }
+
+                }
+            }
+            else
+            {
+                try
+                {
+                    this.file = await CrossMedia.Current.PickPhotoAsync();
+                }
+                catch (Exception ex)
+                {
+                    await Application.Current.MainPage.DisplayAlert(
+                            "Mensaje",
+                            "No tienes permisos! Ve a los ajustes de la aplicacion, y habilita la camara.",
+                            "Ok");
+                    return;
+                }
+            }
+
+            if (this.file != null)
+            {
+                this.ImageSource = ImageSource.FromStream(() =>
+                {
+                    var stream = file.GetStream();
+                    return stream;
+                });
+            }
         }
         private void OnPropertyChanged([CallerMemberName] String propertyName = "")
         {

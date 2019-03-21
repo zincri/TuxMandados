@@ -58,7 +58,7 @@
                             HeightRequest="50"
                             BackgroundColor="#EFCB4B"
                             Text="Enviar"
-                            FontSize="Medium"                            
+                            FontSize="18"                            
                             TextColor="#174188"                            
                             HorizontalOptions="Center"
                             Command="{Binding SendCommand}"/>

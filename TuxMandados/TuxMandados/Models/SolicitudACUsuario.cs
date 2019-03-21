@@ -18,5 +18,9 @@ namespace TuxMandados.Models
         public string telefono { get; set; }
         public decimal latitud { get; set; }
         public decimal longitud { get; set; }
+        public bool cambioPass { get; set; }
+        public int idloc { get; set; }
+        public int idcli { get; set; }
+        public int idusu { get; set; }
     }
 }

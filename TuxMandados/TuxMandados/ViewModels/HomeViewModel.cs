@@ -12,10 +12,49 @@ namespace TuxMandados.ViewModels
     {
         #region Vars  
         private bool _isEnable;
+        private string _nombre;
+        private string _apePat;
+        private string _apeMat;
         public event PropertyChangedEventHandler PropertyChanged;
         #endregion
 
         #region Properties
+        public string Nombre
+        {
+            get
+            {
+                return _nombre;
+            }
+            set
+            {
+                _nombre = value;
+                OnPropertyChanged();
+            }
+        }
+        public string ApePat
+        {
+            get
+            {
+                return _apePat;
+            }
+            set
+            {
+                _apePat = value;
+                OnPropertyChanged();
+            }
+        }
+        public string ApeMat
+        {
+            get
+            {
+                return _apeMat;
+            }
+            set
+            {
+                _apeMat = value;
+                OnPropertyChanged();
+            }
+        }
         public bool IsEnable
         {
             get

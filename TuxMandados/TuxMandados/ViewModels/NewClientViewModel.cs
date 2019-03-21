@@ -13,6 +13,9 @@
     using TuxMandados.Views;
     using Domain;
     using TuxMandados.Models;
+    using Acr.UserDialogs;
+    using System.Threading.Tasks;
+
     public class NewClientViewModel : INotifyPropertyChanged
     {
         #region Services
@@ -20,6 +23,7 @@
         #endregion
 
         #region Vars
+        public SolicitudACUsuario solicitud;
         public event PropertyChangedEventHandler PropertyChanged;
         private string _usuario;
         private string _nombre;
@@ -42,14 +46,7 @@
         #region Constructor
         public NewClientViewModel()
         {
-            this.Nombre = "Nombre_Ejemplo";
-            this.ApePat = "Apellidos Paterno";
-            this.ApeMat = "Apellidos Materno";
-            this.Telefono = "Tele_Ejemplo";
-            this.Direccion = "Direccion_Ejemplo";
-            this.Email = "Email_Ejemplo";
-            this.Password = "Pass_Ejemplo";
-            this.PasswordConfirm = "ConPass_Ejemplo";
+           
             this.apiService = new ApiService();
             this.IsEnabled = true;
             this.ImageSource = "no_image";
@@ -395,51 +392,73 @@
                 Telefono = this.Telefono,
                 ImageArray = imageArray,
                 Password = this.Password
-            };*/
-            SolicitudACUsuario solicitud = new SolicitudACUsuario();
-            // Poner las asignaciones correspondientes
-            solicitud.opcion = 1;
-            solicitud.usuario = Usuario;
-            solicitud.email = Email;
-            solicitud.password = Password;
-            solicitud.nombre = Nombre;
-            solicitud.ape_pat = ApePat;
-            solicitud.ape_mat = ApeMat;
-            solicitud.direccion = Direccion;
-            solicitud.fecha = Fecha.ToString("yyyy-MM-dd");
-            solicitud.telefono = Telefono;
-            solicitud.latitud = 19.365M;
-            solicitud.longitud = 78.32M;
-            
+            };*/            
+            CallService();
+        }
+        private void CallService()
+        {
 
+            bool success = false;
+            string msg="";
+            try
+            {
+                Device.BeginInvokeOnMainThread(() => UserDialogs.Instance.ShowLoading("Registrando nuevo Tuxmandador...", MaskType.Black));
+                Task.Run(async () =>
+                {
 
-            var res = await this.apiService.SetUsuario(
+                    solicitud = new SolicitudACUsuario();
+                    solicitud.opcion = 1;
+                    solicitud.usuario = Usuario;
+                    solicitud.email = Email;
+                    solicitud.password = Password;
+                    solicitud.nombre = Nombre;
+                    solicitud.ape_pat = ApePat;
+                    solicitud.ape_mat = ApeMat;
+                    solicitud.direccion = Direccion;
+                    solicitud.fecha = Fecha.ToString("yyyy-MM-dd");
+                    solicitud.telefono = Telefono;
+                    solicitud.latitud = 19.365M;
+                    solicitud.longitud = 78.32M;
+                    solicitud.cambioPass = false;
+                    solicitud.idcli = 0;
+                    solicitud.idloc = 0;
+                    solicitud.idusu = 0;
+                    var res = await this.apiService.SetUsuario(
                 "http://www.creativasoftlineapps.com/ScriptAppTuxmandados/frmACUsuario.aspx",
                 solicitud);
-            if (res == null)
-            {
-                IsRunning = false;
-                IsEnabled = true;
-                await App.Current.MainPage.DisplayAlert(
-                "Error",
-                "Ocurrió algun problema!",
-                "Ok");
-                
-                return;
+                    if (res != null)
+                    {
+                       
+                        success = true;
+                    }
+                    else
+                    {
+                        msg=res.ErrorDescription;
+                    }
+                }).ContinueWith(res => Device.BeginInvokeOnMainThread(async () =>
+                {
+                    if (success == false)
+                    {
+                        await App.Current.MainPage.DisplayAlert("Ocurrió un error", "msg", "Aceptar");
+                        UserDialogs.Instance.HideLoading();
 
+                    }
+                    else
+                    {
+                       
+                        UserDialogs.Instance.HideLoading();
+                        await App.Current.MainPage.DisplayAlert("Éxito", "Registro realizado correctamente", "ok");
+                        await App.Current.MainPage.Navigation.PopAsync();
+                    }
+                }));
             }
-           
-            await App.Current.MainPage.DisplayAlert(
-               "Èxito",
-               "¡¡Registro correcto!!",
-               "Ingresar");
-            await App.Current.MainPage.Navigation.PopAsync();
-            IsEnabled = true;
-            IsRunning = false;
+            catch (Exception ex)
+            {
 
+                App.Current.MainPage.DisplayAlert("Ocurrió un error", ex.ToString(), "Aceptar");
+            }
 
         }
-
         private async void ChangeImageMethod()
         {
             await CrossMedia.Current.Initialize();

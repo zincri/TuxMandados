@@ -6,6 +6,11 @@
     <Application.Resources>
         <ResourceDictionary>
             <VarXam:InstanceLocator x:Key="Locator"/>
+            <!--MAIN MENU COLOR-->
+            <Color x:Key="MenuTextColor">#629ADD</Color>
+            <Color x:Key="FooterTextColor">#FFFFFF</Color>
+            <Color x:Key="BarTextColor">#EFCB4B</Color>
+            <Color x:Key="BarBackgroundColor">#174188</Color>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

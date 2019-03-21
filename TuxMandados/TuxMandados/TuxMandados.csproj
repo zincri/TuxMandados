@@ -37,6 +37,9 @@
     <Compile Remove="Models\Land.cs" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Update="Views\EditClientPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="Views\ForgotPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>

@@ -2,6 +2,7 @@
 {
     public class User
     {
+        public int IDUsuario { get; set; }
 
         public string FirstName { get; set; }
 

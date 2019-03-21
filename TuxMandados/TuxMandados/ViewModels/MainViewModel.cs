@@ -34,6 +34,13 @@
             get;
             set;
         }
+
+        public TokenResponse TokenResponse
+        {
+            get;
+            set;
+        }
+
         #endregion
         private static MainViewModel instance;//Objeto principal
         #region ViewModels

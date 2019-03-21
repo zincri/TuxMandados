@@ -18,6 +18,8 @@
         #region Vars  
         private ApiService apiService;
         string TokenAccess,TokenType,msgError;
+        private Int64 IDUsuario;
+        private Int64 IDCOR;
         private bool _isRunning;
         private bool _isRemembered;
         private bool _isEnable;
@@ -189,6 +191,8 @@
                     {
                         TokenAccess = res.AccessToken;
                         TokenType = res.TokenType;
+                        IDUsuario = res.IDUsuario;
+                        IDCOR = res.IDCOR;
                         success = true;
                         msgError = res.ErrorDescription;
                     }                   
@@ -220,13 +224,18 @@
 
 
                         var mainViewModel = MainViewModel.GetInstance();
-                        mainViewModel.Token = TokenAccess;
-                        mainViewModel.TokenType = TokenType;
+                        mainViewModel.TokenResponse.AccessToken = TokenAccess;
+                        mainViewModel.TokenResponse.TokenType = TokenType;
+                        mainViewModel.TokenResponse.IDUsuario = IDUsuario;
+                        mainViewModel.TokenResponse.IDCOR = IDCOR;
                         mainViewModel.LoadMenu();
                         if (this.IsRemembered)
                         {
                             Settings.Token = TokenAccess;
                             Settings.TokenType = TokenAccess;
+                            Settings.IDUsuario = IDUsuario.ToString();
+                            Settings.IDCOR = IDCOR.ToString();
+
                         }
                         if (mainViewModel.TokenType.Equals("repartidor"))
                         {

@@ -12,10 +12,13 @@ namespace TuxMandados.Models
         [JsonProperty(PropertyName = "token")]
         public string AccessToken { get; set; }
 
-        [JsonProperty(PropertyName = "id")]
-        public int Id { get; set; }
+        [JsonProperty(PropertyName = "ID_COR")]
+        public Int64 IDCOR { get; set; }
 
-        [JsonProperty(PropertyName = "rol")]
+        [JsonProperty(PropertyName = "IDUsuario")]
+        public Int64 IDUsuario { get; set; }
+
+        [JsonProperty(PropertyName = "Rol")]
         public string TokenType { get; set; }
 
         [JsonProperty(PropertyName = "error_description")]

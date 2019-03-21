@@ -27,17 +27,31 @@ namespace TuxMandados
             }
             else
             {
-                var mainViewModel = MainViewModel.GetInstance();
-                mainViewModel.Token = Settings.Token;
-                mainViewModel.TokenType = Settings.TokenType;
-                mainViewModel.LoadMenu();
-                App.Current.MainPage = new NavigationPage(new AppTabbedPage())
+                try
                 {
-                    BarBackgroundColor = Color.FromHex("#002E6D"),
-                    BarTextColor = Color.FromHex("#EFCB4B")
+                    var mainViewModel = MainViewModel.GetInstance();
+                    mainViewModel.Token = Settings.Token;
+                    mainViewModel.TokenType = Settings.TokenType;
+                    mainViewModel.TokenResponse.IDUsuario = Int32.Parse(Settings.IDUsuario);
+                    mainViewModel.TokenResponse.IDCOR = Int32.Parse(Settings.IDCOR);
+                    mainViewModel.LoadMenu();
+                    App.Current.MainPage = new NavigationPage(new AppTabbedPage())
+                    {
+                        BarBackgroundColor = Color.FromHex("#002E6D"),
+                        BarTextColor = Color.FromHex("#EFCB4B")
 
-                };
-                Navigator = (NavigationPage)MainPage;
+                    };
+                    Navigator = (NavigationPage)MainPage;
+                }
+                catch (Exception)
+                {
+                    App.Current.MainPage.DisplayAlert("Ocurrió un error", "¡Ingresa sesión otra vez!", "Aceptar");
+                    NavigationPage objeto = new NavigationPage(new LoginPage());
+                    objeto.BarBackgroundColor = Color.FromHex("#002E6D");
+                    objeto.BarTextColor = Color.FromHex("#EFCB4B");
+                    MainPage = objeto;
+                }
+                
             }
 
         }

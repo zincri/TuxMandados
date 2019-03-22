@@ -34,7 +34,7 @@
                 Settings.TokenType = String.Empty;
                 var mainViewModel = MainViewModel.GetInstance();
                 mainViewModel.Token = String.Empty;
-                mainViewModel.TokenType = String.Empty;
+                mainViewModel.TokenType = 0;
                 //App.Current.MainPage = new LoginPage();
                 NavigationPage objeto = new NavigationPage(new LoginPage());
                 objeto.BarBackgroundColor = Color.FromHex("#002E6D");

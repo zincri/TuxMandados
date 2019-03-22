@@ -29,7 +29,7 @@
             get;
             set;
         }
-        public string TokenType
+        public Int64 TokenType
         {
             get;
             set;
@@ -130,7 +130,7 @@
         public void LoadMenu()
         {
             this.Menus = new ObservableCollection<MenuItemViewModel>();
-            if (TokenType.Equals("repartidor")) 
+            if (TokenType == 4) 
             {
                 this.Menus.Add(new MenuItemViewModel
                 {

@@ -12,7 +12,7 @@ namespace TuxMandados.Models
         [JsonProperty(PropertyName = "token")]
         public string AccessToken { get; set; }
 
-        [JsonProperty(PropertyName = "ID_COR")]
+        [JsonProperty(PropertyName = "IDCOR")]
         public Int64 IDCOR { get; set; }
 
         [JsonProperty(PropertyName = "IDUsuario")]

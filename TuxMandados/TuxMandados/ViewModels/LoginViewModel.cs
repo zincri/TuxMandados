@@ -221,8 +221,6 @@
                         }
                         this.Password = string.Empty;
                         IsEnable = true;
-
-
                         var mainViewModel = MainViewModel.GetInstance();
                         mainViewModel.TokenResponse.AccessToken = TokenAccess;
                         mainViewModel.TokenResponse.TokenType = TokenType;
@@ -237,7 +235,7 @@
                             Settings.IDCOR = IDCOR.ToString();
 
                         }
-                        if (mainViewModel.TokenType.Equals("repartidor"))
+                        if (mainViewModel.TokenType == 4)
                         {
                             App.Current.MainPage = new NavigationPage(new Views.Repartidor.R_AppTabbedPage())
                             {
@@ -249,6 +247,7 @@
                         }
                         else
                         {
+                            // falta saber que tipo de cliente es...
                             App.Current.MainPage = new NavigationPage(new AppTabbedPage())
                             {
                                 BarBackgroundColor = Color.FromHex("#002E6D"),

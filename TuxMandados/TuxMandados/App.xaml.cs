@@ -31,9 +31,9 @@ namespace TuxMandados
                 {
                     var mainViewModel = MainViewModel.GetInstance();
                     mainViewModel.Token = Settings.Token;
-                    mainViewModel.TokenType = Settings.TokenType;
-                    mainViewModel.TokenResponse.IDUsuario = Int32.Parse(Settings.IDUsuario);
-                    mainViewModel.TokenResponse.IDCOR = Int32.Parse(Settings.IDCOR);
+                    mainViewModel.TokenType =  Int64.Parse(Settings.TokenType);
+                    mainViewModel.TokenResponse.IDUsuario = Int64.Parse(Settings.IDUsuario);
+                    mainViewModel.TokenResponse.IDCOR = Int64.Parse(Settings.IDCOR);
                     mainViewModel.LoadMenu();
                     App.Current.MainPage = new NavigationPage(new AppTabbedPage())
                     {

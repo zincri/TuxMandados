@@ -439,7 +439,7 @@
                 {
                     if (success == false)
                     {
-                        await App.Current.MainPage.DisplayAlert("Ocurrió un error", "msg", "Aceptar");
+                        await App.Current.MainPage.DisplayAlert("Ocurrió un error", msg, "Aceptar");
                         UserDialogs.Instance.HideLoading();
 
                     }

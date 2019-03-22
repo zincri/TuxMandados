@@ -176,6 +176,7 @@
         private void CallService()
         {
             bool success = false;
+           
             try
             {
                 Device.BeginInvokeOnMainThread(() => UserDialogs.Instance.ShowLoading("Accesando a Tuxmandados...", MaskType.Black));
@@ -189,12 +190,13 @@
                         solicitud);
                     if (res != null)
                     {
-                        TokenAccess = res.AccessToken;
-                        TokenType = res.TokenType;
-                        IDUsuario = res.IDUsuario;
-                        IDCOR = res.IDCOR;
-                        success = true;
-                        msgError = res.ErrorDescription;
+                         TokenAccess = res.AccessToken;
+                         TokenType = res.TokenType;
+                         IDUsuario = res.IDUsuario;
+                         IDCOR = res.IDCOR;
+                         success = true;
+                         msgError = res.ErrorDescription;
+                       
                     }                   
                     
                 }).ContinueWith(res => Device.BeginInvokeOnMainThread(async () =>
@@ -203,7 +205,6 @@
                     {
                         await App.Current.MainPage.DisplayAlert("Ocurrió un error", "El acceso no es válido", "Aceptar");
                         UserDialogs.Instance.HideLoading();
-
                     }
                     else
                     {                        
@@ -222,10 +223,12 @@
                         this.Password = string.Empty;
                         IsEnable = true;
                         var mainViewModel = MainViewModel.GetInstance();
+                        mainViewModel.TokenResponse = new TokenResponse();
                         mainViewModel.TokenResponse.AccessToken = TokenAccess;
                         mainViewModel.TokenResponse.TokenType = TokenType;
                         mainViewModel.TokenResponse.IDUsuario = IDUsuario;
                         mainViewModel.TokenResponse.IDCOR = IDCOR;
+
                         mainViewModel.LoadMenu();
                         if (this.IsRemembered)
                         {

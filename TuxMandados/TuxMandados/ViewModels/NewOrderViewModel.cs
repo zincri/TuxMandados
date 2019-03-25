@@ -21,15 +21,30 @@
         private bool _isRunning;
         private bool _isEnable;
         private bool _ubicacion;
+        private bool _switchEnabled;
         private bool _llamar;
         private string _descripcion;
         private string _lugarmandado;
         private string _lugarentrega;
         public static Pin pin;
+        public static bool flagSwitchEnabled;
         public event PropertyChangedEventHandler PropertyChanged;
         #endregion
 
         #region Properties
+        
+        public bool SwitchEnabled
+        {
+            get
+            {
+                return _switchEnabled;
+            }
+            set
+            {
+                _switchEnabled = value;
+                OnPropertyChanged();
+            }
+        }
         public bool Ubicacion
         {
             get
@@ -146,6 +161,7 @@
             this.LugarEntrega = "Direc";
             this.Llamar = false;
             this.Ubicacion = true;
+            this.SwitchEnabled = true;
             this.IsEnable = true;
             this.IsRunning = false;
         }
@@ -162,11 +178,10 @@
             //  mainViewModel.Home = new HomeViewModel();
             //pin = new Pin();
             await App.Current.MainPage.Navigation.PushAsync(new SMapPage());
-
-            // Hay que comentar esto por que no nos sirve de nada.
-            if(pin == null)
+            if (flagSwitchEnabled)
             {
-                //await App.Current.MainPage.DisplayAlert("Mensaje", "pin null", "ok");
+                this.Ubicacion = false;
+                this.SwitchEnabled = false;
             }
             IsEnable = true;
             IsRunning = false;
@@ -177,19 +192,23 @@
         {
             /*antes de cada servicio comprueba la conexion*/
 
-            /*Modal que bloquee la pantalla*/
+            
             ModalMapPage modalPage = new ModalMapPage();
             await App.Navigator.Navigation.PushModalAsync(modalPage);
-            if (Ubicacion) 
+            if (Ubicacion && flagSwitchEnabled==false ) 
             {
                 var t = await UseUbicationMethod();
+                string a = "aa";
             }
 
             await App.Navigator.Navigation.PopModalAsync();
             if (pin == null) {
+
+                //Aqui hay que poner el de escoja una ubicacion
                 await App.Current.MainPage.DisplayAlert("Incorrecto", "Algo ocurrió,por favor active el uso de ubicacion en sus ajustes!", "ok");
             }
             else {
+                MainViewModel mainViewModel = MainViewModel.GetInstance();
                 Order solicitud = new Order();// hacemos el objeto order, para mandarlo al servicio!
                 SolicitudSetOrder solicitudSetOrder = new SolicitudSetOrder();
                 solicitud.Estado = 1;
@@ -198,9 +217,9 @@
                 solicitud.Ubicacion.Latitud = pin.Position.Latitude;
                 solicitud.Ubicacion.Longitud = pin.Position.Longitude;
                 solicitudSetOrder.Order = solicitud;
-                solicitudSetOrder.IDUsuario = 3;
-                solicitudSetOrder.IDCliente = 12;
-                
+                solicitudSetOrder.IDUsuario = mainViewModel.TokenResponse.IDUsuario;
+                solicitudSetOrder.IDCliente = mainViewModel.TokenResponse.IDCOR;
+
 
                 var token = await this.apiService.SetOrder(
                 "http://www.creativasoftlineapps.com/ScriptAppTuxmandados/frmSetOrder.aspx",
@@ -214,7 +233,7 @@
         {
             try
             {
-                var request = new GeolocationRequest(GeolocationAccuracy.High);
+                var request = new GeolocationRequest(GeolocationAccuracy.Best);
                 var location = await Geolocation.GetLocationAsync(request);
                 //var location = await Geolocation.GetLastKnownLocationAsync();
 
@@ -223,6 +242,7 @@
                     Geocoder geo = new Geocoder();
                     Position posicion = new Position(location.Latitude, location.Longitude);
                     IEnumerable<string> adresses = await geo.GetAddressesForPositionAsync(posicion);
+                    //Pin npin = new Pin()
                     pin = new Pin()
                     {
                         Type = PinType.Place,

@@ -147,6 +147,7 @@
                     <Switch 
                         IsToggled="{Binding Ubicacion,Mode=TwoWay}"
                         IsVisible="true" 
+                        IsEnabled="{Binding SwitchEnabled,Mode=TwoWay}"
                         HorizontalOptions="EndAndExpand" />
                     <Label 
                         HorizontalOptions="StartAndExpand" 

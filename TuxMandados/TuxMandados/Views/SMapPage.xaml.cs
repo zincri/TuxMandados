@@ -59,7 +59,7 @@ namespace TuxMandados.Views
                 var res = await DisplayAlert("Ubicación Establecida", "¿Desea establecer la siguiente dirección: " + direcc + "?", "Sí", "NO");
                 if (res == true)
                 {
-                    NewOrderViewModel.flagSwitchEnabled = true;
+                    //NewOrderViewModel.flagSwitchEnabled = true;
                     NewOrderViewModel.pin = _pin;
                 }
                 else

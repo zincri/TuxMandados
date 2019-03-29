@@ -160,8 +160,8 @@
             this.LugarMandado = "Manda";
             this.LugarEntrega = "Direc";
             this.Llamar = false;
-            this.Ubicacion = true;
-            this.SwitchEnabled = true;
+            this.Ubicacion = false;
+            //this.SwitchEnabled = true; //Esta propiedad si no se usa que se borre de xaml y de las props
             this.IsEnable = true;
             this.IsRunning = false;
         }
@@ -178,11 +178,13 @@
             //  mainViewModel.Home = new HomeViewModel();
             //pin = new Pin();
             await App.Current.MainPage.Navigation.PushAsync(new SMapPage());
+            /*
             if (flagSwitchEnabled)
             {
                 this.Ubicacion = false;
                 this.SwitchEnabled = false;
             }
+            */
             IsEnable = true;
             IsRunning = false;
         }
@@ -195,17 +197,17 @@
             
             ModalMapPage modalPage = new ModalMapPage();
             await App.Navigator.Navigation.PushModalAsync(modalPage);
-            if (Ubicacion && flagSwitchEnabled==false ) 
+            /*if (Ubicacion && flagSwitchEnabled==false ) 
             {
                 var t = await UseUbicationMethod();
                 string a = "aa";
-            }
+            }*/
 
             await App.Navigator.Navigation.PopModalAsync();
             if (pin == null) {
 
                 //Aqui hay que poner el de escoja una ubicacion
-                await App.Current.MainPage.DisplayAlert("Incorrecto", "Algo ocurrió,por favor active el uso de ubicacion en sus ajustes!", "ok");
+                await App.Current.MainPage.DisplayAlert("Incorrecto", "Algo ocurrió, por favor active el uso de ubicacion en sus ajustes!", "ok");
             }
             else {
                 MainViewModel mainViewModel = MainViewModel.GetInstance();

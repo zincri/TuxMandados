@@ -444,8 +444,7 @@
 
                     }
                     else
-                    {
-                       
+                    {                       
                         UserDialogs.Instance.HideLoading();
                         await App.Current.MainPage.DisplayAlert("Éxito", "Registro realizado correctamente", "ok");
                         await App.Current.MainPage.Navigation.PopAsync();

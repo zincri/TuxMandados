@@ -319,6 +319,40 @@
                 return null;
             }
         }
+        /// <summary>
+        /// Metodo que sirve devolver los datos del usuario
+        /// </summary>
+        /// <param name="urlBase"> Objeto para pasarle la url del servicio</param>
+        /// <param name="solicitud">Objeto con los datos del usuario</param>
+        /// <returns></returns>
+        public async Task<InfoUserResponse> GetInfoUser(
+            string urlBase,
+            SolicitudInfoUser solicitud)
+        {
+            try
+            {
+                var Client = new HttpClient();
+                string url = urlBase;
+                var data = JsonConvert.SerializeObject(solicitud);
+                var content = new StringContent(data, Encoding.UTF8, "application/json");
+                var response = await Client.PostAsync(url, content);
+                if (response.IsSuccessStatusCode)
+                {
+                    var json = await response.Content.ReadAsStringAsync();
+                    if (json.Substring(0, 5) != "Error")
+                    {
+                        var resultado = (InfoUserResponse)JsonConvert.DeserializeObject(json, typeof(InfoUserResponse));
+                        return resultado;
+                    }
+
+                }
+                return null;
+            }
+            catch
+            {
+                return null;
+            }
+        }
 
     }
 

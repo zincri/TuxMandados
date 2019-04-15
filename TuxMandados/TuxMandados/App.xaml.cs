@@ -45,7 +45,7 @@ namespace TuxMandados
                 }
                 catch (Exception)
                 {
-                    App.Current.MainPage.DisplayAlert("Ocurrió un error", "¡Ingresa sesión otra vez!", "Aceptar");
+                    //App.Current.MainPage.DisplayAlert("Ocurrió un error", "¡Ingresa sesión otra vez!", "Aceptar");
                     NavigationPage objeto = new NavigationPage(new LoginPage());
                     objeto.BarBackgroundColor = Color.FromHex("#002E6D");
                     objeto.BarTextColor = Color.FromHex("#EFCB4B");

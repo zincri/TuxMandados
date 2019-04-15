@@ -71,6 +71,8 @@ namespace TuxMandados.ViewModels
         #region Constructors
         public HomeViewModel()
         {
+            this.Nombre = "Anonimo";
+
         }
         #endregion
 

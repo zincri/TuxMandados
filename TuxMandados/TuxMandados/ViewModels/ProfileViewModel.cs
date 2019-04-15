@@ -12,11 +12,16 @@
     using TuxMandados.Models;
     using TuxMandados.Services;
     using TuxMandados.Helpers;
+    using Acr.UserDialogs;
+    using System.Threading.Tasks;
+
     public class ProfileViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
         #region variables
         private ApiService apiService;
+        private SolicitudInfoUser solicitudinfo;
+        private SolicitudACUsuario solicitud;
         private string _usuario;
         private string _nombre;
         private string _apePat;
@@ -392,25 +397,14 @@
                 ImageArray = imageArray,
                 Password = this.Password
             };*/
-            SolicitudACUsuario solicitud = new SolicitudACUsuario();
+            solicitudinfo = new SolicitudInfoUser();
             // Poner las asignaciones correspondientes
-            solicitud.opcion = 2;
-            solicitud.usuario = Usuario;
-            solicitud.email = Email;
-            solicitud.password = Password;
-            solicitud.nombre = Nombre;
-            solicitud.ape_pat = ApePat;
-            solicitud.ape_mat = ApeMat;
-            solicitud.direccion = Direccion;
-            solicitud.fecha = Fecha.ToString("yyyy-MM-dd");
-            solicitud.telefono = Telefono;
-            solicitud.latitud = 19.365M;
-            solicitud.longitud = 78.32M;
+           
             //solicitud.idusu = Idusuario;
             //Cambiar la implementacion con async
-            var res = await this.apiService.SetUsuario(
+            var res = await this.apiService.GetInfoUser(
                 "http://www.creativasoftlineapps.com/ScriptAppTuxmandados/frmACUsuario.aspx",
-                solicitud);
+                solicitudinfo);
             if (res == null)
             {               
                 await App.Current.MainPage.DisplayAlert(
@@ -427,9 +421,114 @@
         }
         public void Callservice()
         {
+            bool success = false;
+            string msg = "";
+            try
+            {
+                Device.BeginInvokeOnMainThread(() => UserDialogs.Instance.ShowLoading("Obteniendo datos...", MaskType.Black));
+                Task.Run(async () =>
+                {
 
+                    solicitud = new SolicitudACUsuario();
+                    solicitud.opcion = 2;
+                    solicitud.usuario = Usuario;
+                    solicitud.email = Email;
+                    solicitud.password = Password;
+                    solicitud.nombre = Nombre;
+                    solicitud.ape_pat = ApePat;
+                    solicitud.ape_mat = ApeMat;
+                    solicitud.direccion = Direccion;
+                    solicitud.fecha = Fecha.ToString("yyyy-MM-dd");
+                    solicitud.telefono = Telefono;
+                    solicitud.latitud = 19.365M;
+                    solicitud.longitud = 78.32M;
+                    solicitud.cambioPass = false;
+                    solicitud.idcli = 0;
+                    solicitud.idloc = 0;
+                    solicitud.idusu = 0;
+                    var res = await this.apiService.SetUsuario(
+                "http://www.creativasoftlineapps.com/ScriptAppTuxmandados/frmACUsuario.aspx",
+                solicitud);
+                    if (res != null)
+                    {
+
+                        success = true;
+                    }
+                    else
+                    {
+                        msg = res.ErrorDescription;
+                    }
+                }).ContinueWith(res => Device.BeginInvokeOnMainThread(async () =>
+                {
+                    if (success == false)
+                    {
+                        await App.Current.MainPage.DisplayAlert("Ocurrió un error", msg, "Aceptar");
+                        UserDialogs.Instance.HideLoading();
+
+                    }
+                    else
+                    {
+                        UserDialogs.Instance.HideLoading();
+                        await App.Current.MainPage.DisplayAlert("Éxito", "Datos actualizados correctamente", "O" +
+                            "k");
+                        await App.Current.MainPage.Navigation.PopAsync();
+                    }
+                }));
+            }
+            catch (Exception ex)
+            {
+
+                App.Current.MainPage.DisplayAlert("Ocurrió un error", ex.ToString(), "Aceptar");
+            }
         }
 
+        public void CallServiceGet()
+        {
+            bool success = false;
+            string msg = "";
+            try
+            {
+                Device.BeginInvokeOnMainThread(() => UserDialogs.Instance.ShowLoading("Obteniendo datos...", MaskType.Black));
+                Task.Run(async () =>
+                {
+                    solicitudinfo = new SolicitudInfoUser();
+                    solicitudinfo.id = Idusuario;
+                    solicitudinfo.rol = TipoUsuario;                    
+                    var res = await this.apiService.GetInfoUser(
+                "http://www.creativasoftlineapps.com/ScriptAppTuxmandados/frmACUsuario.aspx",
+                solicitudinfo);
+                    if (res != null)
+                    {
+                        success = true;
+                    }
+                    else
+                    {
+                        msg = res.ToString();
+                    }
+                }).ContinueWith(res => Device.BeginInvokeOnMainThread(async () =>
+                {
+                    if (success == false)
+                    {
+                        await App.Current.MainPage.DisplayAlert("Ocurrió un error", msg, "Aceptar");
+                        UserDialogs.Instance.HideLoading();
+
+                    }
+                    else
+                    {
+                        UserDialogs.Instance.HideLoading();                        
+                        await App.Current.MainPage.Navigation.PopAsync();
+                    }
+                }));
+
+
+            }
+            catch (Exception ex)
+            {
+
+                App.Current.MainPage.DisplayAlert("Ocurrió un error", ex.ToString(), "Aceptar");
+            }
+
+        }
         private async void ChangeImageMethod()
         {
             await CrossMedia.Current.Initialize();

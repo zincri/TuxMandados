@@ -4,7 +4,7 @@
     using TuxMandados.ViewModels;
     public class AppTabbedPage : TabbedPage
     {
-
+        
         public AppTabbedPage()
         {
             this.BarBackgroundColor = Color.FromHex("#002E6D");
@@ -13,7 +13,7 @@
             mainViewModel.Home = new HomeViewModel();
             mainViewModel.Orders = new OrdersViewModel();
             mainViewModel.Orders.IsRefreshing = false;
-            //mainViewModel.Profile = new ProfileViewModel();
+           
             mainViewModel.About = new AboutViewModel();
 
             Children.Add(new HomePage() { Icon = "homeworld.png", Title = "Inicio" });

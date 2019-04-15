@@ -4,12 +4,13 @@ using System.Text;
 using System.Net.Mail;
 using System.Net;
 using System.Security.Cryptography.X509Certificates;
+using System.Threading.Tasks;
 
 namespace TuxMandados.Helpers
 {
   public class EmailHelper
     {
-        public void EnviarCorreo(string Mensaje,string Correo,bool html,string Titulo)
+        public static async Task EnviarCorreo(string Mensaje,string Correo,bool html,string Titulo)
         {
 
 
@@ -35,7 +36,10 @@ namespace TuxMandados.Helpers
 
             catch (Exception ex)
             {
-                throw ex;
+                await App.Current.MainPage.DisplayAlert(
+              "Error",
+              "Ocurrio un problema enviando el correo de recuperacion",
+              "Ok");
             }
         }
     }
